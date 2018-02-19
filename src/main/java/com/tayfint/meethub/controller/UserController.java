@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.User;
-import com.tayfint.meethub.service.CustomUserDetailsService;
 import com.tayfint.meethub.service.UserService;
 import com.tayfint.meethub.validator.UserFormValidator;
 
@@ -38,7 +38,7 @@ public class UserController {
 	private UserService userService;
 	
 	@Autowired
-	private CustomUserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
 	UserFormValidator userFormValidator;
