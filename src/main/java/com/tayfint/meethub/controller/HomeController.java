@@ -21,8 +21,8 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping(value = {"/gettingStarted.html"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/signUp"}, method = RequestMethod.GET)
 	public ModelAndView getRegistrationPage(){
-		return new ModelAndView("registration", "user", new User());
+		return new ModelAndView("signup", "user", new User());
 	}
 }

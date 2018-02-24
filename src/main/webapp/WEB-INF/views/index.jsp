@@ -63,7 +63,7 @@ body {
 					decide on what's going to be the interest rate for your next loan.
 					In short, Tectoo let's your money work for you.</p>
 				<p class="lead">
-					<a href="gettingStarted.html" class="btn btn-lg btn-secondary">Get
+					<a href="signUp" class="btn btn-lg btn-secondary">Get
 						Started</a>
 				</p>
 				</main>
