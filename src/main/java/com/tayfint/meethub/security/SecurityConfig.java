@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/signin")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/users/account.jsp")
+				.defaultSuccessUrl("/users/myaccount.go")
 				.permitAll()
 				.and()
 			.rememberMe()

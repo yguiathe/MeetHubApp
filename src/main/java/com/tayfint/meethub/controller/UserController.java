@@ -101,6 +101,12 @@ public class UserController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/users/myaccount.go", method = RequestMethod.GET)
+	public String myAccountPage(Model model) {
+		logger.debug("My Account Page");
+		return "users/account";
+	}
 
 	// show add user form
 	@RequestMapping(value = {"/signUp"}, method = RequestMethod.GET)
