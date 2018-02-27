@@ -49,25 +49,25 @@
 		<div class="container login-form">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<form id="login" action='<spring:url value="/signin"/>' class="well">
+					<form:form id="login" action="signin" method="POST" class="well">
 						<div class="form-group">
-							<label>Username</label> <input type="text" name="username"
+							<label>Username</label> <form:input type="text" name="username"
 								class="form-control" placeholder="Username">
 						</div>
 						<div class="form-group">
-							<label>Password</label> <input type="password" name="password"
+							<label>Password</label> <form:input type="password" name="password"
 								class="form-control" placeholder="Password">
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label> <input type="checkbox" name="remember-me"> Remember me
+									<label> <form:input type="checkbox" name="remember-me"> Remember me
 									</label>
 								</div>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-default btn-block btn-login">Login</button>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>
