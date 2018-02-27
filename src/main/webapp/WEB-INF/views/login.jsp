@@ -49,7 +49,7 @@
 		<div class="container login-form">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<form id="login" action="signin" class="well">
+					<form id="login" action='<spring:url value="/signin"/>' class="well">
 						<div class="form-group">
 							<label>Username</label> <input type="text" name="username"
 								class="form-control" placeholder="Username">

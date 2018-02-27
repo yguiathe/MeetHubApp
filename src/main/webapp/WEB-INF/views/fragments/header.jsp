@@ -34,7 +34,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-item active">
 						<form class="navbar-form navbar-right" method="POST"
-							action="signin">
+							action="<spring:url value="/signin"/>">
 							<div class="form-group">
 								<input type="text" placeholder="Email" name="username"
 									class="form-control">
