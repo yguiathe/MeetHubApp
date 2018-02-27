@@ -88,6 +88,7 @@ public class UserController {
 			}*/
 
 			userService.saveUser(user);
+			logger.debug("----  *** Password  : {}", user.getPassword());
 			authenticateUserAndSetSession(user, request);
 
 			// POST/REDIRECT/GET
