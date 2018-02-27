@@ -49,25 +49,26 @@
 		<div class="container login-form">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<form:form id="login" action="signin" method="POST" class="well">
+					<form id="login" action="signin" method="POST" class="well">
 						<div class="form-group">
-							<label>Username</label> <form:input type="text" name="username"
-								class="form-control" placeholder="Username">
+							<label>Username</label> <input type="text" name="username"
+								class="form-control" placeholder="Username"/>
 						</div>
 						<div class="form-group">
-							<label>Password</label> <form:input type="password" name="password"
-								class="form-control" placeholder="Password">
+							<label>Password</label> <input type="password" name="password"
+								class="form-control" placeholder="Password"/>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="checkbox">
-									<label> <form:input type="checkbox" name="remember-me"> Remember me
+									<label> <input type="checkbox" name="remember-me"/> Remember me
 									</label>
 								</div>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-default btn-block btn-login">Login</button>
-					</form:form>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					</form>
 				</div>
 			</div>
 		</div>

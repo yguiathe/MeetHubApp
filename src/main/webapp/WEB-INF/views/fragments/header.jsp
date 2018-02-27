@@ -1,5 +1,4 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -34,20 +33,21 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-item active">
-						<form:form class="navbar-form navbar-right" method="POST"
+						<form class="navbar-form navbar-right" method="POST"
 							action="signin">
 							<div class="form-group">
-								<form:input type="text" placeholder="Username" name="username" class="form-control" path="username"/>
+								<input type="text" placeholder="Username" name="username" class="form-control">
 							</div>
 							<div class="form-group">
-								<form:input type="password" placeholder="Password" name="password" class="form-control" path="password"/>
+								<input type="password" placeholder="Password" name="password" class="form-control">
 							</div>
 							<div class="checkbox">
-								<label> <form:input type="checkbox" name="remember-me" path="remember-me"/> Remember me
+								<label> <input type="checkbox" name="remember-me"> Remember me
 								</label>
 							</div>
 							<button type="submit" class="btn btn-success all-btn">Login</button>
-						</form:form>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						</form>
 					</li>
 				</ul>
 			</div>
