@@ -19,42 +19,42 @@ import org.springframework.web.servlet.view.JstlView;
 public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Override
-	public void configureViewResolvers(ViewResolverRegistry registry){
+	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
 		registry.viewResolver(viewResolver);
 	}
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
-	
-	/*@Override
-	public void addFormatters(FormatterRegistry registry){
-		registry.addConverter(roleToUserProfileConverter);
-	}*/
-	
+
+	/*
+	 * @Override public void addFormatters(FormatterRegistry registry){
+	 * registry.addConverter(roleToUserProfileConverter); }
+	 */
+
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
 		rb.setBasenames(new String[] { "messages/messages", "messages/validation" });
 		return rb;
 	}
-	
+
 	@Override
-	public void configurePathMatch(PathMatchConfigurer matcher){
+	public void configurePathMatch(PathMatchConfigurer matcher) {
 		matcher.setUseRegisteredSuffixPatternMatch(true);
 	}
-	
+
 	@Bean
-	public CommonsMultipartResolver multipartResolver(){
+	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		resolver.setDefaultEncoding("utf-8");
 		resolver.setMaxUploadSize(10000000);
 		return resolver;
 	}
-	
+
 }

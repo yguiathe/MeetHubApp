@@ -17,4 +17,10 @@ public class HomeController {
 		logger.debug("index()");
 		return "index";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage(Model model) {
+		logger.debug("Login page");
+		return "login";
+	}
 }

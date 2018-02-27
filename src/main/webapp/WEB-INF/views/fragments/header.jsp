@@ -34,17 +34,17 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-item active">
 						<form class="navbar-form navbar-right" method="POST"
-							action="j_security_check">
+							action="signin">
 							<div class="form-group">
-								<input type="text" placeholder="Email" name="j_username"
+								<input type="text" placeholder="Email" name="username"
 									class="form-control">
 							</div>
 							<div class="form-group">
-								<input type="password" placeholder="Password" name="j_password"
+								<input type="password" placeholder="Password" name="password"
 									class="form-control">
 							</div>
 							<div class="checkbox">
-								<label> <input type="checkbox"> Remember me
+								<label> <input type="checkbox" name="remember-me"> Remember me
 								</label>
 							</div>
 							<button type="submit" class="btn btn-success all-btn">Login</button>

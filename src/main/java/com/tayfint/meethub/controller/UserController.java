@@ -72,6 +72,7 @@ public class UserController {
 			final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
 
 		logger.debug("saveOrUpdateUser() : {}", user);
+		String text = user.getPassword();
 		
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
@@ -88,7 +89,7 @@ public class UserController {
 			}*/
 
 			userService.saveUser(user);
-			logger.debug("----  *** Password  : {}", user.getPassword());
+			user.setPassword(text);
 			authenticateUserAndSetSession(user, request);
 
 			// POST/REDIRECT/GET
