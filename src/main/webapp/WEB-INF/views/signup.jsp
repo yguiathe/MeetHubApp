@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<form:form method="POST" action="users/register.go"
+				<form:form method="POST" action="register.go"
 					modelAttribute="user">
 					<div class="panel panel-default">
 						<div class="panel-heading tabbed-nav main-color-bg">

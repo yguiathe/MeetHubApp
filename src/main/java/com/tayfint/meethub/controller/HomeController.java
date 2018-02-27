@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.tayfint.meethub.model.User;
 
 @Controller
 public class HomeController {
@@ -19,10 +16,5 @@ public class HomeController {
 	public String index(Model model) {
 		logger.debug("index()");
 		return "index";
-	}
-	
-	@RequestMapping(value = {"/signUp"}, method = RequestMethod.GET)
-	public ModelAndView getRegistrationPage(){
-		return new ModelAndView("signup", "user", new User());
 	}
 }

@@ -66,7 +66,7 @@ public class UserController {
 	// 1. @ModelAttribute bind form value
 	// 2. @Validated form validator
 	// 3. RedirectAttributes for flash value
-	@RequestMapping(value = "/users/register.go", method = RequestMethod.POST)
+	@RequestMapping(value = "/register.go", method = RequestMethod.POST)
 	public String saveOrUpdateUser(@ModelAttribute("user") @Validated User user,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
@@ -101,7 +101,7 @@ public class UserController {
 	}
 
 	// show add user form
-	@RequestMapping(value = "/users/add", method = RequestMethod.GET)
+	@RequestMapping(value = {"/signUp"}, method = RequestMethod.GET)
 	public String showAddUserForm(Model model) {
 
 		logger.debug("showAddUserForm()");
@@ -116,12 +116,10 @@ public class UserController {
 		user.setGender("M");
 		user.setPrimaryIdType("Passport");
 		user.setCitizenship("Cameroonian");
-		model.addAttribute("userForm", user);
+		model.addAttribute("user", user);
 
 		//populateDefaultModel(model);
-
-		return "users/userform";
-
+		return "signup";
 	}
 
 	// show update form
