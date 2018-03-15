@@ -34,9 +34,9 @@
 				<a class="navbar-brand" href="#">Tayfint</a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault"
-				th:if="${#authorization.expression('!isAuthenticated()')}">
+				>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-item active">
+					<li class="nav-item active" sec:authorize="isAnonymous()">
 						<form class="navbar-form navbar-right" method="POST"
 							th:action="@{signin}">
 							<div class="form-group">
@@ -57,7 +57,7 @@
 								th:value="${_csrf.token}" />
 						</form>
 					</li>
-					<li th:if="${#authorization.expression('isAuthenticated()')}">
+					<li sec:authorize="isAuthenticated()">
 						<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
 							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
 					</a>
