@@ -9,9 +9,9 @@
 <link rel="icon" th:href="@{/static/img/logo1.png}"/>
 
 <title>Tayfint - Cover</title>
-<style>
+<style th:inline="text">
 body {
-	background: url("@{/static/img/grovemade.jpg}") no-repeat 50% 50%;
+	background: url{[[@{/static/img/grovemade.jpg}]]} no-repeat 50% 50%;
 }
 </style>
 
