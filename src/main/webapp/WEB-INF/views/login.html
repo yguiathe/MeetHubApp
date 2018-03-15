@@ -1,45 +1,17 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<spring:url value="/static/img/logo1.png" var="favicon" />
-<link rel="icon" href="${favicon}">
-<title>Login</title>
-
-<!-- Bootstrap core CSS -->
-<spring:url value="/static/css/bootstrap/bootstrap.min.css"
-	var="bootstrapCss" />
-<spring:url value="/static/css/custom/account.css" var="accountCss" />
-<spring:url value="/static/js/vendor/popper.min.js" var="popperJs" />
-<link href="${bootstrapCss}" rel="stylesheet">
-<link href="${accountCss}" rel="stylesheet">
+<div th:include="fragments/header :: header-css"></div>
+<title>#{meethub.loginpage}</title>
 </head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button class="navbar-toggle collapsed" type="button"
-					data-toggle="collapse" data-target="#navbarsExampleDefault"
-					aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Tayfint</a>
-			</div>
+<div th:replace="fragments/header :: header"></div>
 
-		</div>
-	</nav>
-
-	<header id="header">
+<header id="header">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h1 class="text-center">
-						Admin Area <small> Account Login</small>
+						#{meethub.loginpage}
 					</h1>
 				</div>
 			</div>
@@ -74,6 +46,6 @@
 			</div>
 		</div>
 	</section>
-	<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
