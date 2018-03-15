@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "app_user")
@@ -65,7 +66,7 @@ public class User {
 	
 	@Column(name = "BIRTHDATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date birthdate;
 	
 	@Column(name = "FIRST_NAME", nullable = false, length = 45)

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.format.FormatterRegistry;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -71,11 +70,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
 
-	@Override
+	/*@Override
     public void addFormatters(final FormatterRegistry registry) {
         super.addFormatters(registry);
         registry.addFormatter(dateFormatter());
-    }
+    }*/
 	
 	@Bean
     public DateFormatter dateFormatter() {
