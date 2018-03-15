@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:include="fragments/header :: header-css"></div>
-<title>#{meethub.loginpage}</title>
+<title th:text="#{meethub.loginpage}"></title>
 </head>
 <div th:replace="fragments/header :: header"></div>
 
@@ -10,8 +10,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center">
-						#{meethub.loginpage}
+					<h1 class="text-center" th:text="#{meethub.loginpage}">
 					</h1>
 				</div>
 			</div>

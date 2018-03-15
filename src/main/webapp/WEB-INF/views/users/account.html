@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:include="fragments/header :: header-css"></div>
-<title>#{meethub.mygroups}</title>
+<title th:text="#{meethub.mygroups}"></title>
 </head>
 <div th:replace="fragments/header :: header"></div>
 
@@ -10,9 +10,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-10">
-				<h1>
+				<h1 th:text="#{meethub.mygroups}">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					#{meethub.mygroups}
 				</h1>
 			</div>
 		</div>
