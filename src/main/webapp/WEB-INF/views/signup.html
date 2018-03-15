@@ -1,12 +1,23 @@
-<%@ page session="false"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!doctype html>
-<html lang="en">
-<jsp:include page="fragments/header.jsp" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:include="fragments/header :: header-css"></div>
+<title>#{meethub.signup}</title>
+</head>
+<div th:replace="fragments/header :: header"></div>
+
+<header id="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10">
+				<h1>
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					Sign Up <small> Setup An Account</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+</header>
 
 <section id="breadcrumb">
 	<div class="container">
@@ -40,8 +51,8 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<form:form method="POST" action="register.go"
-					modelAttribute="user">
+				<form method="POST" th:action="@{register.go}" action="#"
+					th:object="${user}">
 					<div class="panel panel-default">
 						<div class="panel-heading tabbed-nav main-color-bg">
 							<ul class="nav nav-tabs">
@@ -58,98 +69,99 @@
 									<label for="name_label" class="col-md-2 form-labels">Your
 										Name</label>
 									<div class="form-group">
-										<form:input path="firstName" type="text" class="form-control"
-											name="firstname" id="firstname" placeholder="First Name" />
+										<input th:field="*{firstName}" type="text"
+											class="form-control" name="firstname" id="firstname"
+											placeholder="First Name" />
 									</div>
 									<div class="form-group">
-										<form:input path="middleName" type="text" class="form-control"
-											name="middlename" id="middlename" placeholder="Middle Name" />
+										<input th:field="*{middleName}" type="text"
+											class="form-control" name="middlename" id="middlename"
+											placeholder="Middle Name" />
 									</div>
 									<div class="form-group">
-										<form:input path="lastName" type="text" class="form-control"
+										<input th:field="*{lastName}" type="text" class="form-control"
 											name="lastname" id="lastname" placeholder="Last Name" />
 									</div>
 								</div>
 								<div class="form-group form-inline">
 									<label for="birthday" class="col-md-2 form-labels">Date
-										of Birth</label>
-									<form:input path="birthdate" type='date' class="form-control"
-										name="birthdate" id="birthdate" />
+										of Birth</label> <input th:field="*{birthdate}" type='date'
+										class="form-control" name="birthdate" id="birthdate" />
 								</div>
 								<div class="form-group">
 									<label for="gender" class="col-md-2 form-labels">Gender</label>
-									<label class="radio-inline"> <form:radiobutton
-											path="gender" name="gender" id="male" value="M" /> Male
-									</label> <label class="radio-inline"> <form:radiobutton
-											path="gender" name="gender" id="female" value="F" /> Female
+									<label class="radio-inline"> <input type="radio"
+										th:field="*{gender" name="gender" id="male" value="M" /> Male
+									</label> <label class="radio-inline"> <input type="radio"
+										th:field="*{gender}" name="gender" id="female" value="F" />
+										Female
 									</label>
 								</div>
 								<div class="form-group form-inline">
 									<label for="marital_status" class="col-md-2 form-labels">Marital
-										Status</label>
-									<form:select path="maritalStatusCd" id="marital_status"
-										class="form-control">
+										Status</label> <select th:field="*{maritalStatusCd}"
+										id="marital_status" class="form-control">
 										<option value="0">Single</option>
 										<option value="1">Married</option>
 										<option value="2">Divorced</option>
 										<option value="3">Widow</option>
-									</form:select>
+									</select>
 								</div>
 								<div class="form-group form-inline">
 									<label for="citizenship" class="col-md-2 form-labels">Citizenship</label>
 									<div class="form-group">
-										<form:input path="citizenship" type="text"
+										<input th:field="*{citizenship}" type="text"
 											class="form-control" name="citizenship" id="citizenship"
 											placeholder="Cameroonian" />
 									</div>
 								</div>
 
 								<div class="form-group form-inline">
-									<label for="primaryIdType" class="col-md-3 form-labels">Primary	ID Type </label>
-									<form:select path="primaryIdType" id="primaryIdType"
-										class="form-control">
+									<label for="primaryIdType" class="col-md-3 form-labels">Primary
+										ID Type </label> <select th:field="*{primaryIdType}"
+										id="primaryIdType" class="form-control">
 										<option value="PP">Passport</option>
 										<option value="SSN">SSN</option>
 										<option value="NID">National ID</option>
 										<option value="Others">Others</option>
-									</form:select>
+									</select>
 								</div>
 								<div class="form-group form-inline">
-									<label for="primaryId" class="col-md-2 form-labels">ID #</label>
+									<label for="primaryId" class="col-md-2 form-labels">ID
+										#</label>
 									<div class="form-group">
-										<form:input path="primaryId" type="text"
+										<input th:field="*{primaryId}" type="text"
 											class="form-control" name="primaryId" id="primaryId"
 											placeholder="12345566" />
 									</div>
 								</div>
 
-								<%-- <div class="form-group">
+								<!-- <div class="form-group">
 									<label for="picture" class="col-md-2 form-labels">Profile
 										Picture</label>
-									<form:input path="picture" type="file" id="picture" />
-								</div> --%>
+									<input th:field="*{picture}" type="file" id="picture" />
+								</div> -->
 							</div>
 							<div id="credentials" class="tab-pane fade">
 								<div class="form-group form-inline">
-									<label for="email" class="col-md-3 form-labels">Email</label>
-									<form:input path="email" type="email" class="form-control"
+									<label for="email" class="col-md-3 form-labels">Email</label> <input
+										th:field="*{email}" type="email" class="form-control"
 										name="email" id="email" placeholder="yguiathe@tayfint.com" />
 								</div>
 								<div class="form-group form-inline">
 									<label for="username" class="col-md-3 form-labels">Username</label>
-									<form:input path="username" type="text" class="form-control"
+									<input th:field="*{username}" type="text" class="form-control"
 										name="username" id="username" placeholder="tayfint.10" />
 								</div>
 								<div class="form-group form-inline">
 									<label for="password" class="col-md-3 form-labels">Password</label>
-									<form:input path="password" type="password"
+									<input th:field="*{password}" type="password"
 										class="form-control" name="password" id="password"
 										placeholder="password1" />
 								</div>
 								<div class="form-group form-inline">
 									<label for="cpassword" class="col-md-3 form-labels">Confirm
-										Password</label>
-									<form:input path="confirmPassword" type="password"
+										Password</label> <input th:field="*{confirmPassword}" type="password"
 										class="form-control" name="cpassword" id="cpassword"
 										placeholder="password1" />
 								</div>
@@ -158,8 +170,8 @@
 								<div class="form-group form-inline">
 									<label for="occupation" class="col-md-3 form-labels">Occupation</label>
 									<div class="form-group">
-										<form:input path="occupation" type="text" class="form-control"
-											name="occupation" id="occupation"
+										<input th:field="*{occupation}" type="text"
+											class="form-control" name="occupation" id="occupation"
 											placeholder="Systems Analyst" />
 									</div>
 								</div>
@@ -168,7 +180,7 @@
 										Income (in dollars)</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
-										<form:input path="monthlySalary" type="text"
+										<input th:field="*{monthlySalary}" type="text"
 											class="form-control" id="salary" placeholder="200000" />
 										<div class="input-group-addon">.00</div>
 									</div>
@@ -177,27 +189,26 @@
 									<label for="education" class="col-md-3 form-labels">Highest
 										Level of Education</label>
 									<div class="form-group">
-										<form:input path="education" type="text" class="form-control"
-											name="education" id="education"
+										<input th:field="*{education}" type="text"
+											class="form-control" name="education" id="education"
 											placeholder="Masters in Cybersecurity" />
 									</div>
 								</div>
 
 								<div class="form-group form-inline">
 									<label for="employmentstatuscd" class="col-md-3 form-labels">Employment
-										Status</label>
-									<form:select path="employmentStatusCd" id="employmentstatuscd"
-										class="form-control">
+										Status</label> <select th:field="*{employmentStatusCd}"
+										id="employmentstatuscd" class="form-control">
 										<option value="0">Self-Employed</option>
 										<option value="1">Employed</option>
 										<option value="2">Unemployed</option>
 										<option value="3">Retired</option>
-									</form:select>
+									</select>
 								</div>
 								<div class="form-group form-inline">
 									<label for="employer" class="col-md-3 form-labels">Employer</label>
 									<div class="form-group">
-										<form:input path="employer" type="text" class="form-control"
+										<input th:field="*{employer}" type="text" class="form-control"
 											name="employer" id="employer" placeholder="Actimize, Inc." />
 									</div>
 								</div>
@@ -214,13 +225,13 @@
 							</div>
 						</div>
 					</div>
-				</form:form>
+				</form>
 			</div>
 		</div>
 	</div>
 </section>
 
-<jsp:include page="fragments/footer.jsp" />
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

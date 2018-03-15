@@ -1,40 +1,28 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<spring:url value="/static/img/logo1.png" var="favicon" />
-<spring:url value="/static/img/grovemade.jpg"	var="coverImg" />
-<link rel="icon" href="${favicon}">
+<link rel="icon" th:href="@{/static/img/logo1.png}">
 
 <title>Tayfint - Cover</title>
 <style>
 body {
-	background: url(${coverImg}) no-repeat 50% 50%;
+	background: url{[[@{/static/img/grovemade.jpg}]]} no-repeat 50% 50%;
 }
 </style>
-<spring:url value="/static/js/jquery.min.js" var="jQuery" />
-<spring:url value="/static/css/animate/animate.css"	var="animateCss" />
-<spring:url value="/static/css/animate/waypoints.css"	var="waypointCss" />
-<spring:url value="/static/js/add-ons/jquery.waypoints.min.js"	var="jQWaypointJs" />
-<spring:url value="/static/js/add-ons/waypoints.js"	var="waypointJs" />
-<spring:url value="/static/css/bootstrap/bootstrap.min.css"	var="bootstrapCss" />
-<spring:url value="/static/css/custom/cover.css"	var="customCss" />
-<spring:url value="/static/js/vendor/popper.min.js"	var="popperJs" />
-<spring:url value="/static/js/bootstrap/bootstrap.min.js"	var="bootstrapJs" />
 
-<script src="${jQuery}"></script>
-<link href="${animateCss}" rel="stylesheet" />
-<link href="${waypointCss}" rel="stylesheet" />
-<script src="${jQWaypointJs}" type="text/javascript"></script>
-<script src="${waypointJs}" type="text/javascript"></script>
-<link href="${bootstrapCss}" rel="stylesheet">
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<link th:href="@{/static/css/animate/animate.css}" rel="stylesheet" />
+<link th:href="@{/static/css/animate/waypoints.css}" rel="stylesheet" />
+<script th:src="@{/static/js/add-ons/jquery.waypoints.min.js}" type="text/javascript"></script>
+<script th:src="@{/static/js/add-ons/waypoints.js}" type="text/javascript"></script>
+<link th:href="@{/static/css/bootstrap/bootstrap.min.css}" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="${customCss}" rel="stylesheet">
+<link th:href="@{/static/css/custom/cover.css}" href="../../../static/css/custom/cover.css" rel="stylesheet">
 </head>
 <body>
 	<div class="site-wrapper">
@@ -84,7 +72,7 @@ body {
 	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="${popperJs}"></script>
-	<script src="${bootstrapJs}"></script>
+	<script th:src="@{/static/js/vendor/popper.min.js}" src="../../static/js/vendor/popper.min.js"></script>
+	<script th:src="@{/static/js/bootstrap/bootstrap.min.js}" src="../../static/js/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
