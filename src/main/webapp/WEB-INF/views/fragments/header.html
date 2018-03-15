@@ -33,7 +33,7 @@
 				</button>
 				<a class="navbar-brand" href="#">Tayfint</a>
 			</div>
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault" th:if="${#authorization.expression('!isAuthenticated()')}">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault" th:if="${#authorization.expression('isAuthenticated()')}">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-item active">
 						<form class="navbar-form navbar-right" method="POST"
