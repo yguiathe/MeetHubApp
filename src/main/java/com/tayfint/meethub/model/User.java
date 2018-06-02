@@ -2,6 +2,7 @@ package com.tayfint.meethub.model;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Calendar;
 
@@ -16,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -129,274 +131,14 @@ public class User {
 	@Lob
 	private Blob picture;
 	
+	@OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Membership> userMeetings = new HashSet<Membership>(0);
+	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "app_user_role", 
 				joinColumns = { @JoinColumn(name = "USER_ID") }, 
 				inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Role> roles;
-
-	public Long getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Short getFailedLoginAttempts() {
-		return this.failedLoginAttempts;
-	}
-
-	public void setFailedLoginAttempts(Short failedLoginAttempts) {
-		this.failedLoginAttempts = failedLoginAttempts;
-	}
-
-	public Date getLastSuccessfulLogin() {
-		return this.lastSuccessfulLogin;
-	}
-
-	public void setLastSuccessfulLogin(Date lastSuccessfulLogin) {
-		this.lastSuccessfulLogin = lastSuccessfulLogin;
-	}
-
-	public Date getBlockedUntil() {
-		return this.blockedUntil;
-	}
-
-	public void setBlockedUntil(Date blockedUntil) {
-		this.blockedUntil = blockedUntil;
-	}
-
-	public Boolean getIsDeceased() {
-		return this.isDeceased;
-	}
-
-	public void setIsDeceased(Boolean isDeceased) {
-		this.isDeceased = isDeceased;
-	}
-
-	public String getPrimaryId() {
-		return this.primaryId;
-	}
-
-	public void setPrimaryId(String primaryId) {
-		this.primaryId = primaryId;
-	}
-
-	public String getPrimaryIdType() {
-		return this.primaryIdType;
-	}
-
-	public void setPrimaryIdType(String primaryIdType) {
-		this.primaryIdType = primaryIdType;
-	}
-
-	public Date getBirthdate() {
-		return this.birthdate;
-	}
-
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
-	}
-
-	public String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getMaidenName() {
-		return this.maidenName;
-	}
-
-	public void setMaidenName(String maidenName) {
-		this.maidenName = maidenName;
-	}
-
-	public String getGender() {
-		return this.gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getEducation() {
-		return this.education;
-	}
-
-	public void setEducation(String education) {
-		this.education = education;
-	}
-
-	public String getOccupation() {
-		return this.occupation;
-	}
-
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
-	}
-
-	public Double getMonthlySalary() {
-		return this.monthlySalary;
-	}
-
-	public void setMonthlySalary(Double monthlySalary) {
-		this.monthlySalary = monthlySalary;
-	}
-
-	public Boolean getIsActive() {
-		return this.isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	public String getMaritalStatusCd() {
-		return this.maritalStatusCd;
-	}
-
-	public void setMaritalStatusCd(String maritalStatusCd) {
-		this.maritalStatusCd = maritalStatusCd;
-	}
-
-	public String getEmploymentStatusCd() {
-		return this.employmentStatusCd;
-	}
-
-	public void setEmploymentStatusCd(String employmentStatusCd) {
-		this.employmentStatusCd = employmentStatusCd;
-	}
-
-	public String getEmployer() {
-		return this.employer;
-	}
-
-	public void setEmployer(String employer) {
-		this.employer = employer;
-	}
-
-	public Date getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getCitizenship() {
-		return this.citizenship;
-	}
-
-	public void setCitizenship(String citizenship) {
-		this.citizenship = citizenship;
-	}
-
-	public String getNameSuffix() {
-		return this.nameSuffix;
-	}
-
-	public void setNameSuffix(String nameSuffix) {
-		this.nameSuffix = nameSuffix;
-	}
-
-	public String getNamePrefix() {
-		return this.namePrefix;
-	}
-
-	public void setNamePrefix(String namePrefix) {
-		this.namePrefix = namePrefix;
-	}
-
-	public Date getRowUpdateDate() {
-		return this.rowUpdateDate;
-	}
-
-	public void setRowUpdateDate(Date rowUpdateDate) {
-		this.rowUpdateDate = rowUpdateDate;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-
-	public Blob getPicture() {
-		return picture;
-	}
-
-	public void setPicture(Blob picture) {
-		this.picture = picture;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	@Transient
-	public boolean isNew() {
-		return (this.userId == null);
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((primaryId == null) ? 0 : primaryId.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -423,6 +165,277 @@ public class User {
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	public Date getBirthdate() {
+		return this.birthdate;
+	}
+
+	public Date getBlockedUntil() {
+		return this.blockedUntil;
+	}
+
+	public String getCitizenship() {
+		return this.citizenship;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public Date getCreateDate() {
+		return this.createDate;
+	}
+
+	public String getEducation() {
+		return this.education;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getEmployer() {
+		return this.employer;
+	}
+
+	public String getEmploymentStatusCd() {
+		return this.employmentStatusCd;
+	}
+
+	public Short getFailedLoginAttempts() {
+		return this.failedLoginAttempts;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public String getGender() {
+		return this.gender;
+	}
+
+	public Boolean getIsActive() {
+		return this.isActive;
+	}
+
+	public Boolean getIsDeceased() {
+		return this.isDeceased;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public Date getLastSuccessfulLogin() {
+		return this.lastSuccessfulLogin;
+	}
+
+	public String getMaidenName() {
+		return this.maidenName;
+	}
+
+	public String getMaritalStatusCd() {
+		return this.maritalStatusCd;
+	}
+
+	public String getMiddleName() {
+		return this.middleName;
+	}
+
+	public Double getMonthlySalary() {
+		return this.monthlySalary;
+	}
+
+	public String getNamePrefix() {
+		return this.namePrefix;
+	}
+
+	public String getNameSuffix() {
+		return this.nameSuffix;
+	}
+
+	public String getOccupation() {
+		return this.occupation;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public Blob getPicture() {
+		return picture;
+	}
+
+	public String getPrimaryId() {
+		return this.primaryId;
+	}
+
+	public String getPrimaryIdType() {
+		return this.primaryIdType;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public Date getRowUpdateDate() {
+		return this.rowUpdateDate;
+	}
+
+	public Long getUserId() {
+		return this.userId;
+	}
+
+	public Set<Membership> getUserMeetings() {
+		return userMeetings;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((primaryId == null) ? 0 : primaryId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Transient
+	public boolean isNew() {
+		return (this.userId == null);
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public void setBlockedUntil(Date blockedUntil) {
+		this.blockedUntil = blockedUntil;
+	}
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setEmployer(String employer) {
+		this.employer = employer;
+	}
+
+	public void setEmploymentStatusCd(String employmentStatusCd) {
+		this.employmentStatusCd = employmentStatusCd;
+	}
+
+	public void setFailedLoginAttempts(Short failedLoginAttempts) {
+		this.failedLoginAttempts = failedLoginAttempts;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public void setIsDeceased(Boolean isDeceased) {
+		this.isDeceased = isDeceased;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setLastSuccessfulLogin(Date lastSuccessfulLogin) {
+		this.lastSuccessfulLogin = lastSuccessfulLogin;
+	}
+
+	public void setMaidenName(String maidenName) {
+		this.maidenName = maidenName;
+	}
+
+	public void setMaritalStatusCd(String maritalStatusCd) {
+		this.maritalStatusCd = maritalStatusCd;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public void setMonthlySalary(Double monthlySalary) {
+		this.monthlySalary = monthlySalary;
+	}
+
+	public void setNamePrefix(String namePrefix) {
+		this.namePrefix = namePrefix;
+	}
+
+	public void setNameSuffix(String nameSuffix) {
+		this.nameSuffix = nameSuffix;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setPicture(Blob picture) {
+		this.picture = picture;
+	}
+
+	public void setPrimaryId(String primaryId) {
+		this.primaryId = primaryId;
+	}
+
+	public void setPrimaryIdType(String primaryIdType) {
+		this.primaryIdType = primaryIdType;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public void setRowUpdateDate(Date rowUpdateDate) {
+		this.rowUpdateDate = rowUpdateDate;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
+	public void setUserMeetings(Set<Membership> userMeetings) {
+		this.userMeetings = userMeetings;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
