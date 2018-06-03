@@ -129,7 +129,7 @@ section#main .login-form {
 	padding-bottom: 10px;
 }
 
-#accordion.panel-group>button.btn.btn-default, .all-btn:hover, .all-btn:focus {
+.all-btn:hover, .all-btn:focus {
 	background-color: #009eda;
 	color: white;
 	border-color: #cccccc;
@@ -157,6 +157,12 @@ section#main .login-form {
 
 .glyphicon-ok-sign {
 	color: orange;
+}
+
+.blue-btn{
+	background-color: #009eda;
+	color: white;
+	border-color: #cccccc;
 }
 
 /* Devices styles */
