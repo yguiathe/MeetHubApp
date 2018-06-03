@@ -1,7 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/header :: header-css">
-<title th:text="#{meethub.mygroups}"></title>
+<head th:include="fragments/header :: header-css(title=#{meethub.mygroups})">
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
