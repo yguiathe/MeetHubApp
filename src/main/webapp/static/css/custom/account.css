@@ -175,6 +175,10 @@ section#main .login-form {
 	display: inline;
 }
 
+.modal-body {
+	background-color: #f4f4f4;
+}
+
 /* Devices styles */
 @media ( max-width : 575px) {
 	.navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
