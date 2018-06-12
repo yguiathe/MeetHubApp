@@ -56,11 +56,12 @@
 								th:value="${_csrf.token}" />
 						</form>
 					</li>
-					<li sec:authorize="isAuthenticated()">
-						<p class="navbar-text navbar-right" th:text="#{meethub.welcome} + ' '"></p>
-						<p class="navbar-text navbar-right" sec:authentication="name"></p>
-						<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
-							<span class="glyphicon glyphicon-log-out navbar-right" aria-hidden="true"></span>&nbsp;Logout
+				</ul>
+				<ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
+					<li th:text="#{meethub.welcome}"></li>
+					<li sec:authentication="name"></li>
+					<li>!<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
 					</a>
 						<form style="visibility: hidden" id="form" method="post"
 							action="#" th:action="@{/logout}"></form>
