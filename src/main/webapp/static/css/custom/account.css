@@ -21,10 +21,6 @@ body {
 	color: #009eda;
 }
 
-.navbar .navbar-text {
-	color: #ffffff;
-}
-
 .navbar .navbar-nav .nav-link:not (.disabled ):hover, .navbar .navbar-nav .nav-link:not
 	(.disabled ):focus {
 	color: #009eda;
@@ -168,7 +164,7 @@ section#main .login-form {
 	border-color: #cccccc;
 }
 
-.logout-icon{
+.nav>li>.logout-icon{
 	display: inline;
 }
 
