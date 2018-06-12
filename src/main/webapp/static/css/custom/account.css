@@ -114,7 +114,7 @@ section#main .login-form {
 	margin-top: 180px;
 }
 
-.form-labels {
+.form-labels, .headlines {
 	font-weight: normal;
 	color: #555;
 }

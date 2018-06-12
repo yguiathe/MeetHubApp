@@ -57,6 +57,8 @@
 						</form>
 					</li>
 					<li sec:authorize="isAuthenticated()">
+						<span th:text="#{meethub.welcome}"> </span>
+						<span sec:authentication="name"></span> |
 						<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
 							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
 					</a>
