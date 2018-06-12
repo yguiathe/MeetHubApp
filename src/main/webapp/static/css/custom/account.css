@@ -114,7 +114,7 @@ section#main .login-form {
 	margin-top: 180px;
 }
 
-.form-labels, .headlines {
+.form-labels, .navbar-text {
 	font-weight: normal;
 	color: #555;
 }
@@ -127,6 +127,9 @@ section#main .login-form {
 
 .headlines {
 	padding-bottom: 10px;
+	color: #555;
+	font-size: 12px;
+	
 }
 
 .all-btn:hover, .all-btn:focus {
