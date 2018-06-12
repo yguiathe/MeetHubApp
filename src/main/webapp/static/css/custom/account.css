@@ -168,6 +168,10 @@ section#main .login-form {
 	border-color: #cccccc;
 }
 
+.logout-icon{
+	display: inline;
+}
+
 /* Devices styles */
 @media ( max-width : 575px) {
 	.navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {

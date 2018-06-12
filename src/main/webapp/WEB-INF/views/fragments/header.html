@@ -3,19 +3,18 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="header-css(title)">
-	<meta charset="utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="icon" th:href="@{/static/img/logo1.png}"
-		href="../../../static/img/logo1.png" />
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="icon" th:href="@{/static/img/logo1.png}"
+	href="../../../static/img/logo1.png" />
 
-	<!-- Bootstrap core CSS -->
-	<link th:href="@{/static/css/bootstrap/bootstrap.min.css}"
-		href="../../../static/css/bootstrap/bootstrap.min.css"
-		rel="stylesheet" />
-	<link th:href="@{/static/css/custom/account.css}"
-		href="../../../static/css/custom/account.css" rel="stylesheet" />
-	<title th:text="${title}"></title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/static/css/bootstrap/bootstrap.min.css}"
+	href="../../../static/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+<link th:href="@{/static/css/custom/account.css}"
+	href="../../../static/css/custom/account.css" rel="stylesheet" />
+<title th:text="${title}"></title>
 </head>
 
 <body>
@@ -32,10 +31,10 @@
 				</button>
 				<a class="navbar-brand" href="#">Tayfint</a>
 			</div>
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault"
-				>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-item active" sec:authorize="isAnonymous()">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="nav navbar-nav navbar-right"
+					sec:authorize="isAnonymous()">
+					<li class="nav-item active">
 						<form class="navbar-form navbar-right" method="POST"
 							th:action="@{signin}">
 							<div class="form-group">
@@ -57,11 +56,13 @@
 						</form>
 					</li>
 				</ul>
-				<ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
-					<li th:text="#{meethub.welcome}"></li>
-					<li sec:authentication="name"></li>
-					<li>!<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
-							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+				<ul sec:authorize="isAuthenticated()"
+					class="nav navbar-nav navbar-right">
+					<li class="navbar-text" th:text="#{meethub.welcome} + ' '"></li>
+					<li class="navbar-text" sec:authentication="name"></li>
+					<li>!<a href="/logout" th:href="@{#}"
+						onclick="$('#form').submit();"> <span
+							class="glyphicon glyphicon-log-out logout-icon" aria-hidden="true"></span>
 					</a>
 						<form style="visibility: hidden" id="form" method="post"
 							action="#" th:action="@{/logout}"></form>
