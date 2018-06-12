@@ -60,9 +60,9 @@
 					class="nav navbar-nav navbar-right">
 					<li class="navbar-text" th:text="#{meethub.welcome}"></li>
 					<li class="navbar-text" sec:authentication="name"></li>
-					<li class="navbar-text">!<a href="/logout" th:href="@{#}"
+					<li class="navbar-text">!<a href="/logout"class="logout-icon" th:href="@{#}"
 						onclick="$('#form').submit();"> <span
-							class="glyphicon glyphicon-log-out logout-icon" aria-hidden="true"></span>
+							class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
 					</a>
 						<form style="visibility: hidden" id="form" method="post"
 							action="#" th:action="@{/logout}"></form>

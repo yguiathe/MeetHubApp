@@ -115,6 +115,13 @@ section#main .login-form {
 	color: #555;
 }
 
+.welcome-text, .navbar-username {
+	margin-right: 0px;
+}
+
+.navbar-punctuation {
+	margin-left: 0px;
+}
 .all-btn {
 	background-color: #afc836;
 	color: white;
