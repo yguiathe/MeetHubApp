@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -94,8 +95,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/users/myaccount.go", method = RequestMethod.GET)
-	public String myAccountPage(Model model, Authentication auth) {
-		getLoggedInUserDetails(auth);
+	public String myAccountPage(Model model) {
+		getLoggedInUserDetails(SecurityContextHolder.getContext().getAuthentication());
 		logger.debug("My Account Page");
 		return "users/account";
 	}
