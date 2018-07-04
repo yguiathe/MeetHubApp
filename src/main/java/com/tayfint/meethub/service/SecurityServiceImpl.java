@@ -1,5 +1,7 @@
 package com.tayfint.meethub.service;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,10 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
+@Service("securityService")
+@Transactional
 public class SecurityServiceImpl implements SecurityService {
 	
 	static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
