@@ -178,6 +178,7 @@ public class UserController {
 			user = cud.getUser();
 			logger.debug(user.toString());
 		}
+		logger.debug("+++ " + user.toString());
 		return user;
     }
 	
