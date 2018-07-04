@@ -59,7 +59,7 @@
 				<ul sec:authorize="isAuthenticated()"
 					class="nav navbar-nav navbar-right">
 					<li class="navbar-text welcome-text" th:text="#{meethub.welcome}"></li>
-					<li class="navbar-text navbar-username" sec:authentication="name"></li>
+					<li class="navbar-text navbar-username" th:text="${user.firstName}"></li>
 					<li class="navbar-text navbar-punctuation">!<a href="/logout" class="logout-icon" th:href="@{#}"
 						onclick="$('#form').submit();"> <span
 							class="glyphicon glyphicon-log-out" aria-hidden="true"></span>

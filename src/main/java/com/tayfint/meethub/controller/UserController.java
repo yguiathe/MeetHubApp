@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tayfint.meethub.model.CustomUserDetails;
 import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.service.SecurityService;
 import com.tayfint.meethub.service.UserService;
@@ -60,7 +62,7 @@ public class UserController {
 	// 2. @Validated form validator
 	// 3. RedirectAttributes for flash value
 	@RequestMapping(value = "/register.go", method = RequestMethod.POST)
-	public String saveOrUpdateUser(@ModelAttribute("user") @Validated User user,
+	public String saveOrUpdateUser(@ModelAttribute("userForm") @Validated User user,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
 		
@@ -92,7 +94,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/users/myaccount.go", method = RequestMethod.GET)
-	public String myAccountPage(Model model) {
+	public String myAccountPage(Model model, Authentication auth) {
+		getLoggedInUserDetails(auth);
 		logger.debug("My Account Page");
 		return "users/account";
 	}
@@ -166,6 +169,14 @@ public class UserController {
 		return "users/show";
 
 	}
+	
+	@ModelAttribute("user")
+	public User getLoggedInUserDetails(Authentication authentication) {
+		CustomUserDetails cud = (CustomUserDetails) authentication.getPrincipal();
+		User user = cud.getUser();
+		user.setPassword("");
+		return user;
+    }
 
 	
 }
