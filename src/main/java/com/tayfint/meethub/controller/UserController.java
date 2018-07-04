@@ -176,9 +176,7 @@ public class UserController {
 		if (authentication != null){
 			cud = (CustomUserDetails) authentication.getPrincipal();
 			user = cud.getUser();
-			logger.debug(user.toString());
 		}
-		logger.debug("+++ " + user.toString());
 		return user;
     }
 	
