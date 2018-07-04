@@ -435,4 +435,12 @@ public class User {
 		this.username = username;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
+				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", gender=" + gender
+				+ ", education=" + education + ", monthlySalary=" + monthlySalary + ", maritalStatusCd="
+				+ maritalStatusCd + ", email=" + email + "]";
+	}
+
 }

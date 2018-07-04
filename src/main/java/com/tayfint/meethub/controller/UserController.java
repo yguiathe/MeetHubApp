@@ -178,6 +178,7 @@ public class UserController {
 		if (authentication != null){
 			cud = (CustomUserDetails) authentication.getPrincipal();
 			user = cud.getUser();
+			logger.debug(user.toString());
 		}
 		user.setPassword("");
 		return user;
