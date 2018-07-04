@@ -2,6 +2,7 @@ package com.tayfint.meethub.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.CustomUserDetails;
@@ -28,7 +28,6 @@ import com.tayfint.meethub.service.UserService;
 import com.tayfint.meethub.validator.UserFormValidator;
 
 @Controller
-@SessionAttributes("user")
 public class UserController {
 
 	static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -95,8 +94,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/users/myaccount.go", method = RequestMethod.GET)
-	public String myAccountPage(Model model) {
-		getLoggedInUserDetails(SecurityContextHolder.getContext().getAuthentication());
+	public String myAccountPage(Model model, HttpSession session) {
+		session.setAttribute("user", getLoggedInUserDetails(SecurityContextHolder.getContext().getAuthentication()));
 		logger.debug("My Account Page");
 		return "users/account";
 	}
@@ -171,18 +170,15 @@ public class UserController {
 
 	}
 	
-	@ModelAttribute("user")
 	public User getLoggedInUserDetails(Authentication authentication) {
-		User user = new User();
+		User user = null;
 		CustomUserDetails cud = null;
 		if (authentication != null){
 			cud = (CustomUserDetails) authentication.getPrincipal();
 			user = cud.getUser();
 			logger.debug(user.toString());
 		}
-		user.setPassword("");
 		return user;
     }
-
 	
 }
