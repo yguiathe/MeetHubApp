@@ -173,6 +173,9 @@ public class UserController {
 	
 	@ModelAttribute("user")
 	public User getLoggedInUserDetails(Authentication authentication) {
+		if (authentication == null){
+			logger.debug("SecurityContext is empty");
+		}
 		CustomUserDetails cud = (CustomUserDetails) authentication.getPrincipal();
 		User user = cud.getUser();
 		user.setPassword("");
