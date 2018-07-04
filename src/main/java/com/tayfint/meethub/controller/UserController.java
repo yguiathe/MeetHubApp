@@ -107,17 +107,17 @@ public class UserController {
 
 		logger.debug("showAddUserForm()");
 
-		User user = new User();
+		User userForm = new User();
 
 		// set default value
-		user.setFirstName("John");
-		user.setEmail("test@gmail.com");
-		user.setLastName("Doe");
-		user.setPrimaryId("1234653");
-		user.setGender("M");
-		user.setPrimaryIdType("Passport");
-		user.setCitizenship("Cameroonian");
-		model.addAttribute("user", user);
+		userForm.setFirstName("John");
+		userForm.setEmail("test@gmail.com");
+		userForm.setLastName("Doe");
+		userForm.setPrimaryId("1234653");
+		userForm.setGender("M");
+		userForm.setPrimaryIdType("Passport");
+		userForm.setCitizenship("Cameroonian");
+		model.addAttribute("user", userForm);
 
 		//populateDefaultModel(model);
 		return "signup";
