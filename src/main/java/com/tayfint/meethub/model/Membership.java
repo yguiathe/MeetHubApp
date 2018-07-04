@@ -5,6 +5,7 @@ package com.tayfint.meethub.model;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,13 +34,13 @@ public class Membership implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "MembershipTab")
 	@TableGenerator(name = "MembershipTab", table = "hibernate_id", pkColumnName = "GEN_KEY", valueColumnName = "GEN_VALUE", pkColumnValue = "MEMBERSHIP_GEN", allocationSize = 1)
 	@Column(name = "ID")
-	private int id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "MEETING_ID")
 	private Meeting appMeeting;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")
 	private User appUser;
 	
@@ -57,11 +58,11 @@ public class Membership implements java.io.Serializable {
 	@Column(name = "TERMINATION_DATE")
 	private Date terminationDate;
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -117,10 +118,7 @@ public class Membership implements java.io.Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((appMeeting == null) ? 0 : appMeeting.hashCode());
-		result = prime * result + ((appUser == null) ? 0 : appUser.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((typeCd == null) ? 0 : typeCd.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -133,22 +131,10 @@ public class Membership implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Membership other = (Membership) obj;
-		if (appMeeting == null) {
-			if (other.appMeeting != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!appMeeting.equals(other.appMeeting))
-			return false;
-		if (appUser == null) {
-			if (other.appUser != null)
-				return false;
-		} else if (!appUser.equals(other.appUser))
-			return false;
-		if (id != other.id)
-			return false;
-		if (typeCd == null) {
-			if (other.typeCd != null)
-				return false;
-		} else if (!typeCd.equals(other.typeCd))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

@@ -6,13 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,28 +16,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.service.SecurityService;
 import com.tayfint.meethub.service.UserService;
 import com.tayfint.meethub.validator.UserFormValidator;
 
 @Controller
+@SessionAttributes("user")
 public class UserController {
 
 	static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
 
 	@Autowired
 	UserFormValidator userFormValidator;
 	
 	@Autowired
-    private DaoAuthenticationProvider authenticationManager;
+    private SecurityService securityService;
 
 	//Set a form validator
 	@InitBinder
@@ -70,9 +63,6 @@ public class UserController {
 	public String saveOrUpdateUser(@ModelAttribute("user") @Validated User user,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
-
-		logger.debug("saveOrUpdateUser() : {}", user);
-		String text = user.getPassword();
 		
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
@@ -89,8 +79,7 @@ public class UserController {
 			}*/
 
 			userService.saveUser(user);
-			user.setPassword(text);
-			authenticateUserAndSetSession(user, request);
+			securityService.autologin(user.getUsername(), user.getPassword());
 
 			// POST/REDIRECT/GET
 			return "users/account";
@@ -177,18 +166,6 @@ public class UserController {
 		return "users/show";
 
 	}
-	
-	 private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
-	        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-	        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, user.getPassword(), userDetails.getAuthorities());
 
-	        // generate session if one doesn't exist
-	        request.getSession();
-
-	        token.setDetails(new WebAuthenticationDetails(request));
-	        Authentication authenticatedUser = authenticationManager.authenticate(token);
-
-	        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-	    }
 	
 }

@@ -2,14 +2,11 @@ package com.tayfint.meethub.model;
 
 import java.sql.Blob;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -131,10 +128,10 @@ public class User {
 	@Lob
 	private Blob picture;
 	
-	@OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Membership> userMeetings = new HashSet<Membership>(0);
+	@OneToMany(mappedBy = "appUser")
+	private Set<Membership> memberships;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "app_user_role", 
 				joinColumns = { @JoinColumn(name = "USER_ID") }, 
 				inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -287,8 +284,8 @@ public class User {
 		return this.userId;
 	}
 
-	public Set<Membership> getUserMeetings() {
-		return userMeetings;
+	public Set<Membership> getMemberships() {
+		return memberships;
 	}
 
 	public String getUsername() {
@@ -430,8 +427,8 @@ public class User {
 		this.userId = userId;
 	}
 	
-	public void setUserMeetings(Set<Membership> userMeetings) {
-		this.userMeetings = userMeetings;
+	public void setMemberships(Set<Membership> memberships) {
+		this.memberships = memberships;
 	}
 
 	public void setUsername(String username) {

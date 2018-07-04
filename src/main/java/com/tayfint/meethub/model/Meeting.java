@@ -43,8 +43,8 @@ public class Meeting implements java.io.Serializable {
 	@Column(name = "SHORT_DESC", length = 300)
 	private String shortDesc;
 	
-	@Column(name = "LOGO")
-	private byte[] logo;
+	/*@Column(name = "LOGO")
+	private byte[] logo;*/
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE")
@@ -57,8 +57,8 @@ public class Meeting implements java.io.Serializable {
 	@Column(name = "CLOSE_DATE", length = 19)
 	private Date closeDate;
 	
-	@Column(name = "TERMS")
-	private byte[] terms;
+	/*@Column(name = "TERMS")
+	private byte[] terms;*/
 	
 	@Column(name = "COUNTRY_OF_INCORP", length = 45)
 	private String countryOfIncorp;
@@ -74,7 +74,7 @@ public class Meeting implements java.io.Serializable {
 	private Date lastUpdateDate = new Date(Calendar.getInstance().getTimeInMillis());
 	
 	@OneToMany(mappedBy = "appMeeting")
-	private Set<Membership> appMemberships = new HashSet<Membership>(0);
+	private Set<Membership> memberships = new HashSet<Membership>();
 
 	@Override
 	public boolean equals(Object obj) {
@@ -103,8 +103,8 @@ public class Meeting implements java.io.Serializable {
 		return true;
 	}
 
-	public Set<Membership> getAppMemberships() {
-		return this.appMemberships;
+	public Set<Membership> getMemberships() {
+		return this.memberships;
 	}
 
 	public Date getCloseDate() {
@@ -131,9 +131,9 @@ public class Meeting implements java.io.Serializable {
 		return this.lastUpdateDate;
 	}
 
-	public byte[] getLogo() {
+	/*public byte[] getLogo() {
 		return this.logo;
-	}
+	}*/
 
 	public String getName() {
 		return this.name;
@@ -151,9 +151,9 @@ public class Meeting implements java.io.Serializable {
 		return this.shortDesc;
 	}
 
-	public byte[] getTerms() {
+	/*public byte[] getTerms() {
 		return this.terms;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
@@ -165,8 +165,8 @@ public class Meeting implements java.io.Serializable {
 		return result;
 	}
 
-	public void setAppMemberships(Set<Membership> appMemberships) {
-		this.appMemberships = appMemberships;
+	public void setMemberships(Set<Membership> memberships) {
+		this.memberships = memberships;
 	}
 
 	public void setCloseDate(Date closeDate) {
@@ -193,9 +193,9 @@ public class Meeting implements java.io.Serializable {
 		this.lastUpdateDate = lastUpdateDate;
 	}
 
-	public void setLogo(byte[] logo) {
+	/*public void setLogo(byte[] logo) {
 		this.logo = logo;
-	}
+	}*/
 
 	public void setName(String name) {
 		this.name = name;
@@ -213,9 +213,9 @@ public class Meeting implements java.io.Serializable {
 		this.shortDesc = shortDesc;
 	}
 
-	public void setTerms(byte[] terms) {
+	/*public void setTerms(byte[] terms) {
 		this.terms = terms;
-	}
+	}*/
 	
 	
 
