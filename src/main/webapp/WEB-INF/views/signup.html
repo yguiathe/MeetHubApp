@@ -67,13 +67,17 @@
 								<div class="form-group">
 									<label for="name_label" class="col-sm-2 control-label form-labels">Your
 										Name</label>
-									<div class="col-sm-10">
+									<div class="col-sm-3">
 										<input th:field="*{firstName}" type="text"
 											class="form-control" name="firstname" id="firstname"
 											placeholder="First Name" />
+									</div>
+									<div class="col-sm-2">
 										<input th:field="*{middleName}" type="text"
 											class="form-control" name="middlename" id="middlename"
 											placeholder="Middle Name" />
+									</div>
+									<div class="col-sm-3">
 										<input th:field="*{lastName}" type="text" class="form-control"
 											name="lastname" id="lastname" placeholder="Last Name" />
 									</div>
@@ -88,22 +92,25 @@
 								</div>
 								<div class="form-group">
 									<label for="gender" class="col-sm-2 control-label form-labels">Gender</label>
-									<label class="radio-inline"> <input type="radio"
+									<div class="col-sm-10">
+										<label class="radio-inline"> <input type="radio"
 										th:field="*{gender}" name="gender" id="male" value="M" /> Male
 									</label> <label class="radio-inline"> <input type="radio"
 										th:field="*{gender}" name="gender" id="female" value="F" />
 										Female
 									</label>
+									</div>
 								</div>
 								<div class="form-group">
 									<label for="marital_status" class="col-sm-2 control-label form-labels">Marital
-										Status</label> <select th:field="*{maritalStatusCd}"
+										Status</label> 
+									<div class="col-sm-10"><select th:field="*{maritalStatusCd}"
 										id="marital_status" class="form-control">
 										<option value="0">Single</option>
 										<option value="1">Married</option>
 										<option value="2">Divorced</option>
 										<option value="3">Widow</option>
-									</select>
+									</select></div>
 								</div>
 								<div class="form-group">
 									<label for="citizenship" class="col-sm-2 control-label form-labels">Citizenship</label>
@@ -116,13 +123,14 @@
 
 								<div class="form-group">
 									<label for="primaryIdType" class="col-sm-2 control-label form-labels">Primary
-										ID Type </label> <select th:field="*{primaryIdType}"
+										ID Type </label> 
+									<div class="col-sm-10"><select th:field="*{primaryIdType}"
 										id="primaryIdType" class="form-control">
 										<option value="PP">Passport</option>
 										<option value="SSN">SSN</option>
 										<option value="NID">National ID</option>
 										<option value="Others">Others</option>
-									</select>
+									</select></div>
 								</div>
 								<div class="form-group">
 									<label for="primaryId" class="col-sm-2 control-label form-labels">ID
@@ -142,26 +150,28 @@
 							</div>
 							<div id="credentials" class="tab-pane fade">
 								<div class="form-group">
-									<label for="email" class="col-sm-3 control-label form-labels">Email</label> <input
+									<label for="email" class="col-sm-3 control-label form-labels">Email</label> 
+									<div class="col-sm-9"><input
 										th:field="*{email}" type="email" class="form-control"
-										name="email" id="email" placeholder="yguiathe@tayfint.com" />
+										name="email" id="email" placeholder="yguiathe@tayfint.com" /></div>
 								</div>
 								<div class="form-group">
 									<label for="username" class="col-sm-3 control-label form-labels">Username</label>
-									<input th:field="*{username}" type="text" class="form-control"
-										name="username" id="username" placeholder="tayfint.10" />
+									<div class="col-sm-9"><input th:field="*{username}" type="text" class="form-control"
+										name="username" id="username" placeholder="tayfint.10" /></div>
 								</div>
 								<div class="form-group">
 									<label for="password" class="col-sm-3 control-label form-labels">Password</label>
-									<input th:field="*{password}" type="password"
+									<div class="col-sm-9"><input th:field="*{password}" type="password"
 										class="form-control" name="password" id="password"
-										placeholder="password1" />
+										placeholder="password1" /></div>
 								</div>
 								<div class="form-group">
 									<label for="cpassword" class="col-sm-3 control-label form-labels">Confirm
-										Password</label> <input th:field="*{confirmPassword}" type="password"
+										Password</label> 
+									<div class="col-sm-9"><input th:field="*{confirmPassword}" type="password"
 										class="form-control" name="cpassword" id="cpassword"
-										placeholder="password1" />
+										placeholder="password1" /></div>
 								</div>
 							</div>
 							<div id="other" class="tab-pane fade">
@@ -176,7 +186,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 control-label form-labels" for="salary">Monthly
 										Income (in dollars)</label>
-									<div class="input-group">
+									<div class="input-group col-sm-9">
 										<div class="input-group-addon">$</div>
 										<input th:field="*{monthlySalary}" type="text"
 											class="form-control" id="salary" placeholder="200000" />
@@ -195,13 +205,16 @@
 
 								<div class="form-group">
 									<label for="employmentstatuscd" class="col-sm-3 control-label form-labels">Employment
-										Status</label> <select th:field="*{employmentStatusCd}"
+										Status</label> 
+									<div class="col-sm-9">
+										<select th:field="*{employmentStatusCd}"
 										id="employmentstatuscd" class="form-control">
 										<option value="0">Self-Employed</option>
 										<option value="1">Employed</option>
 										<option value="2">Unemployed</option>
 										<option value="3">Retired</option>
 									</select>
+									</div>
 								</div>
 								<div class="form-group">
 									<label for="employer" class="col-sm-3 control-label form-labels">Employer</label>
@@ -215,8 +228,7 @@
 						</div>
 						<div class="panel-footer">
 							<div class="row">
-								<div class="col-md-9"></div>
-								<div class="col-md-3">
+								<div class="col-sm-offset-9 col-sm-3">
 									<button type="submit" class="btn btn-default all-btn">Sign
 										Up</button>
 								</div>
