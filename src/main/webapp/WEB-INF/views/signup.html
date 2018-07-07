@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-				<form method="POST" th:action="@{register.go}" action="#"
+				<form method="POST" class="form-horizontal" th:action="@{register.go}" action="#"
 					th:object="${userForm}">
 					<div class="panel panel-default">
 						<div class="panel-heading tabbed-nav main-color-bg">
@@ -64,31 +64,30 @@
 						<div class="panel-body tab-content">
 							<div id="about-you" class="tab-pane fade in active">
 
-								<div class="form-group form-inline">
-									<label for="name_label" class="col-md-2 control-label form-labels">Your
+								<div class="form-group">
+									<label for="name_label" class="col-sm-2 control-label form-labels">Your
 										Name</label>
-									<div class="form-group">
+									<div class="col-sm-10">
 										<input th:field="*{firstName}" type="text"
 											class="form-control" name="firstname" id="firstname"
 											placeholder="First Name" />
-									</div>
-									<div class="form-group">
 										<input th:field="*{middleName}" type="text"
 											class="form-control" name="middlename" id="middlename"
 											placeholder="Middle Name" />
-									</div>
-									<div class="form-group">
 										<input th:field="*{lastName}" type="text" class="form-control"
 											name="lastname" id="lastname" placeholder="Last Name" />
 									</div>
 								</div>
-								<div class="form-group form-inline">
-									<label for="birthday" class="col-md-2 control-label form-labels">Date
-										of Birth</label> <input th:field="*{birthdate}" type='date'
+								<div class="form-group">
+									<label for="birthday" class="col-sm-2 control-label form-labels">Date
+										of Birth</label> 
+									<div class="col-sm-10">
+										<input th:field="*{birthdate}" type='date'
 										class="form-control" name="birthdate" id="birthdate" />
+									</div>
 								</div>
 								<div class="form-group">
-									<label for="gender" class="col-md-2 control-label form-labels">Gender</label>
+									<label for="gender" class="col-sm-2 control-label form-labels">Gender</label>
 									<label class="radio-inline"> <input type="radio"
 										th:field="*{gender}" name="gender" id="male" value="M" /> Male
 									</label> <label class="radio-inline"> <input type="radio"
@@ -96,8 +95,8 @@
 										Female
 									</label>
 								</div>
-								<div class="form-group form-inline">
-									<label for="marital_status" class="col-md-2 control-label form-labels">Marital
+								<div class="form-group">
+									<label for="marital_status" class="col-sm-2 control-label form-labels">Marital
 										Status</label> <select th:field="*{maritalStatusCd}"
 										id="marital_status" class="form-control">
 										<option value="0">Single</option>
@@ -106,17 +105,17 @@
 										<option value="3">Widow</option>
 									</select>
 								</div>
-								<div class="form-group form-inline">
-									<label for="citizenship" class="col-md-2 control-label form-labels">Citizenship</label>
-									<div class="form-group">
+								<div class="form-group">
+									<label for="citizenship" class="col-sm-2 control-label form-labels">Citizenship</label>
+									<div class="col-sm-10">
 										<input th:field="*{citizenship}" type="text"
 											class="form-control" name="citizenship" id="citizenship"
 											placeholder="Cameroonian" />
 									</div>
 								</div>
 
-								<div class="form-group form-inline">
-									<label for="primaryIdType" class="col-md-3 control-label form-labels">Primary
+								<div class="form-group">
+									<label for="primaryIdType" class="col-sm-2 control-label form-labels">Primary
 										ID Type </label> <select th:field="*{primaryIdType}"
 										id="primaryIdType" class="form-control">
 										<option value="PP">Passport</option>
@@ -125,10 +124,10 @@
 										<option value="Others">Others</option>
 									</select>
 								</div>
-								<div class="form-group form-inline">
-									<label for="primaryId" class="col-md-2 control-label form-labels">ID
+								<div class="form-group">
+									<label for="primaryId" class="col-sm-2 control-label form-labels">ID
 										#</label>
-									<div class="form-group">
+									<div class="col-sm-10">
 										<input th:field="*{primaryId}" type="text"
 											class="form-control" name="primaryId" id="primaryId"
 											placeholder="12345566" />
@@ -142,40 +141,40 @@
 								</div> -->
 							</div>
 							<div id="credentials" class="tab-pane fade">
-								<div class="form-group form-inline">
-									<label for="email" class="col-md-3 control-label form-labels">Email</label> <input
+								<div class="form-group">
+									<label for="email" class="col-sm-3 control-label form-labels">Email</label> <input
 										th:field="*{email}" type="email" class="form-control"
 										name="email" id="email" placeholder="yguiathe@tayfint.com" />
 								</div>
-								<div class="form-group form-inline">
-									<label for="username" class="col-md-3 control-label form-labels">Username</label>
+								<div class="form-group">
+									<label for="username" class="col-sm-3 control-label form-labels">Username</label>
 									<input th:field="*{username}" type="text" class="form-control"
 										name="username" id="username" placeholder="tayfint.10" />
 								</div>
-								<div class="form-group form-inline">
-									<label for="password" class="col-md-3 control-label form-labels">Password</label>
+								<div class="form-group">
+									<label for="password" class="col-sm-3 control-label form-labels">Password</label>
 									<input th:field="*{password}" type="password"
 										class="form-control" name="password" id="password"
 										placeholder="password1" />
 								</div>
-								<div class="form-group form-inline">
-									<label for="cpassword" class="col-md-3 control-label form-labels">Confirm
+								<div class="form-group">
+									<label for="cpassword" class="col-sm-3 control-label form-labels">Confirm
 										Password</label> <input th:field="*{confirmPassword}" type="password"
 										class="form-control" name="cpassword" id="cpassword"
 										placeholder="password1" />
 								</div>
 							</div>
 							<div id="other" class="tab-pane fade">
-								<div class="form-group form-inline">
-									<label for="occupation" class="col-md-3 control-label form-labels">Occupation</label>
-									<div class="form-group">
+								<div class="form-group">
+									<label for="occupation" class="col-sm-3 control-label form-labels">Occupation</label>
+									<div class="col-sm-9">
 										<input th:field="*{occupation}" type="text"
 											class="form-control" name="occupation" id="occupation"
 											placeholder="Systems Analyst" />
 									</div>
 								</div>
-								<div class="form-group form-inline">
-									<label class="col-md-3 control-label form-labels" for="salary">Monthly
+								<div class="form-group">
+									<label class="col-sm-3 control-label form-labels" for="salary">Monthly
 										Income (in dollars)</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
@@ -184,18 +183,18 @@
 										<div class="input-group-addon">.00</div>
 									</div>
 								</div>
-								<div class="form-group form-inline">
-									<label for="education" class="col-md-3 control-label form-labels">Highest
+								<div class="form-group">
+									<label for="education" class="col-sm-3 control-label form-labels">Highest
 										Level of Education</label>
-									<div class="form-group">
+									<div class="col-sm-9">
 										<input th:field="*{education}" type="text"
 											class="form-control" name="education" id="education"
 											placeholder="Masters in Cybersecurity" />
 									</div>
 								</div>
 
-								<div class="form-group form-inline">
-									<label for="employmentstatuscd" class="col-md-3 control-label form-labels">Employment
+								<div class="form-group">
+									<label for="employmentstatuscd" class="col-sm-3 control-label form-labels">Employment
 										Status</label> <select th:field="*{employmentStatusCd}"
 										id="employmentstatuscd" class="form-control">
 										<option value="0">Self-Employed</option>
@@ -204,9 +203,9 @@
 										<option value="3">Retired</option>
 									</select>
 								</div>
-								<div class="form-group form-inline">
-									<label for="employer" class="col-md-3 control-label form-labels">Employer</label>
-									<div class="form-group">
+								<div class="form-group">
+									<label for="employer" class="col-sm-3 control-label form-labels">Employer</label>
+									<div class="col-sm-9">
 										<input th:field="*{employer}" type="text" class="form-control"
 											name="employer" id="employer" placeholder="Actimize, Inc." />
 									</div>
