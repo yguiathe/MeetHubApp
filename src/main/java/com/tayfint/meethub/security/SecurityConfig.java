@@ -19,6 +19,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.tayfint.meethub.listener.AuthenticationSuccessHandlerImpl;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -56,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/signin")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/users/myaccount.go")
+				.successHandler(myAuthenticationSuccessHandler())
 				.permitAll()
 				.and()
 			.rememberMe()
@@ -98,4 +100,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationTrustResolver getAuthenticationTrustResolver() {
 		return new AuthenticationTrustResolverImpl();
 	}
+	
+	@Bean
+    public AuthenticationSuccessHandlerImpl myAuthenticationSuccessHandler(){
+        return new AuthenticationSuccessHandlerImpl();
+    }
 }
