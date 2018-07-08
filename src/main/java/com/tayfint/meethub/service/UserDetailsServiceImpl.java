@@ -18,7 +18,7 @@ import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.UserDetailsImpl;
 import com.tayfint.meethub.service.UserService;
 
-@Service("UserDetailsServiceImpl")
+@Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
