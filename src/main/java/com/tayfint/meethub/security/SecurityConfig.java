@@ -25,7 +25,7 @@ import com.tayfint.meethub.listener.AuthenticationSuccessHandlerImpl;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	@Qualifier("customUserDetailsService")
+	@Qualifier("userDetailsServiceImpl")
 	UserDetailsService userDetailsService;
 
 	@Autowired
