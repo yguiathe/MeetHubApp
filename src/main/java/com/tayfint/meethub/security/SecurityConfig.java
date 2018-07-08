@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/signin")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.successHandler(myAuthenticationSuccessHandler())
+				.defaultSuccessUrl("/users/myaccount.go")
 				.permitAll()
 				.and()
 			.rememberMe()
