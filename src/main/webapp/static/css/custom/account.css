@@ -119,6 +119,10 @@ section#main .login-form {
 	margin-right: 0px;
 }
 
+.navbar-username {
+	padding-left: 2px;
+}
+
 .navbar-punctuation {
 	margin-left: 0px;
 }
