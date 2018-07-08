@@ -18,7 +18,7 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.tayfint.meethub.model.CustomUserDetails;
+import com.tayfint.meethub.model.UserDetailsImpl;
 
 @Component("authSuccessHandlerImpl")
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
@@ -39,7 +39,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		
 		HttpSession session = request.getSession(false);
 		if(session != null){
-			CustomUserDetails cud = (CustomUserDetails) authentication.getPrincipal();
+			UserDetailsImpl cud = (UserDetailsImpl) authentication.getPrincipal();
 			session.setAttribute("user", cud.getUser());
 		}
 		String targetUrl = determineTargetUrl(authentication);

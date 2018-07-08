@@ -13,9 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tayfint.meethub.model.CustomUserDetails;
 import com.tayfint.meethub.model.Role;
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.UserDetailsImpl;
 import com.tayfint.meethub.service.UserService;
 
 @Service("customUserDetailsService")
@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private UserService userService;
 
 	@Transactional(readOnly = true)
-	public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		User user = userService.findByUsername(username);
 		logger.info("User: {}", user);
@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found.");
 			
 		}
-		CustomUserDetails customUserDetails = new CustomUserDetails();
+		UserDetailsImpl customUserDetails = new UserDetailsImpl();
 		customUserDetails.setUser(user);
 		customUserDetails.setAuthorities(getGrantedAuthorities(user));
 		return customUserDetails;
