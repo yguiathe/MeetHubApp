@@ -18,7 +18,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default" th:fragment="header">
+	<nav class="navbar navbar-default" th:fragment="header(displayInlineLogin)">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -32,7 +32,7 @@
 				<a class="navbar-brand" href="#">Tayfint</a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-				<ul class="nav navbar-nav navbar-right"
+				<ul class="nav navbar-nav navbar-right" th:if="${displayInlineLogin} == true"
 					sec:authorize="isAnonymous()">
 					<li class="nav-item active">
 						<form class="navbar-form navbar-right" method="POST"
