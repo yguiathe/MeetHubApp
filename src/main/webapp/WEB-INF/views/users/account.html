@@ -34,13 +34,13 @@
 						<a href="#" class="list-group-item active main-color-bg"> <span
 							class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 							Actions
-						</a> <a data-toggle="modal" href="#createMeeting"
-							class="list-group-item"><span
+						</a> <a role="button" data-toggle="collapse" href="#createMeeting"
+							class="list-group-item" aria-expanded="false" aria-controls="collapseExample"><span
 							class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span
-							class="badge">Add Meeting</span></a> <a href="#"
+							class="actions">Add Meeting</span></a> <a href="#"
 							class="list-group-item"><span
 							class="glyphicon glyphicon-link" aria-hidden="true"></span> <span
-							class="badge">Join Meeting</span></a>
+							class="actions">Join Meeting</span></a>
 					</div>
 
 					<div class="well">
@@ -60,27 +60,51 @@
 				</div>
 				<div class="col-md-9">
 					<!-- Website Overview -->
-					<div class="panel panel-default">
+					<div class="panel panel-default collapse" id="createMeeting">
 						<div class="panel-heading main-color-bg">
-							<h3 class="panel-title">Meeting Actions</h3>
+							<h3 class="panel-title">New Meeting</h3>
 						</div>
 						<div class="panel-body">
-							<div class="col-md-4">
-								<div class="well dash-box">
-									<h2>
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-									</h2>
-									<h4>Add Meeting</h4>
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label for="meetingName" class="col-sm-2 control-label form-labels">Name</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="meetingName"
+											placeholder="Meeting Name"></input>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="well dash-box">
-									<h2>
-										<span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-									</h2>
-									<h4>Join Meeting</h4>
+								<div class="form-group">
+									<label for="shortDesc" class="col-sm-2 control-label form-labels">Short
+										Description</label>
+									<div class="col-sm-10">
+										<textarea class="form-control" id="shortDesc" rows="3"
+											placeholder="This Group main's objective is provide individuals with an alternate banking system"></textarea>
+									</div>
 								</div>
-							</div>
+								<div class="form-group">
+									<label for="ctyOfIncorp" class="col-sm-2 control-label form-labels">Country
+										of Incorporation</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="ctyOfIncorp"
+											placeholder="Bangladesh"></input>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="terms" class="col-sm-2 control-label form-labels">Meeting
+										Terms and Conditions</label>
+									<div class="col-sm-10">
+										<input type="file" id="terms"></input>
+										<p class="help-block form-labels">Upload terms and
+											conditions document</p>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="panel-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary blue-btn">Create
+								Meeting</button>
 						</div>
 					</div>
 
@@ -210,65 +234,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="createMeeting" tabindex="-1"
-				role="dialog">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header main-color-bg">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title">New Meeting</h4>
-						</div>
-						<div class="modal-body">
-							<form class="form-horizontal">
-								<div class="form-group">
-									<label for="meetingName" class="col-sm-2 control-label form-labels">Name</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="meetingName"
-											placeholder="Meeting Name"></input>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="shortDesc" class="col-sm-2 control-label form-labels">Short
-										Description</label>
-									<div class="col-sm-10">
-										<textarea class="form-control" id="shortDesc" rows="3"
-											placeholder="This Group main's objective is provide individuals with an alternate banking system"></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="ctyOfIncorp" class="col-sm-2 control-label form-labels">Country
-										of Incorporation</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="ctyOfIncorp"
-											placeholder="Bangladesh"></input>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="terms" class="col-sm-2 control-label form-labels">Meeting
-										Terms and Conditions</label>
-									<div class="col-sm-10">
-										<input type="file" id="terms"></input>
-										<p class="help-block form-labels">Upload terms and
-											conditions document</p>
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary blue-btn">Create
-								Meeting</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
 		</div>
 	</section>
 

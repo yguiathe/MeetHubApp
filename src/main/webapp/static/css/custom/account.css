@@ -101,8 +101,12 @@ body {
 }
 
 /* Badges */
-.badge {
+.actions {
 	background-color: orange;
+}
+
+.list-group-item {
+	padding-right: 115px;
 }
 
 /* Login Form */
