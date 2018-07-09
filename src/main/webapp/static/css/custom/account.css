@@ -106,7 +106,8 @@ body {
 }
 
 .list-group-item {
-	padding-right: 130px;
+	padding-left: 30px;
+	padding-right: 100px;
 }
 
 /* Login Form */
@@ -181,10 +182,6 @@ section#main .login-form {
 
 .nav>li>.logout-icon{
 	display: inline;
-}
-
-.form-body {
-	background-color: #f4f4f4;
 }
 
 /* Devices styles */
