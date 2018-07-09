@@ -102,11 +102,11 @@ body {
 
 /* Badges */
 .actions {
-	background-color: orange;
+	color: orange;
 }
 
 .list-group-item {
-	padding-right: 115px;
+	padding-right: 130px;
 }
 
 /* Login Form */
@@ -183,7 +183,7 @@ section#main .login-form {
 	display: inline;
 }
 
-.modal-body {
+.form-body {
 	background-color: #f4f4f4;
 }
 
