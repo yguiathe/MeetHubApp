@@ -1,28 +1,27 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
-<link rel="icon" th:href="@{/static/img/logo1.png}"/>
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" th:href="@{/static/img/logo1.png}" />
 
 <title>Tayfint - Cover</title>
-<style th:inline="text">
-body {
-	background: url([[@{/static/img/grovemade.jpg}]]) no-repeat 50% 50%;
-}
-</style>
 
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <link th:href="@{/static/css/animate/animate.css}" rel="stylesheet" />
 <link th:href="@{/static/css/animate/waypoints.css}" rel="stylesheet" />
-<script th:src="@{/static/js/add-ons/jquery.waypoints.min.js}" type="text/javascript"></script>
-<script th:src="@{/static/js/add-ons/waypoints.js}" type="text/javascript"></script>
-<link th:href="@{/static/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+<script th:src="@{/static/js/add-ons/jquery.waypoints.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/static/js/add-ons/waypoints.js}"
+	type="text/javascript"></script>
+<link th:href="@{/static/css/bootstrap/bootstrap.min.css}"
+	rel="stylesheet" />
 <!-- Custom styles for this template -->
-<link th:href="@{/static/css/custom/cover.css}" href="../../../static/css/custom/cover.css" rel="stylesheet"/>
+<link th:href="@{/static/css/custom/cover.css}"
+	href="../../../static/css/custom/cover.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="site-wrapper">
@@ -31,39 +30,39 @@ body {
 
 			<div class="cover-container">
 
-				<header class="masthead clearfix">
+				<div class="masthead clearfix">
 					<div class="inner">
-						<h3 class="masthead-brand os-animation"
-							data-os-animation="bounceInLeft" data-os-animation-delay="1s">Tayfint</h3>
-						<nav class="nav nav-masthead">
-							<a class="nav-link active" href="#">Home</a> <a class="nav-link"
-								href="#">Features</a> <a class="nav-link" href="#">Contact</a>
+						<h3 class="masthead-brand os-animation" data-os-animation="bounceInLeft" data-os-animation-delay="1s">Tayfint</h3>
+						<nav>
+							<ul class="nav masthead-nav">
+								<li class="active"><a href="#">Home</a></li>
+								<li><a href="#">Features</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
 						</nav>
 					</div>
-				</header>
-
-				<div role="main" class="inner cover os-animation"
-					data-os-animation="bounceInUp" data-os-animation-delay="1.5s">
-				<h1 class="cover-heading">Rewarding</h1>
-				<p class="lead">Behind Tectoo, is a need to computerize the
-					collaboration amongst friends. Sign up today and start using Tectoo
-					to share ideas, invest in public markets, save some money, and even
-					decide on what's going to be the interest rate for your next loan.
-					In short, Tectoo let's your money work for you.</p>
-				<p class="lead">
-					<a href="signUp" class="btn btn-lg btn-secondary">Get
-						Started</a>
-				</p>
 				</div>
 
-				<footer class="mastfoot">
+				<div class="inner cover os-animation" data-os-animation="bounceInUp" data-os-animation-delay="1.5s">
+					<h1 class="cover-heading">Cover your page.</h1>
+					<p class="lead">Cover is a one-page template for building
+						simple and beautiful home pages. Download, edit the text, and add
+						your own fullscreen background photo to make it your own.</p>
+					<p class="lead">
+						<a href="signUp" class="btn btn-lg btn-default">Get
+						Started</a>
+					</p>
+				</div>
+
+				<div class="mastfoot">
 					<div class="inner">
 						<p>
 							&copy; 2018 Tayfint, Inc. &middot; <a href="#">Privacy</a>
 							&middot; <a href="#">Terms</a>
 						</p>
 					</div>
-				</footer>
+				</div>
+
 
 			</div>
 
@@ -72,7 +71,9 @@ body {
 	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script th:src="@{/static/js/vendor/popper.min.js}" src="../../static/js/vendor/popper.min.js"></script>
-	<script th:src="@{/static/js/bootstrap/bootstrap.min.js}" src="../../static/js/bootstrap/bootstrap.min.js"></script>
+	<script th:src="@{/static/js/vendor/popper.min.js}"
+		src="../../static/js/vendor/popper.min.js"></script>
+	<script th:src="@{/static/js/bootstrap/bootstrap.min.js}"
+		src="../../static/js/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
