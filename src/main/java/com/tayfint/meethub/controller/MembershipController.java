@@ -1,5 +1,8 @@
 package com.tayfint.meethub.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,17 +20,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
+import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.UserDetailsImpl;
-import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
 @Controller
 public class MembershipController {
 
 	static final Logger logger = LoggerFactory.getLogger(MembershipController.class);
-	
-	@Autowired
-	private MembershipService membershipService;
 	
 	@Autowired
 	private UserService userService;
@@ -44,8 +44,12 @@ public class MembershipController {
 			Membership membership = new Membership();
 			membership.setAppMeeting(meeting);
 			UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			membership.setAppUser(userService.mergeUser(userDetails.getUser()));
-			membershipService.saveMembership(membership);
+			User user = userDetails.getUser();
+			membership.setAppUser(user);
+			Set<Membership> memberships = new HashSet<Membership>();
+			memberships.add(membership);
+			user.setMemberships(memberships);
+			userService.mergeUser(user);
 
 			// POST/REDIRECT/GET
 			return "redirect:users/membership";
