@@ -42,4 +42,18 @@ public class MeetingController {
 		}
 
 	}
+	
+	@RequestMapping(value = {"/users/membership"}, method = RequestMethod.GET)
+	public String showAddUserForm(Model model) {
+
+		Meeting mtg = new Meeting();
+
+		// set default value
+		mtg.setName("Simo Guiadem");
+		mtg.setShortDesc("This is a short description of this meeting!");
+		mtg.setCountryOfIncorp("Cameroon");
+		model.addAttribute("meetingForm", mtg);
+
+		return "users/membership";
+	}
 }
