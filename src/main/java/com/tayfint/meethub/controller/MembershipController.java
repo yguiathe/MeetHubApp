@@ -19,6 +19,7 @@ import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.UserDetailsImpl;
 import com.tayfint.meethub.service.MembershipService;
+import com.tayfint.meethub.service.UserService;
 
 @Controller
 public class MembershipController {
@@ -27,6 +28,9 @@ public class MembershipController {
 	
 	@Autowired
 	private MembershipService membershipService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value = "/membership.go", method = RequestMethod.GET)
 	public String saveMembership(@ModelAttribute("meeting") Meeting meeting,
@@ -40,7 +44,7 @@ public class MembershipController {
 			Membership membership = new Membership();
 			membership.setAppMeeting(meeting);
 			UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			membership.setAppUser(userDetails.getUser());
+			membership.setAppUser(userService.mergeUser(userDetails.getUser()));
 			membershipService.saveMembership(membership);
 
 			// POST/REDIRECT/GET

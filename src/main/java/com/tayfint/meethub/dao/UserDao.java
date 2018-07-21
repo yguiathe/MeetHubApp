@@ -8,6 +8,8 @@ public interface UserDao {
 	
 	void save(User user);
 	
+	User mergeUser(User user);
+	
 	void update(User user);
 	
 	User findByUserId(Long userId);

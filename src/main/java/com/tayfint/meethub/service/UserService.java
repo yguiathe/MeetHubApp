@@ -13,6 +13,8 @@ public interface UserService {
 	
 	void updateUser(User user);
 	
+	User mergeUser(User user);
+	
 	void deleteUserByUsername(String username);
 	
 	List<User> findAllUsers();

@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User user) {
 		userDao.update(user);
 	}
+	
+	@Override
+	public User mergeUser(User user){
+		return userDao.mergeUser(user);
+	}
 
 	@Override
 	public void deleteUserByUsername(String username) {

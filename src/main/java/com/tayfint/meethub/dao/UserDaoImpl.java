@@ -22,6 +22,11 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 	}
 	
 	@Override
+	public User mergeUser(User user){
+		return (User) merge(user);
+	}
+	
+	@Override
 	public void update(User user) {
 		update(user);
 	}
