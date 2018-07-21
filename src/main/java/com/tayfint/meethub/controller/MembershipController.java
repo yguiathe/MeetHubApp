@@ -28,7 +28,7 @@ public class MembershipController {
 	@Autowired
 	private MembershipService membershipService;
 	
-	@RequestMapping(value = "/membership.go", method = RequestMethod.POST)
+	@RequestMapping(value = "/membership.go", method = RequestMethod.GET)
 	public String saveMembership(@ModelAttribute("meeting") Meeting meeting,
 			BindingResult result, Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
 		if (result.hasErrors()) {
