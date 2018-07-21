@@ -38,7 +38,7 @@ public class MeetingController {
 			redirectAttributes.addFlashAttribute("meeting", meeting);
 
 			// POST/REDIRECT/GET
-			return "redirect:membership.go";
+			return "redirect:saveMembership.go";
 		}
 
 	}

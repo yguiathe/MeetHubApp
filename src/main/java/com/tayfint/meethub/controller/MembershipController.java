@@ -32,7 +32,7 @@ public class MembershipController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/membership.go", method = RequestMethod.GET)
+	@RequestMapping(value = "/saveMembership.go", method = RequestMethod.GET)
 	public String saveMembership(@ModelAttribute("meeting") Meeting meeting,
 			BindingResult result, Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
 		if (result.hasErrors()) {
@@ -52,7 +52,7 @@ public class MembershipController {
 			userService.mergeUser(user);
 
 			// POST/REDIRECT/GET
-			return "redirect:users/membership";
+			return "redirect:my_memberships.go";
 		}
 	}
 }
