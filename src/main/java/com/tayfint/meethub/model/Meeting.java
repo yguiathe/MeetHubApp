@@ -54,7 +54,7 @@ public class Meeting implements java.io.Serializable {
 	private Boolean isActive = true;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CLOSE_DATE", length = 19)
+	@Column(name = "CLOSE_DATE")
 	private Date closeDate;
 	
 	/*@Column(name = "TERMS")

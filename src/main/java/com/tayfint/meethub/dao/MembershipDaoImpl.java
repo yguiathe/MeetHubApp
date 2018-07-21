@@ -46,11 +46,9 @@ public class MembershipDaoImpl extends AbstractDao<Long, Membership> implements 
 	}
 
 	@Override
-	public void deleteByMeetingAndUser(Meeting mtg, User user) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("appMeeting", mtg));
-		crit.add(Restrictions.eq("appUser", user));
-		delete((Membership) crit.uniqueResult());
+	public void deleteByMembershipId(Long membershipId) {
+		Membership membership = getByKey(membershipId);
+		delete(membership);
 	}
 
 }

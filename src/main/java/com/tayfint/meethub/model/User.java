@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -128,7 +129,7 @@ public class User {
 	@Lob
 	private Blob picture;
 	
-	@OneToMany(mappedBy = "appUser")
+	@OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Membership> memberships;
 	
 	@ManyToMany

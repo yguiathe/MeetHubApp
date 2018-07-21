@@ -79,7 +79,7 @@ public class UserController {
 			securityService.autologin(user.getUsername(), user.getPassword());
 
 			// POST/REDIRECT/GET
-			return "users/account";
+			return "users/membership";
 
 			// POST/FORWARD/GET
 			// return "user/list";
@@ -88,10 +88,9 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value = "/users/myaccount.go", method = RequestMethod.GET)
-	public String myAccountPage(Model model) {
-		logger.debug("My Account Page");
-		return "users/account";
+	@RequestMapping(value = "/users/my_memberships.go", method = RequestMethod.GET)
+	public String showMembership(Model model) {
+		return "users/membership";
 	}
 
 	// show add user form

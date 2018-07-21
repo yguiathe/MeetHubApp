@@ -49,7 +49,7 @@ public class Membership implements java.io.Serializable {
 	private Date createDate = new Date(Calendar.getInstance().getTimeInMillis());
 	
 	@Column(name = "TYPE_CD")
-	private Boolean typeCd;
+	private Boolean typeCd = true;
 	
 	@Column(name = "IS_ACTIVE")
 	private Boolean isActive = true;

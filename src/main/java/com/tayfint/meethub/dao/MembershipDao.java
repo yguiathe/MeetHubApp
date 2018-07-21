@@ -17,6 +17,6 @@ public interface MembershipDao {
 	
 	List<User> retrieveUsersByMeeting(Meeting mtg);
 	
-	void deleteByMeetingAndUser(Meeting mtg, User user);
+	void deleteByMembershipId(Long membershipId);
 
 }
