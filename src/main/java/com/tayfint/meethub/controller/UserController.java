@@ -64,7 +64,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
-			return "users/userform";
+			return "signup";
 		} else {
 
 			// Add message to flash scope
@@ -79,18 +79,13 @@ public class UserController {
 			securityService.autologin(user.getUsername(), user.getPassword());
 
 			// POST/REDIRECT/GET
-			return "users/membership";
+			return "redirect:users/my_memberships.go";
 
 			// POST/FORWARD/GET
 			// return "user/list";
 
 		}
 
-	}
-	
-	@RequestMapping(value = "/users/my_memberships.go", method = RequestMethod.GET)
-	public String showMembership(Model model) {
-		return "users/membership";
 	}
 
 	// show add user form

@@ -43,8 +43,8 @@ public class MeetingController {
 
 	}
 	
-	@RequestMapping(value = {"/users/membership"}, method = RequestMethod.GET)
-	public String showAddUserForm(Model model) {
+	@RequestMapping(value = "/users/my_memberships.go", method = RequestMethod.GET)
+	public String showMembership(Model model) {
 
 		Meeting mtg = new Meeting();
 
