@@ -129,7 +129,7 @@ public class User {
 	@Lob
 	private Blob picture;
 	
-	@OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "appUser", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private Set<Membership> memberships;
 	
 	@ManyToMany
