@@ -40,7 +40,7 @@ public class Meeting implements java.io.Serializable {
 	@Column(name = "NAME", unique = true, length = 45)
 	private String name;
 	
-	@Column(name = "SHORT_DESC", length = 300)
+	@Column(name = "SHORT_DESC", length = 1500)
 	private String shortDesc;
 	
 	/*@Column(name = "LOGO")
