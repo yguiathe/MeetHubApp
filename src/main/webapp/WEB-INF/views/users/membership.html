@@ -35,7 +35,8 @@
 							class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 							Actions
 						</a> <a role="button" data-toggle="collapse" href="#createMeeting"
-							class="list-group-item" aria-expanded="false" aria-controls="collapseExample"><span
+							class="list-group-item" aria-expanded="false"
+							aria-controls="collapseExample"><span
 							class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;<span
 							class="actions">Add Meeting</span></a> <a href="#"
 							class="list-group-item"><span
@@ -61,40 +62,48 @@
 				<div class="col-md-9">
 					<!-- Website Overview -->
 					<div class="panel panel-default collapse" id="createMeeting">
-						<div class="panel-heading main-color-bg">
-							<h3 class="panel-title">New Meeting</h3>
-						</div>
-						<div class="panel-body">
-							<form method="POST" class="form-horizontal" th:action="@{newMeeting.go}" action="#" th:object="${meetingForm}">
+						<form method="POST" class="form-horizontal"
+							th:action="@{newMeeting.go}" action="#"
+							th:object="${meetingForm}">
+							<div class="panel-heading main-color-bg">
+								<h3 class="panel-title">New Meeting</h3>
+							</div>
+							<div class="panel-body">
+
 								<div class="form-group">
-									<label for="meetingName" class="col-sm-2 control-label form-labels">Name</label>
+									<label for="meetingName"
+										class="col-sm-2 control-label form-labels">Name</label>
 									<div class="col-sm-10">
-										<input th:field="*{name}" type="text" class="form-control" id="meetingName"
-											placeholder="Meeting Name"></input>
+										<input th:field="*{name}" type="text" class="form-control"
+											id="meetingName" placeholder="Meeting Name"></input>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="shortDesc" class="col-sm-2 control-label form-labels">Short
+									<label for="shortDesc"
+										class="col-sm-2 control-label form-labels">Short
 										Description</label>
 									<div class="col-sm-10">
-										<textarea th:field="*{shortDesc}" class="form-control" id="shortDesc" rows="3"
+										<textarea th:field="*{shortDesc}" class="form-control"
+											id="shortDesc" rows="3"
 											placeholder="This Group main's objective is provide individuals with an alternate banking system"></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="ctyOfIncorp" class="col-sm-2 control-label form-labels">Country
-										of Incorporation</label>
+									<label for="ctyOfIncorp"
+										class="col-sm-2 control-label form-labels">Country of
+										Incorporation</label>
 									<div class="col-sm-10">
-										<input th:field="*{countryOfIncorp}" type="text" class="form-control" id="ctyOfIncorp"
+										<input th:field="*{countryOfIncorp}" type="text"
+											class="form-control" id="ctyOfIncorp"
 											placeholder="Bangladesh"></input>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="govId" class="col-sm-2 control-label form-labels">Government ID
-									</label>
+									<label for="govId" class="col-sm-2 control-label form-labels">Government
+										ID </label>
 									<div class="col-sm-10">
-										<input th:field="*{primaryId}" type="text" class="form-control" id="govId"
-											placeholder="GI-1234"></input>
+										<input th:field="*{primaryId}" type="text"
+											class="form-control" id="govId" placeholder="GI-1234"></input>
 									</div>
 								</div>
 								<div class="form-group">
@@ -106,12 +115,13 @@
 											conditions document</p>
 									</div>
 								</div>
-							</form>
-						</div>
-						<div class="panel-footer">
-							<button type="button" class="btn btn-default blue-btn">Create
-								Meeting</button>
-						</div>
+
+							</div>
+							<div class="panel-footer">
+								<button type="button" class="btn btn-default blue-btn">Create
+									Meeting</button>
+							</div>
+						</form>
 					</div>
 
 					<!-- Meetings -->

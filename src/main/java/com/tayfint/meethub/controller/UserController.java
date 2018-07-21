@@ -79,7 +79,7 @@ public class UserController {
 			securityService.autologin(user.getUsername(), user.getPassword());
 
 			// POST/REDIRECT/GET
-			return "redirect:users/my_memberships.go";
+			return "redirect:my_memberships.go";
 
 			// POST/FORWARD/GET
 			// return "user/list";
