@@ -1,19 +1,20 @@
 package com.tayfint.meethub.service;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tayfint.meethub.dao.RoleDao;
 import com.tayfint.meethub.dao.UserDao;
-import com.tayfint.meethub.model.Role;
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.security.UserRole;
 
 @Service("userService")
 @Transactional
@@ -21,55 +22,102 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
 	RoleDao roleDao;
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	@Override
-	public void saveUser(User user) {
-		user.setIsActive(true);
-		user.setRoles(new HashSet<Role>(Arrays.asList(roleDao.findByRole("USER"))));
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		userDao.save(user);
-	}
+	private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
-	@Override
-	public User findByUserId(Long userId) {
-		return userDao.findByUserId(userId);
-	}
+	public User findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+    
 
 	@Override
 	public User findByUsername(String username) {
 		return userDao.findByUsername(username);
 	}
 
-	@Override
-	public void updateUser(User user) {
-		userDao.update(user);
-	}
-	
-	@Override
-	public User mergeUser(User user){
-		return userDao.mergeUser(user);
+
+	public boolean checkUserExists(String username, String email) {
+		if (checkUsernameExists(username) || checkEmailExists(username)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	@Override
-	public void deleteUserByUsername(String username) {
-		userDao.deleteByUsername(username);
+	public boolean checkUsernameExists(String username) {
+		if (null != findByUsername(username)) {
+			return true;
+		}
+
+		return false;
 	}
 
-	@Override
-	public List<User> findAllUsers() {
-		return userDao.findAllUsers();
+	public boolean checkEmailExists(String email) {
+		if (null != findByEmail(email)) {
+			return true;
+		}
+
+		return false;
 	}
 
-	@Override
-	public boolean isUserUsernameUnique(Long id, String username) {
+	public void enableUser(String username) {
 		User user = findByUsername(username);
-		return (user == null || (user.getUserId().compareTo(id) == 0));
+		user.setEnabled(true);
+		userDao.save(user);
+	}
+
+	public void disableUser(String username) {
+		User user = findByUsername(username);
+		user.setEnabled(false);
+		System.out.println(user.isEnabled());
+		userDao.save(user);
+		System.out.println(username + " is disabled.");
+	}
+
+
+	@Override
+	public void save(User user) {
+		userDao.save(user);
+	}
+
+
+	@Override
+	public User createUser(User user, Set<UserRole> userRoles) {
+		User localUser = userDao.findByUsername(user.getUsername());
+
+        if (localUser != null) {
+        	logger.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
+        } else {
+            String encryptedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encryptedPassword);
+
+            for (UserRole ur : userRoles) {
+                roleDao.save(ur.getRole());
+            }
+
+            user.getUserRoles().addAll(userRoles);
+            localUser = userDao.save(user);
+        }
+
+        return localUser;
+	}
+
+
+	@Override
+	public User saveUser(User user) {
+		return userDao.save(user);
+	}
+
+
+	@Override
+	public List<User> findUserList() {
+		return userDao.findAll();
 	}
 
 }

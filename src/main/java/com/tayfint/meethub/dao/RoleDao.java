@@ -1,7 +1,9 @@
 package com.tayfint.meethub.dao;
 
-import com.tayfint.meethub.model.Role;
+import org.springframework.data.repository.CrudRepository;
 
-public interface RoleDao {
-	Role findByRole(String role);
+import com.tayfint.meethub.model.security.Role;
+
+public interface RoleDao extends CrudRepository<Role, Integer> {
+    Role findByName(String name);
 }

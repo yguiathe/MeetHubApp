@@ -38,22 +38,9 @@ public class MeetingController {
 			redirectAttributes.addFlashAttribute("meeting", meeting);
 
 			// POST/REDIRECT/GET
-			return "redirect:saveMembership.go";
+			return "redirect:my_memberships.go";
 		}
 
 	}
 	
-	@RequestMapping(value = "/my_memberships.go", method = RequestMethod.GET)
-	public String showMembership(Model model) {
-
-		Meeting mtg = new Meeting();
-
-		// set default value
-		mtg.setName("Simo Guiadem");
-		mtg.setShortDesc("This is a short description of this meeting!");
-		mtg.setCountryOfIncorp("Cameroon");
-		model.addAttribute("meetingForm", mtg);
-
-		return "users/membership";
-	}
 }

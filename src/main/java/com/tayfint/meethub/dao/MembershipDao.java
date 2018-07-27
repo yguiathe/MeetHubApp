@@ -2,21 +2,20 @@ package com.tayfint.meethub.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.Membership;
 
-public interface MembershipDao {
+@Repository
+public interface MembershipDao extends CrudRepository<Membership,Long> {
 	
-	void save(Membership userMtg);
+	List<Membership> findMembershipByUser(User user);
 	
-	void update(Membership userMtg);
+	Membership findMembershipByUserAndMeeting(User user, Meeting meeting);
 	
-	List<Membership> retrieveMembershipByUser(User user);
-	
-	List<User> retrieveUsersByMeeting(Meeting mtg);
-	
-	void deleteByMembershipId(Long membershipId);
+	void deleteMembershipById(Long membershipId);
 
 }

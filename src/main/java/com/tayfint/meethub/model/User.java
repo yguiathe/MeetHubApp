@@ -2,19 +2,19 @@ package com.tayfint.meethub.model;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Calendar;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -24,119 +24,130 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.tayfint.meethub.model.security.Authority;
+import com.tayfint.meethub.model.security.UserRole;
 
 @Entity
 @Table(name = "app_user")
-public class User {
-	
+public class User implements UserDetails {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "UserTab")
 	@TableGenerator(name = "UserTab", table = "hibernate_id", pkColumnName = "GEN_KEY", valueColumnName = "GEN_VALUE", pkColumnValue = "USER_GEN", allocationSize = 1)
 	@Column(name = "USER_ID")
 	private Long userId;
-	
+
 	@Column(name = "USERNAME", nullable = false, length = 50)
 	private String username;
-	
+
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
-	
+
 	@Transient
 	private String confirmPassword;
-	
+
 	@Column(name = "FAILED_LOGIN_ATTEMPTS")
 	private Short failedLoginAttempts;
-	
+
 	@Column(name = "LAST_SUCCESSFUL_LOGIN")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastSuccessfulLogin;
-	
+
 	@Column(name = "BLOCKED_UNTIL")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date blockedUntil;
-	
+
 	@Column(name = "IS_DECEASED")
 	private Boolean isDeceased;
-	
+
 	@Column(name = "PRIMARY_ID", length = 40)
 	private String primaryId;
-	
+
 	@Column(name = "PRIMARY_ID_TYPE", length = 45)
 	private String primaryIdType;
-	
+
 	@Column(name = "BIRTHDATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(iso=ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date birthdate;
-	
+
 	@Column(name = "FIRST_NAME", nullable = false, length = 45)
 	private String firstName;
-	
+
 	@Column(name = "MIDDLE_NAME", length = 45)
 	private String middleName;
-	
+
 	@Column(name = "LAST_NAME", nullable = false, length = 45)
 	private String lastName;
-	
+
 	@Column(name = "MAIDEN_NAME", length = 45)
 	private String maidenName;
-	
+
 	@Column(name = "GENDER")
 	private String gender;
-	
+
 	@Column(name = "EDUCATION", length = 45)
 	private String education;
-	
+
 	@Column(name = "OCCUPATION", length = 45)
 	private String occupation;
-	
+
 	@Column(name = "MONTHLY_SALARY", precision = 22, scale = 0)
 	private Double monthlySalary;
-	
+
 	@Column(name = "IS_ACTIVE")
-	private Boolean isActive;
-	
+	private Boolean enabled = true;
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Column(name = "MARITAL_STATUS_CD", length = 3)
 	private String maritalStatusCd;
-	
+
 	@Column(name = "EMPLOYMENT_STATUS_CD", length = 3)
 	private String employmentStatusCd;
-	
+
 	@Column(name = "EMPLOYER", length = 100)
 	private String employer;
-	
+
 	@Column(name = "CREATE_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate = new Date(Calendar.getInstance().getTimeInMillis());
-	
+
 	@Column(name = "CITIZENSHIP", length = 45)
 	private String citizenship;
-	
+
 	@Column(name = "NAME_SUFFIX", length = 45)
 	private String nameSuffix;
-	
+
 	@Column(name = "NAME_PREFIX", length = 45)
 	private String namePrefix;
-	
+
 	@Column(name = "ROW_UPDATE_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date rowUpdateDate = new Date(Calendar.getInstance().getTimeInMillis());
-	
+
 	@Column(name = "EMAIL", length = 45)
 	private String email;
-	
+
 	@Column(name = "PICTURE")
 	@Lob
 	private Blob picture;
-	
-	@OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Membership> memberships;
-	
-	@ManyToMany
-	@JoinTable(name = "app_user_role", 
-				joinColumns = { @JoinColumn(name = "USER_ID") }, 
-				inverseJoinColumns = {@JoinColumn(name = "role_id")})
-	private Set<Role> roles;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<UserRole> userRoles = new HashSet<>();
 
 	@Override
 	public boolean equals(Object obj) {
@@ -213,10 +224,6 @@ public class User {
 		return this.gender;
 	}
 
-	public Boolean getIsActive() {
-		return this.isActive;
-	}
-
 	public Boolean getIsDeceased() {
 		return this.isDeceased;
 	}
@@ -271,10 +278,6 @@ public class User {
 
 	public String getPrimaryIdType() {
 		return this.primaryIdType;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
 	}
 
 	public Date getRowUpdateDate() {
@@ -356,10 +359,6 @@ public class User {
 		this.gender = gender;
 	}
 
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
 	public void setIsDeceased(Boolean isDeceased) {
 		this.isDeceased = isDeceased;
 	}
@@ -416,8 +415,12 @@ public class User {
 		this.primaryIdType = primaryIdType;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}
 
 	public void setRowUpdateDate(Date rowUpdateDate) {
@@ -427,7 +430,7 @@ public class User {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
+
 	public void setMemberships(Set<Membership> memberships) {
 		this.memberships = memberships;
 	}
@@ -442,6 +445,38 @@ public class User {
 				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", gender=" + gender
 				+ ", education=" + education + ", monthlySalary=" + monthlySalary + ", maritalStatusCd="
 				+ maritalStatusCd + ", email=" + email + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		for (UserRole ur : userRoles) {
+			authorities.add(new Authority(ur.getRole().getName()));
+		}
+		return authorities;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
 	}
 
 }

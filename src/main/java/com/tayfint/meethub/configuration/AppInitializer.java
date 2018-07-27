@@ -2,8 +2,6 @@ package com.tayfint.meethub.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.tayfint.meethub.security.SecurityConfig;
-
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override

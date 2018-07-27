@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -73,7 +74,7 @@ public class Meeting implements java.io.Serializable {
 	@Column(name = "LAST_UPDATE_DATE")
 	private Date lastUpdateDate = new Date(Calendar.getInstance().getTimeInMillis());
 	
-	@OneToMany(mappedBy = "appMeeting")
+	@OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Membership> memberships = new HashSet<Membership>();
 
 	@Override

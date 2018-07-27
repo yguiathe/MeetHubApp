@@ -4,15 +4,19 @@ package com.tayfint.meethub.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -36,13 +40,13 @@ public class Membership implements java.io.Serializable {
 	@Column(name = "ID")
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEETING_ID")
-	private Meeting appMeeting;
+	private Meeting meeting;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
-	private User appUser;
+	private User user;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE")
@@ -57,6 +61,39 @@ public class Membership implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "TERMINATION_DATE")
 	private Date terminationDate;
+	
+	@OneToOne
+    private PrimaryAccount primaryAccount;
+
+    @OneToOne
+    private SavingsAccount savingsAccount;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Recipient> recipientList;
+
+	public PrimaryAccount getPrimaryAccount() {
+		return primaryAccount;
+	}
+
+	public void setPrimaryAccount(PrimaryAccount primaryAccount) {
+		this.primaryAccount = primaryAccount;
+	}
+
+	public SavingsAccount getSavingsAccount() {
+		return savingsAccount;
+	}
+
+	public void setSavingsAccount(SavingsAccount savingsAccount) {
+		this.savingsAccount = savingsAccount;
+	}
+
+	public List<Recipient> getRecipientList() {
+		return recipientList;
+	}
+
+	public void setRecipientList(List<Recipient> recipientList) {
+		this.recipientList = recipientList;
+	}
 
 	public Long getId() {
 		return this.id;
@@ -66,20 +103,20 @@ public class Membership implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Meeting getAppMeeting() {
-		return this.appMeeting;
+	public Meeting getMeeting() {
+		return meeting;
 	}
 
-	public void setAppMeeting(Meeting appMeeting) {
-		this.appMeeting = appMeeting;
+	public void setMeeting(Meeting meeting) {
+		this.meeting = meeting;
 	}
 
-	public User getAppUser() {
-		return this.appUser;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAppUser(User appUser) {
-		this.appUser = appUser;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getCreateDate() {

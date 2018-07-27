@@ -12,13 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
-import com.tayfint.meethub.model.UserDetailsImpl;
 
 @Component("authSuccessHandlerImpl")
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
@@ -39,8 +38,8 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		
 		HttpSession session = request.getSession(false);
 		if(session != null){
-			UserDetailsImpl cud = (UserDetailsImpl) authentication.getPrincipal();
-			session.setAttribute("user", cud.getUser());
+			UserDetails cud = (UserDetails) authentication.getPrincipal();
+			session.setAttribute("user", cud);
 		}
 		String targetUrl = determineTargetUrl(authentication);
 

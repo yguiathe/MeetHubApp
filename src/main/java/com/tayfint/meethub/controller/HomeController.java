@@ -12,11 +12,15 @@ public class HomeController {
 
 	private final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model) {
-		logger.debug("index()");
-		return "index";
+	@RequestMapping("/")
+	public String home() {
+		return "redirect:/index";
 	}
+	
+	@RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(Model model) {

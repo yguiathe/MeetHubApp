@@ -1,5 +1,8 @@
 package com.tayfint.meethub.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -12,12 +15,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tayfint.meethub.dao.RoleDao;
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.security.UserRole;
 import com.tayfint.meethub.service.SecurityService;
 import com.tayfint.meethub.service.UserService;
 import com.tayfint.meethub.validator.UserFormValidator;
@@ -35,6 +39,9 @@ public class UserController {
 	
 	@Autowired
     private SecurityService securityService;
+	
+	@Autowired
+    private RoleDao roleDao;
 
 	//Set a form validator
 	@InitBinder
@@ -47,7 +54,7 @@ public class UserController {
 	public String showAllUsers(Model model) {
 
 		logger.debug("showAllUsers()");
-		model.addAttribute("users", userService.findAllUsers());
+		model.addAttribute("users", userService.findUserList());
 		return "users/list";
 
 	}
@@ -65,6 +72,16 @@ public class UserController {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
 			return "signup";
+		} else if(userService.checkUserExists(user.getUsername(), user.getEmail())){
+			 if (userService.checkEmailExists(user.getEmail())) {
+	                model.addAttribute("emailExists", true);
+	            }
+
+	            if (userService.checkUsernameExists(user.getUsername())) {
+	                model.addAttribute("usernameExists", true);
+	            }
+
+	            return "signup";
 		} else {
 
 			// Add message to flash scope
@@ -74,15 +91,13 @@ public class UserController {
 			}else{
 			  redirectAttributes.addFlashAttribute("msg", "User updated successfully!");
 			}*/
-
-			userService.saveUser(user);
+			
+			Set<UserRole> userRoles = new HashSet<>();
+            userRoles.add(new UserRole(user, roleDao.findByName("ROLE_USER")));
+			userService.createUser(user, userRoles);
 			securityService.autologin(user.getUsername(), user.getPassword());
 
-			// POST/REDIRECT/GET
 			return "redirect:my_memberships.go";
-
-			// POST/FORWARD/GET
-			// return "user/list";
 
 		}
 
@@ -108,54 +123,6 @@ public class UserController {
 
 		//populateDefaultModel(model);
 		return "signup";
-	}
-
-	// show update form
-	@RequestMapping(value = "/users/{id}/update", method = RequestMethod.GET)
-	public String showUpdateUserForm(@PathVariable("id") Long id, Model model) {
-
-		logger.debug("showUpdateUserForm() : {}", id);
-
-		User user = userService.findByUserId(id);
-		model.addAttribute("userForm", user);
-
-		//populateDefaultModel(model);
-
-		return "users/userform";
-
-	}
-
-	/*	// delete user
-	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.POST)
-	public String deleteUser(@PathVariable("id") long id,
-		final RedirectAttributes redirectAttributes) {
-
-		logger.debug("deleteUser() : {}", id);
-
-		userService.delete(id);
-
-		redirectAttributes.addFlashAttribute("css", "success");
-		redirectAttributes.addFlashAttribute("msg", "User is deleted!");
-
-		return "redirect:/users";
-
-	}*/
-
-	// show user
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-	public String showUser(@PathVariable("id") Long id, Model model) {
-
-		logger.debug("showUser() id: {}", id);
-
-		User user = userService.findByUserId(id);
-		if (user == null) {
-			model.addAttribute("css", "danger");
-			model.addAttribute("msg", "User not found");
-		}
-		model.addAttribute("user", user);
-
-		return "users/show";
-
 	}
 	
 }

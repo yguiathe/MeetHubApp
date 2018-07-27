@@ -1,23 +1,31 @@
 package com.tayfint.meethub.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.security.UserRole;
 
 public interface UserService {
-	void saveUser(User user);
-	
-	User findByUserId(Long userId);
-	
 	User findByUsername(String username);
-	
-	void updateUser(User user);
-	
-	User mergeUser(User user);
-	
-	void deleteUserByUsername(String username);
-	
-	List<User> findAllUsers();
-	
-	boolean isUserUsernameUnique(Long id, String username);
+
+    User findByEmail(String email);
+
+    boolean checkUserExists(String username, String email);
+
+    boolean checkUsernameExists(String username);
+
+    boolean checkEmailExists(String email);
+    
+    void save (User user);
+    
+    User createUser(User user, Set<UserRole> userRoles);
+    
+    User saveUser (User user); 
+    
+    List<User> findUserList();
+
+    void enableUser (String username);
+
+    void disableUser (String username);
 }

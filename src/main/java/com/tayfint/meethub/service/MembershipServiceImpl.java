@@ -1,12 +1,16 @@
 package com.tayfint.meethub.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tayfint.meethub.dao.MembershipDao;
+import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
+import com.tayfint.meethub.model.User;
 
 @Service("membershipService")
 @Transactional
@@ -15,14 +19,32 @@ public class MembershipServiceImpl implements MembershipService {
 	@Autowired
 	MembershipDao membershipDao;
 
-	@Override
-	public void saveMembership(Membership membership) {
+	public void save(Membership membership) {
 		membershipDao.save(membership);
 	}
 
 	@Override
 	public void deleteMembershipById(Long membershipId) {
-		membershipDao.deleteByMembershipId(membershipId);
+		membershipDao.deleteMembershipById(membershipId);
+	}
+
+	@Override
+	public List<Membership> findMembershipByUser(User user) {
+		return membershipDao.findMembershipByUser(user);
+	}
+
+	@Override
+	public Membership findMembershipByUserAndMeeting(User user, Meeting meeting) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveMembership(Meeting meeting, User user) {
+		Membership membership = new Membership();
+		membership.setMeeting(meeting);
+		membership.setUser(user);
+		save(membership);
 	}
 
 }
