@@ -5,7 +5,7 @@ import javax.persistence.*;
 import com.tayfint.meethub.model.User;
 
 @Entity
-@Table(name = "app_role")
+@Table(name = "app_user_role")
 public class UserRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "UserPRFTab")
@@ -15,7 +15,7 @@ public class UserRole {
 					valueColumnName = "GEN_VALUE", 
 					pkColumnValue = "USER_PRF_GEN", 
 					allocationSize = 1)
-	@Column(name = "role_id")
+	@Column(name = "id")
     private long userRoleId;
 
     public UserRole(User user, Role role) {

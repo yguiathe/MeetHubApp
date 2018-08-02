@@ -9,6 +9,7 @@ import java.util.Set;
  */
 
 @Entity
+@Table(name = "app_role")
 public class Role {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
