@@ -19,7 +19,7 @@ public class MeetingServiceImpl implements MeetingService {
 	
 	@Override
 	public Meeting findByMeetingId(Long meetingId) {
-		return meetingDao.findByMeetingId(meetingId);
+		return meetingDao.findById(meetingId);
 	}
 
 	@Override
@@ -29,22 +29,17 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Meeting findByMeetingName(String name) {
-		return meetingDao.findByMeetingName(name);
-	}
-
-	@Override
-	public void updateMeeting(Meeting meeting) {
-		meetingDao.update(meeting);	
+		return meetingDao.findByName(name);
 	}
 
 	@Override
 	public List<Meeting> findAllMeetings() {
-		return meetingDao.findAllMeetings();
+		return meetingDao.findAll();
 	}
 
 	@Override
 	public void deleteMeetingById(Long meetingId) {
-		meetingDao.deleteByMeetingId(meetingId);		
+		meetingDao.deleteById(meetingId);		
 	}
 
 }

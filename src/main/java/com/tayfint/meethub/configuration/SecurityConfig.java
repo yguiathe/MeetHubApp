@@ -1,5 +1,7 @@
 package com.tayfint.meethub.configuration;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.tayfint.meethub.listener.AuthenticationSuccessHandlerImpl;
@@ -29,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	UserDetailsService userDetailsService;
 
 	@Autowired
-	PersistentTokenRepository tokenRepository;
+	private DataSource dataSource;
 	
 	@Autowired
     private AccessDeniedHandler accessDeniedHandler;
@@ -62,7 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.rememberMe()
-				.tokenRepository(tokenRepository)
+				.rememberMeCookieName("app-remember-me")
+				.rememberMeParameter("remember-me")
+				.tokenRepository(tokenRepository())
 				.tokenValiditySeconds(86400)
 				.and()
 			.csrf()
@@ -90,10 +94,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public PersistentTokenBasedRememberMeServices getPersitentTokenBasedRememberMeServices() {
-		PersistentTokenBasedRememberMeServices tokenBasedService = new PersistentTokenBasedRememberMeServices(
-				"remember-me", userDetailsService, tokenRepository);
-		return tokenBasedService;
+	public PersistentTokenRepository tokenRepository() {
+	    JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
+	    jdbcTokenRepositoryImpl.setDataSource(dataSource);
+	    return jdbcTokenRepositoryImpl;
 	}
 
 	@Bean

@@ -2,20 +2,18 @@ package com.tayfint.meethub.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.tayfint.meethub.model.Meeting;
 
-public interface MeetingDao {
+public interface MeetingDao extends CrudRepository<Meeting,Long> {
 	
-	void save(Meeting meeting);
+	Meeting findById(Long meetingId);
 	
-	void update(Meeting meeting);
+	Meeting findByName(String name);
 	
-	Meeting findByMeetingId(Long meetingId);
+	void deleteById(Long meetingId);
 	
-	Meeting findByMeetingName(String name);
-	
-	void deleteByMeetingId(Long meetingId);
-	
-	List<Meeting> findAllMeetings();
+	List<Meeting> findAll();
 
 }

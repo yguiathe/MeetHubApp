@@ -25,18 +25,17 @@ public class MembershipServiceImpl implements MembershipService {
 
 	@Override
 	public void deleteMembershipById(Long membershipId) {
-		membershipDao.deleteMembershipById(membershipId);
+		membershipDao.deleteById(membershipId);
 	}
 
 	@Override
 	public List<Membership> findMembershipByUser(User user) {
-		return membershipDao.findMembershipByUser(user);
+		return membershipDao.findByUser(user);
 	}
 
 	@Override
 	public Membership findMembershipByUserAndMeeting(User user, Meeting meeting) {
-		// TODO Auto-generated method stub
-		return null;
+		return membershipDao.findByUserAndMeeting(user, meeting);
 	}
 
 	@Override

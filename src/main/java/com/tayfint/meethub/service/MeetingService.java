@@ -12,8 +12,6 @@ public interface MeetingService {
 	
 	Meeting findByMeetingName(String name);
 	
-	void updateMeeting(Meeting meeting);
-	
 	void deleteMeetingById(Long meetingId);
 	
 	List<Meeting> findAllMeetings();
