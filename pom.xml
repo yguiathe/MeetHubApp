@@ -118,7 +118,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
+			<artifactId>HikariCP-java7</artifactId>
 		</dependency>
 	</dependencies>
 
