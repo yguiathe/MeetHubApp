@@ -13,13 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.Meeting;
+import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
 @Controller
+@SessionAttributes("userFirstName")
 public class MembershipController {
 
 	static final Logger logger = LoggerFactory.getLogger(MembershipController.class);
@@ -54,8 +57,9 @@ public class MembershipController {
 		mtg.setShortDesc("This is a short description of this meeting!");
 		mtg.setCountryOfIncorp("Cameroon");
 		model.addAttribute("meetingForm", mtg);
-		
-		model.addAttribute("memberships", membershipService.findMembershipByUser(userService.findByUsername(principal.getName())));
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("userFirstName", user.getFirstName());
+		model.addAttribute("memberships", membershipService.findMembershipByUser(user));
 
 		return "users/membership";
 	}
