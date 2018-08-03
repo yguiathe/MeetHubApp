@@ -40,7 +40,7 @@ public class Membership implements java.io.Serializable {
 	@Column(name = "ID")
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MEETING_ID")
 	private Meeting meeting;
 	

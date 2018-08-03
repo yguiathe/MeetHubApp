@@ -2,21 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-<div th:fragment="footer">
-	<nav
-		class="navbar navbar-default navbar-fixed-bottom">
-		<div class="container footer">
-			<p>Tayfint, Inc. &copy; 2018</p>
-		</div>
-	</nav>
+	<div th:fragment="footer">
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<div class="container footer">
+				<p>Tayfint, Inc. &copy; 2018</p>
+			</div>
+		</nav>
 
-	<!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script th:src="@{/static/js/jquery.min.js}"
-		src="../../../static/js/jquery.min.js"></script>
-	<script th:src="@{/static/js/bootstrap/bootstrap.min.js}"
-		src="../../../static/js/bootstrap/bootstrap.min.js"></script>
-</div>
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script th:src="@{/static/js/jquery.min.js}"
+			src="../../../static/js/jquery.min.js"></script>
+		<script>
+     		CKEDITOR.replace( 'shortDesc' );
+		</script>
+		<script th:src="@{/static/js/bootstrap/bootstrap.min.js}"
+			src="../../../static/js/bootstrap/bootstrap.min.js"></script>
+	</div>
 </body>
 </html>
