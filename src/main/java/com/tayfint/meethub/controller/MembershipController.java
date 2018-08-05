@@ -70,6 +70,6 @@ public class MembershipController {
 
 		logger.debug("************** Membership ID: " + membershipId);
 
-		return "users/posts";
+		return "users/account";
 	}
 }
