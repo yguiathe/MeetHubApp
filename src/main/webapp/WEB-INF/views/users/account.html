@@ -124,7 +124,7 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-12">
-										<canvas id="finTrenChart" width="550" height="250"></canvas>
+										<canvas id="finTrenChart" width="550" height="200"></canvas>
 									</div>
 								</div>
 							</div>
@@ -133,49 +133,59 @@
 					<div role="tabpanel" class="tab-pane fade" id="messages"></div>
 					<div role="tabpanel" class="tab-pane fade" id="roaster"></div>
 					<div role="tabpanel" class="tab-pane fade" id="transactions">
-						<div class="well">
-							<div class="col-lg-3 col-md-6">
-								<div class="panel panel-yellow">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-xs-3">
-												<i class="fa fa-credit-card fa-5x"></i>
-											</div>
-											<div class="col-xs-9 text-right">
-												<div>Deposit</div>
-											</div>
-										</div>
-									</div>
-									<a th:href="@{/account/deposit}">
-										<div class="panel-footer">
-											<span class="pull-left">Go to Deposit</span> <span
-												class="pull-right"><i
-												class="fa fa-arrow-circle-right"></i></span>
-											<div class="clearfix"></div>
-										</div>
-									</a>
-								</div>
+						<div class="panel panel-default">
+							<div class="panel-heading main-color-bg">
+								<h3 class="panel-title">Initiate a Transaction</h3>
 							</div>
-							<div class="col-lg-3 col-md-6">
-								<div class="panel panel-red">
-									<div class="panel-heading">
-										<div class="row">
-											<div class="col-xs-3">
-												<i class="fa fa-money fa-5x"></i>
-											</div>
-											<div class="col-xs-9 text-right">
-												<div>Withdraw</div>
-											</div>
-										</div>
+							<div class="panel-body">
+								<div class="col-md-3">
+									<div class="well dash-box">
+										<h2>
+											<span class="fa fa-money fa-5x" aria-hidden="true"></span>
+										</h2>
+										<h4>
+											<a th:href="@{/account/deposit}">
+												<div class="panel-footer">
+													<span class="pull-left">Go to Deposit</span> <span
+														class="pull-right"><i
+														class="fa fa-arrow-circle-right"></i></span>
+													<div class="clearfix"></div>
+												</div>
+											</a>
+										</h4>
 									</div>
-									<a th:href="@{/account/withdraw}">
-										<div class="panel-footer">
-											<span class="pull-left">Go to Withdrawal</span> <span
-												class="pull-right"><i
-												class="fa fa-arrow-circle-right"></i></span>
-											<div class="clearfix"></div>
-										</div>
-									</a>
+								</div>
+								<div class="col-md-3">
+									<div class="well dash-box">
+										<h2>
+											<span class="fa fa-credit-card fa-5x" aria-hidden="true"></span>
+										</h2>
+										<h4>
+											<a th:href="@{/account/withdraw}">
+												<div class="panel-footer">
+													<span class="pull-left">Go to Withdrawal</span> <span
+														class="pull-right"><i
+														class="fa fa-arrow-circle-right"></i></span>
+													<div class="clearfix"></div>
+												</div>
+											</a>
+										</h4>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="well dash-box">
+										<h2>
+											<span class="fa fa-file-invoice-dollar fa-5x" aria-hidden="true"></span>
+										</h2>
+										<h4><a th:href="@{/account/statements}">
+												<div class="panel-footer">
+													<span class="pull-left">Go to Statements</span> <span
+														class="pull-right"><i
+														class="fa fa-arrow-circle-right"></i></span>
+													<div class="clearfix"></div>
+												</div>
+											</a></h4>
+									</div>
 								</div>
 							</div>
 						</div>
