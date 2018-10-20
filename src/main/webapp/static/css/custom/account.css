@@ -5,7 +5,6 @@ html {
 
 body {
 	background: #f4f4f4;
-	position: relative;
 	padding-bottom: 70px;
 	min-height: 100%;
 }
@@ -203,8 +202,7 @@ section#main .login-form {
 .dash-box{
   text-align:center;
   margin-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0px;
 }
 
 /* Devices styles */
