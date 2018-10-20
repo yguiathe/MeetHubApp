@@ -38,15 +38,18 @@ function getFinTrendChart() {
 				datasets : [ {
 					label : 'Savings',
 					data : [ 5000, 10000, 45000, 25000, 1000, 10000, 0 ],
-					backgroundColor : "#afc836"
+					borderColor : "#afc836",
+					fill: false
 				}, {
 					label : 'Contributions',
 					data : [ 15000, 15000, 20000, 15000, 20000, 25000, 15000 ],
-					backgroundColor : "#009eda"
+					borderColor : "#009eda",
+					fill: false
 				}, {
 					label : 'Loan Balance',
 					data : [ 0, 0, 0, 100000, 0, 75000, 65000 ],
-					backgroundColor : "orange"
+					borderColor : "orange",
+					fill: false
 				} ]
 			}
 
