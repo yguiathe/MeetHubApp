@@ -196,8 +196,15 @@ section#main .login-form {
 	border-color: #ddd;
 }
 
-.fa-credit-card, .fa-money{
+.fa-credit-card, .fa-money, .fa-archive{
 	color: #afc836;
+}
+
+.dash-box{
+  text-align:center;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 /* Devices styles */
