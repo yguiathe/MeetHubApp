@@ -1,11 +1,13 @@
 html {
 	min-height: 100%;
+	position: relative;
 }
 
 body {
 	background: #f4f4f4;
 	position: relative;
 	padding-bottom: 70px;
+	margin-bottom: 60px;
 	min-height: 100%;
 }
 
@@ -195,6 +197,10 @@ section#main .login-form {
 	border-color: #ddd;
 }
 
+.fa-credit-card, .fa-money{
+	color: #afc836;
+}
+
 /* Devices styles */
 @media ( max-width : 575px) {
 	.navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
@@ -272,4 +278,11 @@ section#main .login-form {
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
 	color: #009eda;
 	background-color: #afc836;
+}
+
+/* Added by Yvan to push footer down the page based on content */
+.navbar-fixed-bottom{
+	position: absolute;
+	bottom: 0;
+	z-index: 0;
 }
