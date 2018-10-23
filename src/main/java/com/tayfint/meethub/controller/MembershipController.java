@@ -69,6 +69,7 @@ public class MembershipController {
 	public String showAccount(@PathVariable Long membershipId, Principal principal, Model model) {
 
 		logger.debug("************** Membership ID: " + membershipId);
+		model.addAttribute("membership", membershipService.findMembershipById(membershipId));
 
 		return "users/account";
 	}

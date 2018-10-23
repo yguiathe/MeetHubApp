@@ -10,6 +10,8 @@ public interface MembershipService {
 
 	void saveMembership(Meeting meeting, User user);
 	
+	Membership findMembershipById(Long membershipId);
+	
 	void deleteMembershipById(Long membershipId);
 	
 	List<Membership> findMembershipByUser(User user);
