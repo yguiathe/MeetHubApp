@@ -205,6 +205,15 @@ section#main .login-form {
   padding: 0px;
 }
 
+.custom-group-item{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.balance-display{
+	margin-top: 40px;
+}
+
 /* Devices styles */
 @media ( max-width : 575px) {
 	.navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
