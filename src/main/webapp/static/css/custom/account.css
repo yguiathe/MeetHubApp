@@ -195,22 +195,22 @@ section#main .login-form {
 	border-color: #ddd;
 }
 
-.fa-credit-card, .fa-money, .fa-book, .fa-exchange{
+.fa-credit-card, .fa-money, .fa-book, .fa-exchange {
 	color: #afc836;
 }
 
-.dash-box{
-  text-align:center;
-  margin-bottom: 10px;
-  padding: 0px;
+.dash-box {
+	text-align: center;
+	margin-bottom: 10px;
+	padding: 0px;
 }
 
-.custom-group-item{
+.custom-group-item {
 	padding-left: 0px;
 	padding-right: 0px;
 }
 
-.balance-display{
+.balance-display {
 	margin-top: 40px;
 }
 
@@ -294,8 +294,13 @@ section#main .login-form {
 }
 
 /* Added by Yvan to push footer down the page based on content */
-.navbar-fixed-bottom{
+.navbar-fixed-bottom {
 	position: absolute;
 	bottom: 0;
 	z-index: 0;
+}
+
+#deposit>div>div>div.modal-body>div>div.col-md-4>ul>li.list-group-item.list-group-item-success.custom-group-item>div>div.col-md-7>span
+	{
+	padding-left: 3px;
 }
