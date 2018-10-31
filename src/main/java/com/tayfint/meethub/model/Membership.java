@@ -176,5 +176,12 @@ public class Membership implements java.io.Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Membership [id=" + id + ", meeting=" + meeting + ", user=" + user + ", createDate=" + createDate
+				+ ", typeCd=" + typeCd + ", primaryAccount=" + primaryAccount + ", savingsAccount=" + savingsAccount
+				+ "]";
+	}
+
 	
 }

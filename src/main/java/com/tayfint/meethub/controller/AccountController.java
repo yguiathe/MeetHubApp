@@ -77,7 +77,7 @@ public class AccountController {
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @SessionAttribute("membership") Membership membership) {
-    	logger.debug("************** Membership before deposit: " + membership);
+    	logger.debug("************** Membership before deposit: " + membership.toString());
     	accountService.deposit(accountType, Double.parseDouble(amount), membership);
 
         return "redirect:users/account";
