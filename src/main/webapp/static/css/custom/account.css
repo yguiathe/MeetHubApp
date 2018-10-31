@@ -299,8 +299,3 @@ section#main .login-form {
 	bottom: 0;
 	z-index: 0;
 }
-
-#deposit>div>div>div.modal-body>div>div.col-md-4>ul>li.list-group-item.list-group-item-success.custom-group-item>div>div.col-md-7>span
-	{
-	padding-left: 3px;
-}

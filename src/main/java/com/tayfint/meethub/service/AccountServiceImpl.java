@@ -1,7 +1,6 @@
 package com.tayfint.meethub.service;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.tayfint.meethub.dao.PrimaryAccountDao;
 import com.tayfint.meethub.dao.SavingsAccountDao;
-import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.PrimaryAccount;
 import com.tayfint.meethub.model.PrimaryTransaction;
 import com.tayfint.meethub.model.SavingsAccount;
 import com.tayfint.meethub.model.SavingsTransaction;
-import com.tayfint.meethub.model.User;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 	
-	private static int nextAccountNumber = 11223145;
+	private static int nextAccountNumber = 1000000;
 
     @Autowired
     private PrimaryAccountDao primaryAccountDao;
@@ -57,10 +54,7 @@ public class AccountServiceImpl implements AccountService {
         return savingsAccountDao.findByAccountNumber(savingsAccount.getAccountNumber());
     }
     
-    public void deposit(String accountType, double amount, Meeting meeting, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        
-        Membership membership = membershipService.findMembershipByUserAndMeeting(user, meeting);
+    public void deposit(String accountType, double amount, Membership membership) {
 
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = membership.getPrimaryAccount();
@@ -83,10 +77,7 @@ public class AccountServiceImpl implements AccountService {
         }
     }
     
-    public void withdraw(String accountType, double amount, Meeting meeting, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        
-        Membership membership = membershipService.findMembershipByUserAndMeeting(user, meeting);
+    public void withdraw(String accountType, double amount, Membership membership) {
 
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = membership.getPrimaryAccount();

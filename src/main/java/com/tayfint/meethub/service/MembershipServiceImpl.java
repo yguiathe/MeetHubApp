@@ -18,8 +18,13 @@ public class MembershipServiceImpl implements MembershipService {
 	
 	@Autowired
 	MembershipDao membershipDao;
+	
+	@Autowired
+    private AccountService accountService;
 
 	public void save(Membership membership) {
+		membership.setPrimaryAccount(accountService.createPrimaryAccount());
+		membership.setSavingsAccount(accountService.createSavingsAccount());
 		membershipDao.save(membership);
 	}
 
