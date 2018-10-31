@@ -62,10 +62,10 @@ public class Membership implements java.io.Serializable {
 	@Column(name = "TERMINATION_DATE")
 	private Date terminationDate;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
     private PrimaryAccount primaryAccount;
 
-    @OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
     private SavingsAccount savingsAccount;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
