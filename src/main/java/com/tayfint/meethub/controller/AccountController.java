@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -71,14 +72,14 @@ public class AccountController {
     }*/
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @ModelAttribute("membership") Membership membership) {
+    public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @SessionAttribute("membership") Membership membership) {
         accountService.deposit(accountType, Double.parseDouble(amount), membership);
 
         return "redirect:users/account";
     }
 
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-    public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @ModelAttribute("membership") Membership membership) {
+    public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @SessionAttribute("membership") Membership membership) {
         accountService.withdraw(accountType, Double.parseDouble(amount), membership);
 
         return "redirect:users/account";
