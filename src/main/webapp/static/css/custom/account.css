@@ -299,3 +299,7 @@ section#main .login-form {
 	bottom: 0;
 	z-index: 0;
 }
+
+.cs-form-group{
+	padding-left: 0px;
+}

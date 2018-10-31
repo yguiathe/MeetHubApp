@@ -284,7 +284,7 @@
 								<div class="modal-body">
 									<div class="row">
 										<div class="col-md-8">
-											<div class="row">
+											<div class="row cs-form-group">
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">1.
 														Please select the account you would like to deposit:</label> <select
@@ -297,7 +297,7 @@
 													</select> <br />
 												</div>
 											</div>
-											<div class="row">
+											<div class="row cs-form-group">
 												<div class="form-group col-md-12">
 													<label class="form-labels">2. Please specify the
 														amount you would like to deposit: </label>
@@ -309,8 +309,7 @@
 													</div>
 												</div>
 											</div>
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" /> <input type="hidden"
+											<input type="hidden"
 												name="membership" th:value="${membership}" />
 										</div>
 										<div class="col-md-4">
