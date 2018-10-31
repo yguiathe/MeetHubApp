@@ -28,7 +28,7 @@ import com.tayfint.meethub.service.UserService;
 
 @Controller
 @RequestMapping("/account")
-@SessionAttributes("userFirstName")
+@SessionAttributes("membership")
 public class AccountController {
 	
 	@Autowired
