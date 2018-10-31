@@ -70,10 +70,15 @@ public class AccountController {
 
         return "savingsAccount";
     }*/
+	@ModelAttribute("membership")
+	public Membership getMembersip(){
+		return new Membership();
+	}
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @SessionAttribute("membership") Membership membership) {
-        accountService.deposit(accountType, Double.parseDouble(amount), membership);
+    	logger.debug("************** Membership before deposit: " + membership);
+    	accountService.deposit(accountType, Double.parseDouble(amount), membership);
 
         return "redirect:users/account";
     }
@@ -86,10 +91,11 @@ public class AccountController {
     }
     
     @RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
-	public String showAccount(@PathVariable Long membershipId, Principal principal, Model model) {
+	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership, Principal principal, Model model) {
 
 		logger.debug("************** Membership ID: " + membershipId);
-		model.addAttribute("membership", membershipService.findMembershipById(membershipId));
+		membership = membershipService.findMembershipById(membershipId);
+		model.addAttribute("membership", membership);
 		model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
 
