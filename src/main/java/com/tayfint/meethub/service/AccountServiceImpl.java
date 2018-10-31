@@ -3,9 +3,12 @@ package com.tayfint.meethub.service;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tayfint.meethub.controller.AccountController;
 import com.tayfint.meethub.dao.PrimaryAccountDao;
 import com.tayfint.meethub.dao.SavingsAccountDao;
 import com.tayfint.meethub.model.Membership;
@@ -33,6 +36,8 @@ public class AccountServiceImpl implements AccountService {
     
     @Autowired
     private TransactionService transactionService;
+    
+    static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     public PrimaryAccount createPrimaryAccount() {
         PrimaryAccount primaryAccount = new PrimaryAccount();
@@ -58,6 +63,9 @@ public class AccountServiceImpl implements AccountService {
 
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = membership.getPrimaryAccount();
+            if(primaryAccount == null){
+            	logger.info("****Primary Account is null *****");
+            }
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
 
