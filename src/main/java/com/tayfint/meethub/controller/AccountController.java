@@ -83,18 +83,6 @@ public class AccountController {
     @RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
 	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership, Principal principal, Model model) {
 
-		populateDefaultModel(model);
-		DepositWithdrawForm depositForm = new DepositWithdrawForm();
-    	model.addAttribute("depositForm", depositForm);
-		logger.debug("************** Membership ID: " + membershipId);
-		membership = membershipService.findMembershipById(membershipId);
-		model.addAttribute("membership", membership);
-
-		return "users/account";
-	}
-    
-    private void populateDefaultModel(Model model){
-    	
     	DepositWithdrawForm depositForm = new DepositWithdrawForm();
     	model.addAttribute("depositForm", depositForm);
     	
@@ -107,5 +95,12 @@ public class AccountController {
     	operationTypes.add("deposit");
     	operationTypes.add("withdraw");
         model.addAttribute("operationTypes", operationTypes);
-    }
+        
+		logger.debug("************** Membership ID: " + membershipId);
+		membership = membershipService.findMembershipById(membershipId);
+		model.addAttribute("membership", membership);
+
+		return "users/account";
+	}
+    
 }
