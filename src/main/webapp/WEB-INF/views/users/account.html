@@ -271,7 +271,7 @@
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">1.
 														Please select type of operation:</label> <select
-														class="form-control" th:field="*{operationType}"
+														class="form-control" th:object="${operationType}"
 														name="operationType" id="operationType" required="required">
 														<option disabled="disabled" selected="selected">--
 															select operation --</option>
@@ -285,7 +285,7 @@
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">2.
 														Please select the account you would like to deposit:</label> <select
-														class="form-control" th:field="*{accountType}"
+														class="form-control" th:object="${accountType}"
 														name="accountType" id="accountType" required="required">
 														<option disabled="disabled" selected="selected">--
 															select your account --</option>
