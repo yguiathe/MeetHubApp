@@ -275,9 +275,9 @@
 														name="operationType" id="operationType" required="required">
 														<option disabled="disabled" selected="selected">--
 															select operation --</option>
-														<option th:each="type : ${operationTypes}"
-																th:value="${type}"
-																th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
+														<option th:each="operationType : ${operationTypes}"
+																th:value="${operationType}"
+																th:text="#{${'meethub.operationType.' + operationType}}">Deposit</option>
 													</select> <br />
 												</div>
 											</div>
@@ -289,9 +289,9 @@
 														name="accountType" id="accountType" required="required">
 														<option disabled="disabled" selected="selected">--
 															select your account --</option>
-														<option th:each="type : ${accountTypes}"
-																th:value="${type}"
-																th:text="#{${'meethub.accountType.' + type}}">Primary</option>
+														<option th:each="accountType : ${accountTypes}"
+																th:value="${accountType}"
+																th:text="#{${'meethub.accountType.' + accountType}}">Primary</option>
 													</select> <br />
 												</div>
 											</div>
