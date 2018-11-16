@@ -1,6 +1,7 @@
 package com.tayfint.meethub.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -76,29 +77,36 @@ public class AccountController {
 	}
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @SessionAttribute("membership") Membership membership) {
-    	logger.debug("************** Membership before deposit: " + membership.toString());
-    	accountService.deposit(accountType, Double.parseDouble(amount), membership);
-
-        return "redirect:users/account";
-    }
-
-    @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-    public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @SessionAttribute("membership") Membership membership) {
-        accountService.withdraw(accountType, Double.parseDouble(amount), membership);
-
+    public String depositOrWithdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @ModelAttribute("operationType") String operationType, @SessionAttribute("membership") Membership membership) {
+    	if(operationType.equalsIgnoreCase("Deposit")){
+    		accountService.deposit(accountType, Double.parseDouble(amount), membership);
+    	} else {
+    		accountService.withdraw(accountType, Double.parseDouble(amount), membership);
+    	}
         return "redirect:users/account";
     }
     
     @RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
 	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership, Principal principal, Model model) {
 
+		populateDefaultModel(model);
 		logger.debug("************** Membership ID: " + membershipId);
 		membership = membershipService.findMembershipById(membershipId);
 		model.addAttribute("membership", membership);
-		model.addAttribute("accountType", "");
-        model.addAttribute("amount", "");
 
 		return "users/account";
 	}
+    
+    private void populateDefaultModel(Model model){
+    	
+    	List<String> AccountTypes = new ArrayList<String>();
+    	AccountTypes.add("Primary");
+    	AccountTypes.add("Savings");
+    	model.addAttribute("accountTypes", AccountTypes);
+    	
+    	List<String> operationTypes = new ArrayList<String>();
+    	operationTypes.add("deposit");
+    	operationTypes.add("withdraw");
+        model.addAttribute("operationTypes", operationTypes);
+    }
 }

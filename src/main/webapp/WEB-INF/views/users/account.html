@@ -81,7 +81,7 @@
 												</div>
 												<div class="col-xs-6 text-right">
 													<h4>
-														<i class="fa fa-usd" aria-hidden="true"></i> <span>0.00</span>
+														<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.primaryAccount.accountBalance}">0.00</span>
 													</h4>
 												</div>
 											</div>
@@ -103,7 +103,7 @@
 												</div>
 												<div class="col-xs-6 text-right">
 													<h4>
-														<i class="fa fa-usd" aria-hidden="true"></i> <span>0.00</span>
+														<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.savingsAccount.accountBalance}">0.00</span>
 													</h4>
 												</div>
 											</div>
@@ -144,29 +144,12 @@
 								<div class="col-sm-3">
 									<div class="well dash-box">
 										<h3>
-											<i class="fa fa-money" aria-hidden="true"></i>
+											<i class="fa fa-credit-card" aria-hidden="true"></i>
 										</h3>
 										<h4>
 											<a href="#deposit" role="button" data-toggle="modal">
 												<div class="panel-footer">
-													<span class="pull-left">Deposit</span> <span
-														class="pull-right"><i
-														class="fa fa-arrow-circle-right"></i></span>
-													<div class="clearfix"></div>
-												</div>
-											</a>
-										</h4>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="well dash-box">
-										<h3>
-											<i class="fa fa-credit-card" aria-hidden="true"></i>
-										</h3>
-										<h4>
-											<a th:href="@{/account/withdraw}">
-												<div class="panel-footer">
-													<span class="pull-left">Withdraw</span> <span
+													<span class="pull-left">Deposit/Withdraw</span> <span
 														class="pull-right"><i
 														class="fa fa-arrow-circle-right"></i></span>
 													<div class="clearfix"></div>
@@ -273,13 +256,13 @@
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<form method="POST" class="form-horizontal"
-								th:action="@{/account/deposit}" action="#">
+								th:action="@{/account/deposit}" action="#" id="depositForm">
 								<div class="modal-header main-color-bg">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="gridSystemModalLabel">Deposit</h4>
+									<h4 class="modal-title" id="gridSystemModalLabel">Deposit/Withdrawal</h4>
 								</div>
 								<div class="modal-body">
 									<div class="row">
@@ -287,19 +270,34 @@
 											<div class="row cs-form-group">
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">1.
-														Please select the account you would like to deposit:</label> <select
-														class="form-control" th:value="${accountType}"
-														name="accountType" id="accountType" required="required">
+														Please select type of operation:</label> <select
+														class="form-control" th:field="*{operationType}"
+														name="operationType" id="operationType" required="required">
 														<option disabled="disabled" selected="selected">--
-															select your account --</option>
-														<option>Primary</option>
-														<option>Savings</option>
+															select operation --</option>
+														<option th:each="type : ${operationTypes}"
+																th:value="${type}"
+																th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
 													</select> <br />
 												</div>
 											</div>
 											<div class="row cs-form-group">
 												<div class="form-group col-md-12">
-													<label class="form-labels">2. Please specify the
+													<label for="accountType" class="form-labels">2.
+														Please select the account you would like to deposit:</label> <select
+														class="form-control" th:field="*{accountType}"
+														name="accountType" id="accountType" required="required">
+														<option disabled="disabled" selected="selected">--
+															select your account --</option>
+														<option th:each="type : ${accountTypes}"
+																th:value="${type}"
+																th:text="#{${'meethub.accountType.' + type}}">Primary</option>
+													</select> <br />
+												</div>
+											</div>
+											<div class="row cs-form-group">
+												<div class="form-group col-md-12">
+													<label class="form-labels">3. Please specify the
 														amount you would like to deposit: </label>
 													<div class="input-group">
 														<span class="input-group-addon">$</span> <input
@@ -319,7 +317,7 @@
 															<span>Primary Balance:</span>
 														</div>
 														<div class="col-md-5">
-															<i class="fa fa-usd" aria-hidden="true"></i> <span>0.00</span>
+															<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.primaryAccount.accountBalance}">0.00</span>
 														</div>
 													</div></li>
 												<li
@@ -329,7 +327,7 @@
 															<span>Savings Balance:</span>
 														</div>
 														<div class="col-md-5">
-															<i class="fa fa-usd" aria-hidden="true"></i> <span>0.00</span>
+															<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.savingsAccount.accountBalance}">0.00</span>
 														</div>
 													</div></li>
 											</ul>
