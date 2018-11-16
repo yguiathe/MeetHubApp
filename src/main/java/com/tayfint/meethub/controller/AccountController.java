@@ -15,14 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.tayfint.meethub.model.Membership;
-import com.tayfint.meethub.model.PrimaryAccount;
-import com.tayfint.meethub.model.PrimaryTransaction;
-import com.tayfint.meethub.model.SavingsAccount;
-import com.tayfint.meethub.model.SavingsTransaction;
-import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.form.DepositWithdrawForm;
 import com.tayfint.meethub.service.AccountService;
 import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.TransactionService;
@@ -77,11 +71,11 @@ public class AccountController {
 	}
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String depositOrWithdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, @ModelAttribute("operationType") String operationType, @SessionAttribute("membership") Membership membership) {
-    	if(operationType.equalsIgnoreCase("Deposit")){
-    		accountService.deposit(accountType, Double.parseDouble(amount), membership);
+    public String depositOrWithdrawPOST(@ModelAttribute("depositForm") DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
+    	if(depositForm.getOperationType().equalsIgnoreCase("Deposit")){
+    		accountService.deposit(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
     	} else {
-    		accountService.withdraw(accountType, Double.parseDouble(amount), membership);
+    		accountService.withdraw(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
     	}
         return "redirect:users/account";
     }
@@ -98,6 +92,9 @@ public class AccountController {
 	}
     
     private void populateDefaultModel(Model model){
+    	
+    	DepositWithdrawForm depositForm = new DepositWithdrawForm();
+    	model.addAttribute("depositForm", depositForm);
     	
     	List<String> AccountTypes = new ArrayList<String>();
     	AccountTypes.add("Primary");

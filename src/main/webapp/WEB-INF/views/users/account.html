@@ -256,7 +256,7 @@
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<form method="POST" class="form-horizontal"
-								th:action="@{/account/deposit}" action="#" id="depositForm">
+								th:action="@{/account/deposit}" action="#" th:object="${depositForm}" id="depositForm">
 								<div class="modal-header main-color-bg">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
@@ -271,13 +271,13 @@
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">1.
 														Please select type of operation:</label> <select
-														class="form-control" th:object="${operationType}"
+														class="form-control" th:field="*{operationType}"
 														name="operationType" id="operationType" required="required">
 														<option disabled="disabled" selected="selected">--
 															select operation --</option>
-														<option th:each="operationType : ${operationTypes}"
-																th:value="${operationType}"
-																th:text="#{${'meethub.operationType.' + operationType}}">Deposit</option>
+														<option th:each="type : ${operationTypes}"
+																th:value="${type}"
+																th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
 													</select> <br />
 												</div>
 											</div>
@@ -285,13 +285,13 @@
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">2.
 														Please select the account you would like to deposit:</label> <select
-														class="form-control" th:object="${accountType}"
+														class="form-control" th:field="*{accountType}"
 														name="accountType" id="accountType" required="required">
 														<option disabled="disabled" selected="selected">--
 															select your account --</option>
-														<option th:each="accountType : ${accountTypes}"
-																th:value="${accountType}"
-																th:text="#{${'meethub.accountType.' + accountType}}">Primary</option>
+														<option th:each="type : ${accountTypes}"
+																th:value="${type}"
+																th:text="#{${'meethub.accountType.' + type}}">Primary</option>
 													</select> <br />
 												</div>
 											</div>
@@ -301,7 +301,7 @@
 														amount you would like to deposit: </label>
 													<div class="input-group">
 														<span class="input-group-addon">$</span> <input
-															th:value="${amount}" type="text" name="amount"
+															th:field="*{amount}" type="text" name="amount"
 															id="amount" class="form-control"
 															aria-label="Amount (to the nearest dollar)" />
 													</div>
