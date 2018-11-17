@@ -19,6 +19,11 @@ jQuery(document).ready(function($) {
 });
 
 function depositOrWithdraw() {
+	$.ajaxSetup({
+		headers : {
+			'X-CSRF-TOKEN' : $('input[name="_csrf"]').attr('value')
+		}
+	});
 
 	$.ajax({
 		type : "POST",
@@ -48,8 +53,8 @@ function enableSearchButton(flag) {
 }
 
 function display(data) {
-	var json = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> " +
-			"<span aria-hidden=\"true\">&times;</span> </button>" +
-			+ JSON.stringify(data, null, 4);
+	var json = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
+			+ "<span aria-hidden=\"true\">&times;</span> </button>"
+			+ +JSON.stringify(data, null, 4);
 	$('#confirmationMsg').html(json);
 }
