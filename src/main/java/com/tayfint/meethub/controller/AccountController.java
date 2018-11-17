@@ -87,8 +87,8 @@ public class AccountController {
     	model.addAttribute("depositForm", depositForm);
     	
     	List<String> AccountTypes = new ArrayList<String>();
-    	AccountTypes.add("Primary");
-    	AccountTypes.add("Savings");
+    	AccountTypes.add("primary");
+    	AccountTypes.add("savings");
     	model.addAttribute("accountTypes", AccountTypes);
     	
     	List<String> operationTypes = new ArrayList<String>();

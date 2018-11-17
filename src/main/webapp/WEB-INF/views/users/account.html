@@ -270,7 +270,7 @@
 											<div class="row cs-form-group">
 												<div class="form-group col-md-12">
 													<label for="accountType" class="form-labels">1.
-														Please select type of operation:</label> <select
+														Please select type of operation:</label> <div th:if="${not #lists.isEmpty(operationTypes)}"><select
 														class="form-control" th:field="*{operationType}"
 														name="operationType" id="operationType" required="required">
 														<option disabled="disabled" selected="selected">--
@@ -278,7 +278,7 @@
 														<option th:each="type : ${operationTypes}"
 																th:value="${type}"
 																th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
-													</select> <br />
+													</select></div> <br />
 												</div>
 											</div>
 											<div class="row cs-form-group">
