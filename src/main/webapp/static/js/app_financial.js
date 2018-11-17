@@ -23,7 +23,7 @@ function depositOrWithdraw() {
 	$.ajax({
 		type : "POST",
 		contentType : "application/json",
-		url : "/account/deposit",
+		url : "/" + $(location).attr('pathname') + "/account/deposit",
 		data : $("#depositForm").serialize(),
 		dataType : 'json',
 		timeout : 100000,
