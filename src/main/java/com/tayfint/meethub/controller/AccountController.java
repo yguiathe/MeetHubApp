@@ -78,11 +78,14 @@ public class AccountController {
     @ResponseBody
     public Account depositOrWithdrawPOST(@ModelAttribute("depositForm") DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
     	Account act = null;
-    	if(depositForm.getOperationType().equalsIgnoreCase("Deposit")){
+    	logger.debug("************** OperationType: " + depositForm.getOperationType());
+    	logger.debug("************** Amount: " + depositForm.getAmount());
+    	if(depositForm.getOperationType().equalsIgnoreCase("deposit")){
     		act = accountService.deposit(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
     	} else {
     		act = accountService.withdraw(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
     	}
+    	logger.debug("************** Transaction Done!!");
         return act;
     }
     
