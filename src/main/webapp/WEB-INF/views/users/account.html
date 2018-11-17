@@ -273,11 +273,11 @@
 														Please select type of operation:</label> <select
 														class="form-control" th:field="*{operationType}"
 														name="operationType" id="operationType" required="required">
-														<option disabled="disabled" selected="selected">--
+														<option disabled="disabled" value="default" selected="selected">--
 															select operation --</option>
 														<option th:each="type : ${operationTypes}"
 																th:value="${type}"
-																th:text="#{${'meethub.operationType.' + type}}" value="">Deposit</option>
+																th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
 													</select> <br />
 												</div>
 											</div>
@@ -287,7 +287,7 @@
 														Please select the account you would like to deposit:</label> <select
 														class="form-control" th:field="*{accountType}"
 														name="accountType" id="accountType" required="required">
-														<option disabled="disabled" selected="selected">--
+														<option disabled="disabled" value="default" selected="selected">--
 															select your account --</option>
 														<option th:each="type : ${accountTypes}"
 																th:value="${type}"
