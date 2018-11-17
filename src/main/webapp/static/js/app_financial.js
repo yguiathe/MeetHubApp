@@ -12,23 +12,19 @@ jQuery(document).ready(function($) {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 
-		searchViaAjax();
+		depositOrWithdraw();
 
 	});
 
 });
 
-function searchViaAjax() {
-
-	var search = {}
-	search["username"] = $("#username").val();
-	search["email"] = $("#email").val();
+function depositOrWithdraw() {
 
 	$.ajax({
 		type : "POST",
 		contentType : "application/json",
-		url : "${home}search/api/getSearchResult",
-		data : JSON.stringify(search),
+		url : "/account/deposit",
+		data : $("#depositForm").serialize(),
 		dataType : 'json',
 		timeout : 100000,
 		success : function(data) {
@@ -48,11 +44,12 @@ function searchViaAjax() {
 }
 
 function enableSearchButton(flag) {
-	$("#btn-search").prop("disabled", flag);
+	$("#deposit").prop("disabled", flag);
 }
 
 function display(data) {
-	var json = "<h4>Ajax Response</h4><pre>" + JSON.stringify(data, null, 4)
-			+ "</pre>";
-	$('#feedback').html(json);
+	var json = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> " +
+			"<span aria-hidden=\"true\">&times;</span> </button>" +
+			+ JSON.stringify(data, null, 4);
+	$('#confirmationMsg').html(json);
 }

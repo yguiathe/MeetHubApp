@@ -81,7 +81,8 @@
 												</div>
 												<div class="col-xs-6 text-right">
 													<h4>
-														<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.primaryAccount.accountBalance}">0.00</span>
+														<i class="fa fa-usd" aria-hidden="true"></i> <span
+															th:text="${membership.primaryAccount.accountBalance}">0.00</span>
 													</h4>
 												</div>
 											</div>
@@ -103,7 +104,8 @@
 												</div>
 												<div class="col-xs-6 text-right">
 													<h4>
-														<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.savingsAccount.accountBalance}">0.00</span>
+														<i class="fa fa-usd" aria-hidden="true"></i> <span
+															th:text="${membership.savingsAccount.accountBalance}">0.00</span>
 													</h4>
 												</div>
 											</div>
@@ -149,7 +151,7 @@
 										<h4>
 											<a href="#deposit" role="button" data-toggle="modal">
 												<div class="panel-footer">
-													<span class="pull-left">Deposit/Withdraw</span> <span
+													<span class="pull-left">Deposit</span> <span
 														class="pull-right"><i
 														class="fa fa-arrow-circle-right"></i></span>
 													<div class="clearfix"></div>
@@ -256,13 +258,14 @@
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<form method="POST" class="form-horizontal"
-								th:action="@{/account/deposit}" action="#" th:object="${depositForm}" id="depositForm">
+								th:action="@{/account/deposit}" action="#"
+								th:object="${depositForm}" id="depositForm">
 								<div class="modal-header main-color-bg">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="gridSystemModalLabel">Deposit/Withdrawal</h4>
+									<h4 class="modal-title" id="gridSystemModalLabel">Deposit/Withdraw</h4>
 								</div>
 								<div class="modal-body">
 									<div class="row">
@@ -272,12 +275,13 @@
 													<label for="accountType" class="form-labels">1.
 														Please select type of operation:</label> <select
 														class="form-control" th:field="*{operationType}"
-														name="operationType" id="operationType" required="required">
-														<option disabled="disabled" value="default" selected="selected">--
-															select operation --</option>
+														name="operationType" id="operationType"
+														required="required">
+														<option disabled="disabled" value="default"
+															selected="selected">-- select operation --</option>
 														<option th:each="type : ${operationTypes}"
-																th:value="${type}"
-																th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
+															th:value="${type}"
+															th:text="#{${'meethub.operationType.' + type}}">Deposit</option>
 													</select> <br />
 												</div>
 											</div>
@@ -287,11 +291,11 @@
 														Please select the account you would like to deposit:</label> <select
 														class="form-control" th:field="*{accountType}"
 														name="accountType" id="accountType" required="required">
-														<option disabled="disabled" value="default" selected="selected">--
-															select your account --</option>
+														<option disabled="disabled" value="default"
+															selected="selected">-- select your account --</option>
 														<option th:each="type : ${accountTypes}"
-																th:value="${type}"
-																th:text="#{${'meethub.accountType.' + type}}" value="">Primary</option>
+															th:value="${type}"
+															th:text="#{${'meethub.accountType.' + type}}" value="">Primary</option>
 													</select> <br />
 												</div>
 											</div>
@@ -317,7 +321,8 @@
 															<span>Primary Balance:</span>
 														</div>
 														<div class="col-md-5">
-															<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.primaryAccount.accountBalance}">0.00</span>
+															<i class="fa fa-usd" aria-hidden="true"></i> <span
+																th:text="${membership.primaryAccount.accountBalance}">0.00</span>
 														</div>
 													</div></li>
 												<li
@@ -327,17 +332,23 @@
 															<span>Savings Balance:</span>
 														</div>
 														<div class="col-md-5">
-															<i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${membership.savingsAccount.accountBalance}">0.00</span>
+															<i class="fa fa-usd" aria-hidden="true"></i> <span
+																th:text="${membership.savingsAccount.accountBalance}">0.00</span>
 														</div>
 													</div></li>
 											</ul>
+
+											<div class="alert alert-success alert-dismissible"
+												role="alert" id="confirmationMsg">
+											</div>
 										</div>
 									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary all-btn">Deposit</button>
+									<button type="submit" class="btn btn-primary all-btn"
+										id="deposit">Deposit</button>
 								</div>
 							</form>
 						</div>

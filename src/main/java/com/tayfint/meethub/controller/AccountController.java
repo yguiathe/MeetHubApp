@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Membership;
+import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.form.DepositWithdrawForm;
 import com.tayfint.meethub.service.AccountService;
 import com.tayfint.meethub.service.MembershipService;
@@ -71,17 +75,19 @@ public class AccountController {
 	}
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String depositOrWithdrawPOST(@ModelAttribute("depositForm") DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
+    @ResponseBody
+    public Account depositOrWithdrawPOST(@ModelAttribute("depositForm") DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
+    	Account act = null;
     	if(depositForm.getOperationType().equalsIgnoreCase("Deposit")){
-    		accountService.deposit(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
+    		act = accountService.deposit(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
     	} else {
-    		accountService.withdraw(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
+    		act = accountService.withdraw(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
     	}
-        return "redirect:users/account";
+        return act;
     }
     
     @RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
-	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership, Principal principal, Model model) {
+	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership, @SessionAttribute("userFirstName") String userFirstName, Model model) {
 
     	DepositWithdrawForm depositForm = new DepositWithdrawForm();
     	model.addAttribute("depositForm", depositForm);
@@ -95,6 +101,8 @@ public class AccountController {
     	operationTypes.add("deposit");
     	operationTypes.add("withdraw");
         model.addAttribute("operationTypes", operationTypes);
+      
+		model.addAttribute("userFirstName", userFirstName);
         
 		logger.debug("************** Membership ID: " + membershipId);
 		membership = membershipService.findMembershipById(membershipId);

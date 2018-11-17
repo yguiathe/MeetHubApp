@@ -16,7 +16,7 @@ import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "primary_account")
-public class PrimaryAccount {
+public class PrimaryAccount extends Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "primaryAcct")

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.tayfint.meethub.controller.AccountController;
 import com.tayfint.meethub.dao.PrimaryAccountDao;
 import com.tayfint.meethub.dao.SavingsAccountDao;
+import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.PrimaryAccount;
 import com.tayfint.meethub.model.PrimaryTransaction;
@@ -59,13 +60,10 @@ public class AccountServiceImpl implements AccountService {
         return savingsAccountDao.findByAccountNumber(savingsAccount.getAccountNumber());
     }
     
-    public void deposit(String accountType, double amount, Membership membership) {
-
+    public Account deposit(String accountType, double amount, Membership membership) {
+    	Account act = null;
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = membership.getPrimaryAccount();
-            if(primaryAccount == null){
-            	logger.info("****Primary Account is null *****");
-            }
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
 
@@ -73,6 +71,7 @@ public class AccountServiceImpl implements AccountService {
 
             PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Deposit to Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
             transactionService.savePrimaryDepositTransaction(primaryTransaction);
+            act = primaryAccount;
             
         } else if (accountType.equalsIgnoreCase("Savings")) {
             SavingsAccount savingsAccount = membership.getSavingsAccount();
@@ -82,11 +81,14 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Deposit to savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
             transactionService.saveSavingsDepositTransaction(savingsTransaction);
+            act = savingsAccount;
         }
+        
+        return act;
     }
     
-    public void withdraw(String accountType, double amount, Membership membership) {
-
+    public Account withdraw(String accountType, double amount, Membership membership) {
+    	Account act = null;
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = membership.getPrimaryAccount();
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
@@ -96,6 +98,7 @@ public class AccountServiceImpl implements AccountService {
 
             PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Withdraw from Primary Account", "Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
             transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
+            act = primaryAccount;
         } else if (accountType.equalsIgnoreCase("Savings")) {
             SavingsAccount savingsAccount = membership.getSavingsAccount();
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
@@ -104,7 +107,10 @@ public class AccountServiceImpl implements AccountService {
             Date date = new Date();
             SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Withdraw from savings Account", "Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
             transactionService.saveSavingsWithdrawTransaction(savingsTransaction);
+            act = savingsAccount;
         }
+        
+        return act;
     }
     
     private int accountGen() {
