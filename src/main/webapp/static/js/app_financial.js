@@ -19,6 +19,12 @@ jQuery(document).ready(function($) {
 });
 
 function depositOrWithdraw() {
+	
+	var opType = $("#operationType").val();
+	var acctType = $("#accountType").val();
+	var amt = $("#amount").val();
+	var transaction = {"operationType" : opType, "accountType" : acctType, "amount" : amt};
+
 	$.ajaxSetup({
 		headers : {
 			'X-CSRF-TOKEN' : $('input[name="_csrf"]').attr('value')
@@ -29,7 +35,7 @@ function depositOrWithdraw() {
 		type : "POST",
 		contentType : "application/json",
 		url : "/MeetHub/account/deposit",
-		data : $("#depositForm").serialize(),
+		data : JSON.stringify(transaction),
 		dataType : 'json',
 		timeout : 100000,
 		success : function(data) {
