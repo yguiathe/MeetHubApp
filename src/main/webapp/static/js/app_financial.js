@@ -83,6 +83,6 @@ function display(data) {
 			+ data.amount
 			+ "</strong></p>";
 
-	$('#confirmationMsg:hidden').html(msg);
-	$('#confirmationMsg:hidden').fadeIn("slow");
+	$('#confirmationMsg').html(msg);
+	$('#confirmationMsg').fadeIn("slow");
 }
