@@ -1,17 +1,19 @@
-package com.tayfint.meethub.model.form;
+package com.tayfint.meethub.model.dto;
 
-public class DepositWithdrawForm {
+import java.math.BigDecimal;
+
+public class DepositWithdrawDTO {
 
 	private String accountType;
 	
-	private String amount;
+	private BigDecimal amount;
 	
 	private String operationType;
 	
-	public DepositWithdrawForm(){
+	public DepositWithdrawDTO(){
 		this.accountType = "";
 		this.operationType = "";
-		this.amount = "0";
+		this.amount = BigDecimal.ZERO;
 	}
 
 	public String getAccountType() {
@@ -22,12 +24,12 @@ public class DepositWithdrawForm {
 		this.accountType = accountType;
 	}
 
-	public String getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
-		this.amount = amount;
+	public void setAmount(BigDecimal bigDecimal) {
+		this.amount = bigDecimal;
 	}
 
 	public String getOperationType() {

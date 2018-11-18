@@ -61,6 +61,6 @@ function enableSearchButton(flag) {
 function display(data) {
 	var json = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
 			+ "<span aria-hidden=\"true\">&times;</span> </button>"
-			+ +JSON.stringify(data, null, 4);
+			+ JSON.stringify(data);
 	$('#confirmationMsg').html(json);
 }

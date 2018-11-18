@@ -1,6 +1,5 @@
 package com.tayfint.meethub.controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Membership;
-import com.tayfint.meethub.model.User;
-import com.tayfint.meethub.model.form.DepositWithdrawForm;
+import com.tayfint.meethub.model.dto.DepositWithdrawDTO;
 import com.tayfint.meethub.service.AccountService;
 import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.TransactionService;
@@ -77,23 +74,23 @@ public class AccountController {
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     @ResponseBody
-    public Account depositOrWithdrawPOST(@RequestBody DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
-    	Account act = null;
+    public DepositWithdrawDTO depositOrWithdrawPOST(@RequestBody DepositWithdrawDTO depositForm, @SessionAttribute("membership") Membership membership) {
+    	DepositWithdrawDTO dto = new DepositWithdrawDTO();
     	logger.debug("************** OperationType: " + depositForm.getOperationType());
     	logger.debug("************** Amount: " + depositForm.getAmount());
     	if(depositForm.getOperationType().equalsIgnoreCase("deposit")){
-    		act = accountService.deposit(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
+    		dto = accountService.deposit(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount().toPlainString()), membership);
     	} else {
-    		act = accountService.withdraw(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount()), membership);
+    		dto = accountService.withdraw(depositForm.getAccountType(), Double.parseDouble(depositForm.getAmount().toPlainString()), membership);
     	}
     	logger.debug("************** Transaction Done!!");
-        return act;
+        return dto;
     }
     
     @RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
 	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership, @SessionAttribute("userFirstName") String userFirstName, Model model) {
 
-    	DepositWithdrawForm depositForm = new DepositWithdrawForm();
+    	DepositWithdrawDTO depositForm = new DepositWithdrawDTO();
     	model.addAttribute("depositForm", depositForm);
     	
     	List<String> AccountTypes = new ArrayList<String>();
