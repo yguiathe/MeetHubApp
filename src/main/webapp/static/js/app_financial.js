@@ -19,11 +19,15 @@ jQuery(document).ready(function($) {
 });
 
 function depositOrWithdraw() {
-	
+
 	var opType = $("#operationType").val();
 	var acctType = $("#accountType").val();
 	var amt = $("#amount").val();
-	var transaction = {"operationType" : opType, "accountType" : acctType, "amount" : amt};
+	var transaction = {
+		"operationType" : opType,
+		"accountType" : acctType,
+		"amount" : amt
+	};
 
 	$.ajaxSetup({
 		headers : {
@@ -59,8 +63,26 @@ function enableSearchButton(flag) {
 }
 
 function display(data) {
-	var json = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
+	var msg = "";
+	var acType = "meethub.accountType.primary";
+	var opType = "meethub.successfulDeposit";
+
+	if (data.accountType != "primary")
+		acType = "meethub.accountType.savings";
+
+	if (data.operationType != "Deposit")
+		opType = "meethub.successfulWithdrawal";
+
+	msg = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
 			+ "<span aria-hidden=\"true\">&times;</span> </button>"
-			+ JSON.stringify(data);
-	$('#confirmationMsg').html(json);
+			+ "<p th:text=\"#{"
+			+ opType
+			+ " + ' ' + "
+			+ acType
+			+ " + ' ' + meethub.verbToBe + ' '}\"><strong>"
+			+ data.amount
+			+ "</strong></p>";
+
+	$('#confirmationMsg').html(msg);
+	$('#confirmationMsg').fadeIn("slow");
 }
