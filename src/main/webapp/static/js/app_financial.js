@@ -73,7 +73,8 @@ function display(data) {
 	if (data.operationType != "Deposit")
 		opType = "meethub.successfulWithdrawal";
 
-	msg = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
+	msg = "<div class=\"alert alert-success alert-dismissible\" " +
+			"role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
 			+ "<span aria-hidden=\"true\">&times;</span> </button>"
 			+ "<p th:text=\"#{"
 			+ opType
@@ -81,7 +82,7 @@ function display(data) {
 			+ acType
 			+ " + ' ' + meethub.verbToBe + ' '}\"><strong>"
 			+ data.amount
-			+ "</strong></p>";
+			+ "</strong></p></div>";
 
 	$('#confirmationMsg').html(msg);
 	$('#confirmationMsg').fadeIn("slow");
