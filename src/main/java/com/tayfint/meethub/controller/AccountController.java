@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,7 +77,7 @@ public class AccountController {
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     @ResponseBody
-    public Account depositOrWithdrawPOST(@ModelAttribute("depositForm") DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
+    public Account depositOrWithdrawPOST(@RequestBody DepositWithdrawForm depositForm, @SessionAttribute("membership") Membership membership) {
     	Account act = null;
     	logger.debug("************** OperationType: " + depositForm.getOperationType());
     	logger.debug("************** Amount: " + depositForm.getAmount());
