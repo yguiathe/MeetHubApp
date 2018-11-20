@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-	<div th:fragment="depositOrWithdrawal">
-		<div class="alert alert-success alert-dismissible" role="alert" id="dw_result">
+	<div id="dw_result" th:fragment="depositOrWithdrawal">
+		<div class="alert alert-success alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<p
-				th:text="#{${(depositForm.operationType == 'Deposit') ? 'meethub.successfulDeposit':'meethub.successfulWithdrawal'} + ' ' + 
-			${(depositForm.accountType == 'primary') ? 'meethub.accountType.primary':'meethub.accountType.savings'} + ' ' + meethub.verbToBe + ' '}">
-				<strong th:text="${depositForm.amount}"> </strong>
+				th:text="#{(${depositForm.operationType} == 'Deposit') ? 'meethub.successfulDeposit':'meethub.successfulWithdrawal'} + ' ' + 
+			#{(${depositForm.accountType} == 'primary') ? 'meethub.accountType.primary':'meethub.accountType.savings'} + ' ' + meethub.verbToBe + ' '}">
 			</p>
+			<strong th:text="${depositForm.amount}"> </strong>
 		</div>
 	</div>
 </body>
