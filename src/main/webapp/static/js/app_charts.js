@@ -29,8 +29,9 @@ function getFinSummaryChart() {
 }
 
 function getFinTrendChart() {
-	ctx = document.getElementById("finTrenChart").getContext('2d');
-	if (ctx != null) {
+	finChart = document.getElementById("finTrenChart");
+	if(finChart != null){
+		ctx = finChart.getContext('2d');
 		var myLineChart = new Chart(ctx, {
 			type : 'line',
 			data : {
