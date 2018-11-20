@@ -40,7 +40,7 @@ function depositOrWithdraw() {
 		contentType : "application/json",
 		url : "/MeetHub/account/deposit",
 		data : JSON.stringify(transaction),
-		dataType : 'json',
+		dataType : 'html',
 		timeout : 100000,
 		success : function(data) {
 			console.log("SUCCESS: ", data);
@@ -63,8 +63,6 @@ function enableSearchButton(flag) {
 }
 
 function display(data) {
-	console.log(data);
-	console.log($(data).find('#dw_result'));
 	$('#confirmationMsg').html($(data).find('#dw_result'));
 	$('#confirmationMsg').fadeIn("slow");
 }
