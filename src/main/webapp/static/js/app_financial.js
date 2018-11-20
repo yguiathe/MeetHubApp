@@ -63,27 +63,6 @@ function enableSearchButton(flag) {
 }
 
 function display(data) {
-	var msg = "";
-	var acType = "meethub.accountType.primary";
-	var opType = "meethub.successfulDeposit";
-
-	if (data.accountType != "primary")
-		acType = "meethub.accountType.savings";
-
-	if (data.operationType != "Deposit")
-		opType = "meethub.successfulWithdrawal";
-
-	msg = "<div class=\"alert alert-success alert-dismissible\" " +
-			"role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> "
-			+ "<span aria-hidden=\"true\">&times;</span> </button>"
-			+ "<p th:text=\"#{"
-			+ opType
-			+ " + ' ' + "
-			+ acType
-			+ " + ' ' + meethub.verbToBe + ' '}\"><strong>"
-			+ data.amount
-			+ "</strong></p></div>";
-
-	$('#confirmationMsg').html(msg);
+	$('#confirmationMsg').html($(data).find('#dw_result'));
 	$('#confirmationMsg').fadeIn("slow");
 }
