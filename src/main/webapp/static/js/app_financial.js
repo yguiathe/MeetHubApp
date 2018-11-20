@@ -63,6 +63,7 @@ function enableSearchButton(flag) {
 }
 
 function display(data) {
+	console.log($(data).find('#dw_result'));
 	$('#confirmationMsg').html($(data).find('#dw_result'));
 	$('#confirmationMsg').fadeIn("slow");
 }
