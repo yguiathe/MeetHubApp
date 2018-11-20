@@ -10,7 +10,7 @@
 			</button>
 			<p
 				th:text="#{(${depositForm.operationType} == 'Deposit') ? 'meethub.successfulDeposit':'meethub.successfulWithdrawal'} + ' ' + 
-			#{(${depositForm.accountType} == 'primary') ? 'meethub.accountType.primary':'meethub.accountType.savings'} + ' ' + meethub.verbToBe + ' '}">
+			#{(${depositForm.accountType} == 'primary') ? 'meethub.accountType.primary':'meethub.accountType.savings'} + ' ' + meethub.verbToBe + ' '">
 			</p>
 			<strong th:text="${depositForm.amount}"> </strong>
 		</div>
