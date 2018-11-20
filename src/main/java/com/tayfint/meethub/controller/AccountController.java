@@ -90,7 +90,7 @@ public class AccountController {
 		}
 		logger.debug("************** Transaction Done!!");
 		model.addAttribute("depositForm", dto);
-		return "successful_transaction :: depositOrWithdrawal";
+		return "fragments/successful_transaction :: depositOrWithdrawal";
 	}
 
 	@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
