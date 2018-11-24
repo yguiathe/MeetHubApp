@@ -43,7 +43,6 @@ function depositOrWithdraw() {
 		dataType : 'html',
 		timeout : 100000,
 		success : function(data) {
-			console.log("SUCCESS: ", data);
 			display(data);
 		},
 		error : function(e) {

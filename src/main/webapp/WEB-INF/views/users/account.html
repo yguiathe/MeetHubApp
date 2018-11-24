@@ -135,7 +135,31 @@
 							</div>
 						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="messages"></div>
+					<div role="tabpanel" class="tab-pane fade" id="messages">
+						<div class="panel-heading main-color-bg">
+							<h3 class="panel-title">New Message</h3>
+						</div>
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<label>To</label> <input type="text" class="form-control"
+										placeholder="Recipient" name="recipient">
+								</div>
+								<div class="form-group">
+									<label>Subject</label> <input type="text" class="form-control"
+										placeholder="Important Request" name="subject">
+								</div>
+								<div class="form-group">
+									<label>Page Body</label>
+									<textarea name="emailBody" class="form-control"
+										placeholder="Page Body" id="emailBody">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </textarea>
+								</div>
+								<input type="submit" class="btn btn-default" value="Send">
+							</form>
+						</div>
+					</div>
 					<div role="tabpanel" class="tab-pane fade" id="roaster"></div>
 					<div role="tabpanel" class="tab-pane fade" id="transactions">
 						<div class="panel panel-default">
@@ -197,57 +221,69 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading main-color-bg">
-								<h3 class="panel-title">Latest Transactions</h3>
-							</div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-12">
-										<input class="form-control" type="text"
-											placeholder="Filter Transactions..."></input>
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#checking"
+									th:text="#{meethub.accountType.primary}">Checking</a></li>
+								<li><a data-toggle="tab" href="#savings"
+									th:text="#{meethub.accountType.savings}">Savings</a></li>
+								<li><a data-toggle="tab" href="#loans"
+									th:text="#{meethub.accountType.loan}">Loans</a></li>
+								<li><a data-toggle="tab" href="#transfers"
+									th:text="#{meethub.accountType.transfers}">Transfers</a></li>
+							</ul>
+							<div class="tab-content">
+								<div id="checking" class="tab-pane fade in active">
+									<div class="row">
+										<div class="col-md-12">
+											<input class="form-control" type="text"
+												placeholder="Filter Transactions..."></input>
+										</div>
 									</div>
+									<br></br>
+									<table class="table table-striped table-hover">
+										<tr>
+											<th>Title</th>
+											<th>Published</th>
+											<th>Created</th>
+											<th></th>
+										</tr>
+										<tr>
+											<td>Blog Post 1</td>
+											<td><span class="glyphicon glyphicon-ok"
+												aria-hidden="true"></span></td>
+											<td>Dec 12, 2016</td>
+											<td><a class="btn btn-default" href="edit.html">Edit</a>
+												<a class="btn btn-danger" href="#">Delete</a></td>
+										</tr>
+										<tr>
+											<td>Blog Post 2</td>
+											<td><span class="glyphicon glyphicon-ok"
+												aria-hidden="true"></span></td>
+											<td>Dec 13, 2016</td>
+											<td><a class="btn btn-default" href="edit.html">Edit</a>
+												<a class="btn btn-danger" href="#">Delete</a></td>
+										</tr>
+										<tr>
+											<td>Blog Post 3</td>
+											<td><span class="glyphicon glyphicon-remove"
+												aria-hidden="true"></span></td>
+											<td>Dec 13, 2016</td>
+											<td><a class="btn btn-default" href="edit.html">Edit</a>
+												<a class="btn btn-danger" href="#">Delete</a></td>
+										</tr>
+										<tr>
+											<td>Blog Post 4</td>
+											<td><span class="glyphicon glyphicon-ok"
+												aria-hidden="true"></span></td>
+											<td>Dec 14, 2016</td>
+											<td><a class="btn btn-default" href="edit.html">Edit</a>
+												<a class="btn btn-danger" href="#">Delete</a></td>
+										</tr>
+									</table>
 								</div>
-								<br></br>
-								<table class="table table-striped table-hover">
-									<tr>
-										<th>Title</th>
-										<th>Published</th>
-										<th>Created</th>
-										<th></th>
-									</tr>
-									<tr>
-										<td>Blog Post 1</td>
-										<td><span class="glyphicon glyphicon-ok"
-											aria-hidden="true"></span></td>
-										<td>Dec 12, 2016</td>
-										<td><a class="btn btn-default" href="edit.html">Edit</a>
-											<a class="btn btn-danger" href="#">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Blog Post 2</td>
-										<td><span class="glyphicon glyphicon-ok"
-											aria-hidden="true"></span></td>
-										<td>Dec 13, 2016</td>
-										<td><a class="btn btn-default" href="edit.html">Edit</a>
-											<a class="btn btn-danger" href="#">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Blog Post 3</td>
-										<td><span class="glyphicon glyphicon-remove"
-											aria-hidden="true"></span></td>
-										<td>Dec 13, 2016</td>
-										<td><a class="btn btn-default" href="edit.html">Edit</a>
-											<a class="btn btn-danger" href="#">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Blog Post 4</td>
-										<td><span class="glyphicon glyphicon-ok"
-											aria-hidden="true"></span></td>
-										<td>Dec 14, 2016</td>
-										<td><a class="btn btn-default" href="edit.html">Edit</a>
-											<a class="btn btn-danger" href="#">Delete</a></td>
-									</tr>
-								</table>
+								<div id="savings" class="tab-pane fade">
+								<div id="loans" class="tab-pane fade">
+								<div id="transfers" class="tab-pane fade">
 							</div>
 						</div>
 					</div>
@@ -311,7 +347,7 @@
 													</div>
 												</div>
 											</div>
-											<input type="hidden"/>
+											<input type="hidden" />
 										</div>
 										<div class="col-md-4">
 											<ul class="list-group balance-display">
