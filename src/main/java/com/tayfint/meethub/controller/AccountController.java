@@ -94,8 +94,7 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
-	public String showAccount(@PathVariable Long membershipId, @ModelAttribute("membership") Membership membership,
-			@SessionAttribute("userFirstName") String userFirstName, Model model) {
+	public String showAccount(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, Model model) {
 
 		DepositWithdrawDTO depositForm = new DepositWithdrawDTO();
 		model.addAttribute("depositForm", depositForm);
@@ -113,9 +112,9 @@ public class AccountController {
 		model.addAttribute("userFirstName", userFirstName);
 
 		logger.debug("************** Membership ID: " + membershipId);
-		membership = membershipService.findMembershipById(membershipId);
+		Membership membership = membershipService.findMembershipById(membershipId);
 		model.addAttribute("membership", membership);
-		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membershipId));
+		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership));
 
 		return "users/account";
 	}

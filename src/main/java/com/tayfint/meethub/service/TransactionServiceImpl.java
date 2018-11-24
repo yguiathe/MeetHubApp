@@ -38,23 +38,21 @@ public class TransactionServiceImpl implements TransactionService {
 	private SavingsAccountDao savingsAccountDao;
 	
 	@Autowired
-	private RecipientDao recipientDao;
-
+	private PrimaryTransactionDao primaryTrsDao;
+	
 	@Autowired
-	private MembershipService membershipService;
+	private RecipientDao recipientDao;
 	
 	static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);	
 
-	public List<PrimaryTransaction> findPrimaryTransactionList(Long membershipId){
-		Membership membership = membershipService.findMembershipById(membershipId);
-        List<PrimaryTransaction> primaryTransactionList = membership.getPrimaryAccount().getPrimaryTransactionList();
+	public List<PrimaryTransaction> findPrimaryTransactionList(Membership membership){
+        List<PrimaryTransaction> primaryTransactionList = primaryTrsDao.findByPrimaryAccount(membership.getPrimaryAccount());
         logger.debug("****************** Number of Transactions is: " + primaryTransactionList.size());
 
         return primaryTransactionList;
     }
 
-    public List<SavingsTransaction> findSavingsTransactionList(Long membershipId) {
-    	Membership membership = membershipService.findMembershipById(membershipId);
+    public List<SavingsTransaction> findSavingsTransactionList(Membership membership) {
         List<SavingsTransaction> savingsTransactionList = membership.getSavingsAccount().getSavingsTransactionList();
 
         return savingsTransactionList;
