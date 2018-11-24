@@ -35,15 +35,19 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	@Autowired
 	private RecipientDao recipientDao;
+
+	private MembershipService membershipService;
 	
 
-	public List<PrimaryTransaction> findPrimaryTransactionList(Membership membership){
+	public List<PrimaryTransaction> findPrimaryTransactionList(Long membershipId){
+		Membership membership = membershipService.findMembershipById(membershipId);
         List<PrimaryTransaction> primaryTransactionList = membership.getPrimaryAccount().getPrimaryTransactionList();
 
         return primaryTransactionList;
     }
 
-    public List<SavingsTransaction> findSavingsTransactionList(Membership membership) {
+    public List<SavingsTransaction> findSavingsTransactionList(Long membershipId) {
+    	Membership membership = membershipService.findMembershipById(membershipId);
         List<SavingsTransaction> savingsTransactionList = membership.getSavingsAccount().getSavingsTransactionList();
 
         return savingsTransactionList;

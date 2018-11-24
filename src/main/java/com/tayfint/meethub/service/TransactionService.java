@@ -10,9 +10,9 @@ import com.tayfint.meethub.model.SavingsAccount;
 import com.tayfint.meethub.model.SavingsTransaction;
 
 public interface TransactionService {
-	List<PrimaryTransaction> findPrimaryTransactionList(Membership membership);
+	List<PrimaryTransaction> findPrimaryTransactionList(Long membershipId);
 
-    List<SavingsTransaction> findSavingsTransactionList(Membership membership);
+    List<SavingsTransaction> findSavingsTransactionList(Long membershipId);
 
     void savePrimaryDepositTransaction(PrimaryTransaction primaryTransaction);
 
