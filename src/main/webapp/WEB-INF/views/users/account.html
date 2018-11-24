@@ -142,12 +142,14 @@
 						<div class="panel-body">
 							<form>
 								<div class="form-group">
-									<label th:text="#{meethub.emailTo}">To</label> <input type="text" class="form-control"
-										placeholder="Recipient" name="recipient"/>
+									<label th:text="#{meethub.emailTo}">To</label> <input
+										type="text" class="form-control" placeholder="Recipient"
+										name="recipient" />
 								</div>
 								<div class="form-group">
-									<label th:text="#{meethub.emailSubject}">Subject</label> <input type="text" class="form-control"
-										placeholder="Important Request" name="subject"/>
+									<label th:text="#{meethub.emailSubject}">Subject</label> <input
+										type="text" class="form-control"
+										placeholder="Important Request" name="subject" />
 								</div>
 								<div class="form-group">
 									<label th:text="#{meethub.emailBody}">Body</label>
@@ -156,7 +158,7 @@
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </textarea>
 								</div>
-								<input type="submit" class="btn btn-default" value="Send"/>
+								<input type="submit" class="btn btn-default" value="Send" />
 							</form>
 						</div>
 					</div>
@@ -221,21 +223,23 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<ul class="nav nav-tabs main-color-bg">
-								<li class="active"><a data-toggle="tab" href="#checking"
-									th:text="#{meethub.accountType.primary}">Checking</a></li>
-								<li><a data-toggle="tab" href="#savings"
-									th:text="#{meethub.accountType.savings}">Savings</a></li>
-								<li><a data-toggle="tab" href="#loans"
-									th:text="#{meethub.accountType.loan}">Loans</a></li>
-								<li><a data-toggle="tab" href="#transfers"
-									th:text="#{meethub.accountType.transfers}">Transfers</a></li>
-							</ul>
-							<div class="tab-content">
+							<div class="panel-heading tabbed-nav main-color-bg">
+								<ul class="nav nav-tabs">
+									<li class="active"><a data-toggle="tab" href="#checking"
+										th:text="#{meethub.accountType.primary}">Checking</a></li>
+									<li><a data-toggle="tab" href="#savings"
+										th:text="#{meethub.accountType.savings}">Savings</a></li>
+									<li><a data-toggle="tab" href="#loans"
+										th:text="#{meethub.accountType.loan}">Loans</a></li>
+									<li><a data-toggle="tab" href="#transfers"
+										th:text="#{meethub.accountType.transfers}">Transfers</a></li>
+								</ul>
+							</div>
+							<div class="panel-body tab-content">
 								<div id="checking" class="tabs-custom tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-8">
-											<input class="form-control trxFilter" type="text"
+											<input class="form-control" type="text"
 												placeholder="Filter Transactions..."></input>
 										</div>
 									</div>
