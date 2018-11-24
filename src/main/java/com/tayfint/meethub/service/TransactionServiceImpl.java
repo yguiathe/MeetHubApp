@@ -3,9 +3,13 @@ package com.tayfint.meethub.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tayfint.meethub.controller.AccountController;
 import com.tayfint.meethub.dao.PrimaryAccountDao;
 import com.tayfint.meethub.dao.PrimaryTransactionDao;
 import com.tayfint.meethub.dao.RecipientDao;
@@ -39,10 +43,12 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private MembershipService membershipService;
 	
+	static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);	
 
 	public List<PrimaryTransaction> findPrimaryTransactionList(Long membershipId){
 		Membership membership = membershipService.findMembershipById(membershipId);
         List<PrimaryTransaction> primaryTransactionList = membership.getPrimaryAccount().getPrimaryTransactionList();
+        logger.debug("****************** Number of Transactions is: " + primaryTransactionList.size());
 
         return primaryTransactionList;
     }
