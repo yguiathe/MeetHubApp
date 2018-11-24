@@ -36,6 +36,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private RecipientDao recipientDao;
 
+	@Autowired
 	private MembershipService membershipService;
 	
 
