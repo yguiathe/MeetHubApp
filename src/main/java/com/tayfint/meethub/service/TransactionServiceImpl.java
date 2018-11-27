@@ -7,9 +7,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.tayfint.meethub.controller.AccountController;
 import com.tayfint.meethub.dao.PrimaryAccountDao;
 import com.tayfint.meethub.dao.PrimaryTransactionDao;
 import com.tayfint.meethub.dao.RecipientDao;
@@ -41,19 +42,23 @@ public class TransactionServiceImpl implements TransactionService {
 	private PrimaryTransactionDao primaryTrsDao;
 	
 	@Autowired
+	private SavingsTransactionDao svgsTrsDao;
+	
+	@Autowired
 	private RecipientDao recipientDao;
 	
 	static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);	
 
-	public List<PrimaryTransaction> findPrimaryTransactionList(Membership membership){
-        List<PrimaryTransaction> primaryTransactionList = primaryTrsDao.findByPrimaryAccount(membership.getPrimaryAccount());
+	public List<PrimaryTransaction> findPrimaryTransactionList(Membership membership, int page){
+        List<PrimaryTransaction> primaryTransactionList = primaryTrsDao.findByPrimaryAccount(membership.getPrimaryAccount(), new PageRequest(page, 10, Sort.Direction.DESC, "date"));
         logger.debug("****************** Number of Transactions is: " + primaryTransactionList.size());
 
         return primaryTransactionList;
     }
 
-    public List<SavingsTransaction> findSavingsTransactionList(Membership membership) {
-        List<SavingsTransaction> savingsTransactionList = membership.getSavingsAccount().getSavingsTransactionList();
+    public List<SavingsTransaction> findSavingsTransactionList(Membership membership, int page) {
+    	List<SavingsTransaction> savingsTransactionList = svgsTrsDao.findBySavingsAccount(membership.getSavingsAccount(), new PageRequest(page, 10, Sort.Direction.DESC, "date"));
+    	logger.debug("****************** Number of Transactions is: " + savingsTransactionList.size());
 
         return savingsTransactionList;
     }

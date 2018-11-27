@@ -2,6 +2,7 @@ package com.tayfint.meethub.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.tayfint.meethub.model.PrimaryAccount;
@@ -11,5 +12,5 @@ public interface PrimaryTransactionDao extends PagingAndSortingRepository<Primar
 
     List<PrimaryTransaction> findAll();
     
-    List<PrimaryTransaction> findByPrimaryAccount(PrimaryAccount primaryAcct);
+    List<PrimaryTransaction> findByPrimaryAccount(PrimaryAccount primaryAcct, Pageable pageRequest);
 }

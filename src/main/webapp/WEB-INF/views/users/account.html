@@ -269,9 +269,11 @@
 											</tbody>
 										</table>
 										<hr/>
-<!-- 										<ul class="nav nav-pills"> -->
-<!-- 											<li class="nav-item" th:each="${#numbers.sequence(0,)}"></li> -->
-<!-- 										</ul> -->
+										<ul class="nav nav-pills">
+											<li class="nav-item" th:each="i : ${#numbers.sequence(0,primaryTransactionList.totalPages -1)}">
+												<a th:text="${i}" class="nav-link"></a>
+											</li>
+										</ul>
 									</div>
 								</div>
 								<div id="savings" class="tab-pane fade"></div>
@@ -390,11 +392,11 @@
 	</section>
 
 	<div th:replace="fragments/footer :: footer"></div>
-	<script>
+	<!-- <script>
     $(document).ready(function() {
         $('.transactions-tbl').DataTable();
     } );
-</script>
+</script> -->
 
 </body>
 </html>

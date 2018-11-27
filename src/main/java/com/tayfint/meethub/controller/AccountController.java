@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -94,7 +95,7 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
-	public String showAccount(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, Model model) {
+	public String showAccount(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, @RequestParam(defaultValue="0") int page, Model model) {
 
 		DepositWithdrawDTO depositForm = new DepositWithdrawDTO();
 		model.addAttribute("depositForm", depositForm);
@@ -114,7 +115,7 @@ public class AccountController {
 		logger.debug("************** Membership ID: " + membershipId);
 		Membership membership = membershipService.findMembershipById(membershipId);
 		model.addAttribute("membership", membership);
-		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership));
+		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership, page));
 
 		return "users/account";
 	}
