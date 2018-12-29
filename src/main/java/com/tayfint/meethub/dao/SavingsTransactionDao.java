@@ -2,6 +2,7 @@ package com.tayfint.meethub.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,6 +13,6 @@ public interface SavingsTransactionDao extends CrudRepository<SavingsTransaction
 
     List<SavingsTransaction> findAll();
     
-    List<SavingsTransaction> findBySavingsAccount(SavingsAccount svgAcct, Pageable pageRequest);
+    Page<SavingsTransaction> findBySavingsAccount(SavingsAccount svgAcct, Pageable pageRequest);
 }
 

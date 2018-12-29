@@ -116,7 +116,7 @@ public class AccountController {
 		logger.debug("************** Membership ID: " + membershipId);
 		Membership membership = membershipService.findMembershipById(membershipId);
 		model.addAttribute("membership", membership);
-		model.addAttribute("primaryTransactionList", new PageImpl<>(transactionService.findPrimaryTransactionList(membership, page)));
+		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership, page));
 
 		return "users/account";
 	}

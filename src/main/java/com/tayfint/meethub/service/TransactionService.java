@@ -1,6 +1,6 @@
 package com.tayfint.meethub.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.PrimaryAccount;
@@ -10,9 +10,9 @@ import com.tayfint.meethub.model.SavingsAccount;
 import com.tayfint.meethub.model.SavingsTransaction;
 
 public interface TransactionService {
-	List<PrimaryTransaction> findPrimaryTransactionList(Membership membership, int page);
+	Page<PrimaryTransaction> findPrimaryTransactionList(Membership membership, int page);
 
-    List<SavingsTransaction> findSavingsTransactionList(Membership membership, int page);
+    Page<SavingsTransaction> findSavingsTransactionList(Membership membership, int page);
 
     void savePrimaryDepositTransaction(PrimaryTransaction primaryTransaction);
 

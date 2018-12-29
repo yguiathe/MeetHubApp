@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -49,16 +50,16 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);	
 
-	public List<PrimaryTransaction> findPrimaryTransactionList(Membership membership, int page){
-        List<PrimaryTransaction> primaryTransactionList = primaryTrsDao.findByPrimaryAccount(membership.getPrimaryAccount(), new PageRequest(page, 10, Sort.Direction.DESC, "date"));
-        logger.debug("****************** Number of Transactions is: " + primaryTransactionList.size());
+	public Page<PrimaryTransaction> findPrimaryTransactionList(Membership membership, int page){
+        Page<PrimaryTransaction> primaryTransactionList = primaryTrsDao.findByPrimaryAccount(membership.getPrimaryAccount(), new PageRequest(page, 10, Sort.Direction.DESC, "date"));
+        logger.debug("****************** Number of Transactions is: " + primaryTransactionList.getTotalPages());
 
         return primaryTransactionList;
     }
 
-    public List<SavingsTransaction> findSavingsTransactionList(Membership membership, int page) {
-    	List<SavingsTransaction> savingsTransactionList = svgsTrsDao.findBySavingsAccount(membership.getSavingsAccount(), new PageRequest(page, 10, Sort.Direction.DESC, "date"));
-    	logger.debug("****************** Number of Transactions is: " + savingsTransactionList.size());
+    public Page<SavingsTransaction> findSavingsTransactionList(Membership membership, int page) {
+    	Page<SavingsTransaction> savingsTransactionList = svgsTrsDao.findBySavingsAccount(membership.getSavingsAccount(), new PageRequest(page, 10, Sort.Direction.DESC, "date"));
+    	logger.debug("****************** Number of Transactions is: " + savingsTransactionList.getTotalPages());
 
         return savingsTransactionList;
     }
