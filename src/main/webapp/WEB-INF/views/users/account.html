@@ -271,7 +271,7 @@
 										<hr/>
 										<ul class="nav nav-pills">
 											<li class="nav-item" th:each="i : ${#numbers.sequence(0,primaryTransactionList.totalPages -1)}">
-												<a th:href="@{/account/{membershipId}/(page=${i})}" th:text="${i}" class="nav-link"></a>
+												<a th:href="@{/account/${membership.id}/(page=${i})}" th:text="${i}" class="nav-link"></a>
 											</li>
 										</ul>
 									</div>
