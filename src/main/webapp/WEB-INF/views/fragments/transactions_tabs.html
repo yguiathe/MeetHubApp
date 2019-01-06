@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-	<div id="trxPage" th:fragment="checkingActTrxPage">
-		<tbody>
+	<div th:fragment="checkingActTrxPage">
+		<table id="trxPage">
+			<tbody>
 				<tr data-th-each="primaryTransaction : ${primaryTransactionList}">
 					<td data-th-text="${primaryTransaction.date}">...</td>
 					<td data-th-text="${primaryTransaction.description}">...</td>
@@ -12,7 +13,8 @@
 					<td data-th-text="${primaryTransaction.amount}">...</td>
 					<td data-th-text="${primaryTransaction.availableBalance}">...</td>
 				</tr>
-		</tbody>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>
