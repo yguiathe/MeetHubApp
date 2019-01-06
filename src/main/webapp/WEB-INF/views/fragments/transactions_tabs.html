@@ -3,8 +3,8 @@
 <head></head>
 <body>
 	<div th:fragment="checkingActTrxPage">
-		<table id="trxPage">
-			<tbody>
+		<table>
+			<tbody id="trxPage">
 				<tr data-th-each="primaryTransaction : ${primaryTransactionList}">
 					<td data-th-text="${primaryTransaction.date}">...</td>
 					<td data-th-text="${primaryTransaction.description}">...</td>
