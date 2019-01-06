@@ -56,6 +56,7 @@ function loadNextTrxPage(url){
 }
 
 function showNextTrxPage(data){
+	console.log($('<div />').append(data).find('#trxPage tbody'));
 	$('#checkingTrxTbl tbody').html($('<div />').append(data).find('#trxPage tbody').html());
 	$('#checkingTrxTbl tbody').fadeIn("slow");
 }
