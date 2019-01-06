@@ -15,8 +15,50 @@ jQuery(document).ready(function($) {
 		depositOrWithdraw();
 
 	});
+	
+	$("#checking > div.table-responsive > ul > li > a").click(function(event) {
+		// Prevent the form from submitting via the browser.
+		event.preventDefault();
+
+		loadNextTrxPage($(this).attr('href'));
+
+	});
 
 });
+
+function setAjaxHeader(){
+	$.ajaxSetup({
+		headers : {
+			'X-CSRF-TOKEN' : $('input[name="_csrf"]').attr('value')
+		}
+	});
+}
+
+function loadNextTrxPage(url){
+	setAjaxHeader();
+	
+	$.ajax({
+		type : "GET",
+		url : url,
+		dataType : 'html',
+		timeout : 100000,
+		success : function(data) {
+			showNextTrxPage(data);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+			showNextTrxPage(e);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+}
+
+function showNextTrxPage(data){
+	$('#checkingTrxTbl tbody').html(data.find('#trxPage tbody').html());
+	$('#checkingTrxTbl tbody').fadeIn("slow");
+}
 
 function depositOrWithdraw() {
 
@@ -29,11 +71,7 @@ function depositOrWithdraw() {
 		"amount" : amt
 	};
 
-	$.ajaxSetup({
-		headers : {
-			'X-CSRF-TOKEN' : $('input[name="_csrf"]').attr('value')
-		}
-	});
+	setAjaxHeader();
 
 	$.ajax({
 		type : "POST",

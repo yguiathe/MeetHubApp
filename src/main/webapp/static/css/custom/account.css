@@ -303,3 +303,8 @@ section#main .login-form {
 .cs-form-group{
 	padding-left: 15px;
 }
+
+div.table-responsive > table > thead > tr > th {
+	color: #009eda;
+	font-size: 12px;
+}

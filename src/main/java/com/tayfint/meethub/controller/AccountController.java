@@ -120,5 +120,13 @@ public class AccountController {
 
 		return "users/account";
 	}
+	
+	@RequestMapping(value = "/checkingActTrxPage", method = RequestMethod.GET)
+	public String getcheckingActTrxPage(@SessionAttribute("membership") Membership membership, @RequestParam(defaultValue="0") int page, Model model) {
+		logger.debug("************** Membership ID: " + membership.getId());
+		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership, page));
+
+		return "fragments/transactions_tabs :: checkingActTrxPage";
+	}
 
 }
