@@ -22,7 +22,7 @@
 	<section id="breadcrumb">
 		<div class="container">
 			<ol class="breadcrumb">
-				<li class="active" th:text="#{meethub.myaccount}">Memberships</li>
+				<li class="active" th:text="#{meethub.home}">Home</li>
 			</ol>
 		</div>
 	</section>
@@ -35,14 +35,20 @@
 						<a href="#" class="list-group-item active main-color-bg"> <span
 							class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 							Menu
-						</a> <a role="tab" data-toggle="tab" href="#overview"
+						</a> <a role="tab" data-toggle="tab" href="#dashboards"
 							class="list-group-item"><span
 							class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;&nbsp;<span
-							class="actions">Overview</span></a> <a role="tab" data-toggle="tab"
-							href="#transactions" class="list-group-item"><span
+							class="actions">Dashboards</span></a> <a role="tab" data-toggle="tab"
+							href="#myAccounts" class="list-group-item" id="dropdown-btn"><span
 							class="glyphicon glyphicon-transfer" aria-hidden="true"></span>&nbsp;&nbsp;<span
-							class="actions">Transactions</span></a> <a role="tab"
-							data-toggle="tab" href="#messages" class="list-group-item"><span
+							class="actions">My Accounts</span><i class="fa fa-caret-down"></i></a>
+						<div class="dropdown-container">
+							<a role="tab" data-toggle="tab" href="#" class="list-group-item">Checking</a>
+							<a role="tab" data-toggle="tab"href="#" class="list-group-item">Savings</a>
+							<a role="tab" data-toggle="tab"href="#" class="list-group-item">Loans</a>
+						</div>
+						<a role="tab" data-toggle="tab" href="#messages"
+							class="list-group-item"><span
 							class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;&nbsp;<span
 							class="actions">Messages</span></a><a role="tab" data-toggle="tab"
 							href="#roaster" class="list-group-item"><span
@@ -62,7 +68,8 @@
 					</div>
 				</div>
 				<div class=" tab-content col-md-9">
-					<div role="tabpanel" class="tab-pane fade in active" id="overview">
+					<div role="tabpanel" class="tab-pane fade in active"
+						id="dashboards">
 						<div class="panel panel-default">
 							<div class="panel-heading main-color-bg">
 								<h3 class="panel-title">Overview</h3>
@@ -163,7 +170,7 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="roaster"></div>
-					<div role="tabpanel" class="tab-pane fade" id="transactions">
+					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
 						<div class="panel panel-default">
 							<div class="panel-heading main-color-bg">
 								<h3 class="panel-title">Initiate a Transaction</h3>
@@ -245,7 +252,8 @@
 									</div>
 									<br></br>
 									<div class="table-responsive">
-										<table id="checkingTrxTbl" class="table table-hover transactions-tbl">
+										<table id="checkingTrxTbl"
+											class="table table-hover transactions-tbl">
 											<thead>
 												<tr>
 													<th>Post Date</th>
@@ -268,10 +276,12 @@
 												</tr>
 											</tbody>
 										</table>
-										<hr/>
+										<hr />
 										<ul class="nav nav-pills">
-											<li class="nav-item" th:each="i : ${#numbers.sequence(0,primaryTransactionList.totalPages -1)}">
-												<a th:href="@{/account/checkingActTrxPage/(page=${i})}" th:text="${i}" class="nav-link"></a>
+											<li class="nav-item"
+												th:each="i : ${#numbers.sequence(0,primaryTransactionList.totalPages -1)}">
+												<a th:href="@{/account/checkingActTrxPage/(page=${i})}"
+												th:text="${i}" class="nav-link"></a>
 											</li>
 										</ul>
 									</div>
