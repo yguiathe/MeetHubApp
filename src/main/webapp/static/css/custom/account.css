@@ -315,7 +315,7 @@ div.table-responsive > table > thead > tr > th {
 }
 
 .dropdown-container > a {
-	background-color: #d4d4d4;
+	background-color: #ffffff;
 }
 
 /* Optional: Style the caret down icon */
@@ -323,4 +323,9 @@ div.table-responsive > table > thead > tr > th {
   float: right;
   padding-left: 15px;
   padding-top: 3px;
+}
+
+.sub-menu{
+	margin-left: 10px;
+	margin-right: 10px;
 }
