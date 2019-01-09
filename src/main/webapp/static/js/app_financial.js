@@ -113,7 +113,7 @@ for (i = 0; i < dropdown.length; i++) {
 	  this.classList.toggle("main-color-bg");
     var dropdownContent = this.nextElementSibling;
     if (dropdownContent.style.display === "block") {
-      document.getElementById("top-menu").classList.add("actions");
+      this.classList.remove("main-color-bg");
       dropdownContent.style.display = "none";
     } else {
       document.getElementById("top-menu").style.color = "white";
