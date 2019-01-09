@@ -114,6 +114,7 @@ for (i = 0; i < dropdown.length; i++) {
     var dropdownContent = this.nextElementSibling;
     if (dropdownContent.style.display === "block") {
       this.classList.remove("main-color-bg");
+      document.getElementById("top-menu").style.color = "";
       dropdownContent.style.display = "none";
     } else {
       document.getElementById("top-menu").style.color = "white";
