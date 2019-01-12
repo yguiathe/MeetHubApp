@@ -329,26 +329,23 @@ div.table-responsive > table > thead > tr > th {
 	padding-left: 60px;
 }
 
-.btn-circle {
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 30px;
-  line-height: 1.5;
-  border-radius: 50%;
-  border: 2px solid #009eda;
+.act-summary-bal-div{
+	color: slategrey;
+	font-size: 80px;
+	border-bottom-style: solid;
+	border-bottom-color: darkgray;
 }
 
-.circle {
-  margin: 9px;
-  display: inline-block;
-  padding: 4px;
-  text-align: center;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border: 2px solid #009eda;
+.btn-circle {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 45px;
+    line-height: 2;
+    border-radius: 50%;
+    color: slategrey;
+    background-color: #d9edf7;
 }
 
 .circle::before,

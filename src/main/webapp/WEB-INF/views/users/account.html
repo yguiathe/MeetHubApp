@@ -235,21 +235,46 @@
 								</div>
 							</div>
 						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading tabbed-nav main-color-bg">
-								<ul class="nav nav-tabs">
-									<li class="active"><a data-toggle="tab" href="#checking"
-										th:text="#{meethub.accountType.primary}">Checking</a></li>
-									<li><a data-toggle="tab" href="#savings"
-										th:text="#{meethub.accountType.savings}">Savings</a></li>
-									<li><a data-toggle="tab" href="#loans"
-										th:text="#{meethub.accountType.loan}">Loans</a></li>
-									<li><a data-toggle="tab" href="#transfers"
-										th:text="#{meethub.accountType.transfers}">Transfers</a></li>
-								</ul>
+						
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
+						<div class="panel panel-default act-summary">
+							<div class="panel-heading main-color-bg">
+								<h3 class="panel-title text-right">
+									<em>Checking Account</em>
+								</h3>
 							</div>
-							<div class="panel-body tab-content">
-								<div id="checking" class="tabs-custom tab-pane fade in active">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-2">
+										<div class="btn-circle">
+											<i><strong>C</strong></i>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="act-summary-bal-div text-center">
+											<h1>
+												<strong><i class="fas fa-usd" aria-hidden="true"></i>
+													<span th:text="${membership.primaryAccount.accountBalance}">0.00</span></strong>
+											</h1>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer act-summary-actions">
+								<div class="btn-group" role="group" aria-label="...">
+									<button type="button" class="btn btn-default">Left</button>
+									<button type="button" class="btn btn-default">Middle</button>
+									<button type="button" class="btn btn-default">Right</button>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading main-color-bg">
+								<h3 class="panel-title">Transactions</h3>
+							</div>
+							<div class="panel-body">
+								<div id="checking">
 									<div class="row">
 										<div class="col-md-8">
 											<input class="form-control" type="text"
@@ -291,32 +316,6 @@
 											</li>
 										</ul>
 									</div>
-								</div>
-								<div id="savings" class="tab-pane fade"></div>
-								<div id="loans" class="tab-pane fade"></div>
-								<div id="transfers" class="tab-pane fade"></div>
-							</div>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
-						<div class="panel panel-default act-summary">
-							<div class="panel-heading main-color-bg">
-								<h3 class="panel-title text-right">
-									<em>Checking Account</em>
-								</h3>
-							</div>
-							<div class="panel-body">
-								<div class="col-md-2">
-									<div class="btn-circle">
-										<i><strong>C</strong></i>
-									</div>
-								</div>
-							</div>
-							<div class="panel-footer act-summary-actions">
-								<div class="btn-group" role="group" aria-label="...">
-									<button type="button" class="btn btn-default">Left</button>
-									<button type="button" class="btn btn-default">Middle</button>
-									<button type="button" class="btn btn-default">Right</button>
 								</div>
 							</div>
 						</div>
