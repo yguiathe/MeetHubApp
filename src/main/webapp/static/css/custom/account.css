@@ -329,6 +329,17 @@ div.table-responsive > table > thead > tr > th {
 	padding-left: 60px;
 }
 
+.act-summary-header{
+	color: #aaaaaa;
+    background-color: white;
+	border-top-color: #afc836;
+    border-top-style: solid;
+    border-top-width: 10px;
+    border-bottom-style: double;
+    border-bottom-width: thick;
+    border-bottom-color: #afc836
+}
+
 .circle {
   margin: 9px;
   display: inline-block;
