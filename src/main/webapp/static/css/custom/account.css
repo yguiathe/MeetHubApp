@@ -329,6 +329,17 @@ div.table-responsive > table > thead > tr > th {
 	padding-left: 60px;
 }
 
+.btn-circle {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 30px;
+  line-height: 1.5;
+  border-radius: 50%;
+  border: 2px solid #009eda;
+}
+
 .circle {
   margin: 9px;
   display: inline-block;
