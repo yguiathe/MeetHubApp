@@ -367,3 +367,8 @@ div.panel-footer.act-summary-actions > div > button{
 .act-details-labels{
 	color: #009eda;
 }
+
+div.panel.panel-default.act-summary > div.panel-body{
+	border-bottom-style: double;
+	border-bottom-color: #afc836;
+}
