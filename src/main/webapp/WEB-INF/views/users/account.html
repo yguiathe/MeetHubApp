@@ -94,7 +94,7 @@
 												</div>
 												<div class="col-xs-6 text-right">
 													<h4>
-														<i class="fas fa-usd" aria-hidden="true"></i> <span
+														<i class="fas fa-dollar-sign" aria-hidden="true"></i> <span
 															th:text="${membership.primaryAccount.accountBalance}">0.00</span>
 													</h4>
 												</div>
@@ -117,7 +117,7 @@
 												</div>
 												<div class="col-xs-6 text-right">
 													<h4>
-														<i class="fas fa-usd" aria-hidden="true"></i> <span
+														<i class="fas fa-dollar-sign" aria-hidden="true"></i> <span
 															th:text="${membership.savingsAccount.accountBalance}">0.00</span>
 													</h4>
 												</div>
@@ -235,7 +235,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
 						<div class="panel panel-default act-summary">
@@ -254,8 +254,9 @@
 									<div class="col-md-3">
 										<div class="act-summary-bal-div text-center">
 											<h1>
-												<strong><i class="fas fa-usd" aria-hidden="true"></i>
-													<span th:text="${membership.primaryAccount.accountBalance}">0.00</span></strong>
+												<strong><i class="fas fa-dollar-sign"
+													aria-hidden="true"></i> <span
+													th:text="${membership.primaryAccount.accountBalance}">0.00</span></strong>
 											</h1>
 										</div>
 									</div>
@@ -263,9 +264,22 @@
 							</div>
 							<div class="panel-footer act-summary-actions">
 								<div class="btn-group" role="group" aria-label="...">
-									<button type="button" class="btn btn-default">Left</button>
-									<button type="button" class="btn btn-default">Middle</button>
-									<button type="button" class="btn btn-default">Right</button>
+									<button type="button" class="btn btn-default">
+										<i class="fas fa-plus-circle"></i>&nbsp;&nbsp;<span
+											class="actions">Deposit</span>
+									</button>
+									<button type="button" class="btn btn-default">
+										<i class="fas fa-minus-circle"></i>&nbsp;&nbsp;<span
+											class="actions">Withdraw</span>
+									</button>
+									<button type="button" class="btn btn-default">
+										<i class="fas fa-exchange-alt"></i>&nbsp;&nbsp;<span
+											class="actions">Make a transfer</span>
+									</button>
+									<button type="button" class="btn btn-default">
+										<i class="fas fa-print"></i>&nbsp;&nbsp;<span
+											class="actions">Print statement</span>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -391,7 +405,7 @@
 															<span>Primary Balance:</span>
 														</div>
 														<div class="col-md-5">
-															<i class="fas fa-usd" aria-hidden="true"></i> <span
+															<i class="fas fa-dollar-sign" aria-hidden="true"></i> <span
 																th:text="${membership.primaryAccount.accountBalance}">0.00</span>
 														</div>
 													</div></li>
@@ -402,7 +416,7 @@
 															<span>Savings Balance:</span>
 														</div>
 														<div class="col-md-5">
-															<i class="fas fa-usd" aria-hidden="true"></i> <span
+															<i class="fas fa-dollar-sign" aria-hidden="true"></i> <span
 																th:text="${membership.savingsAccount.accountBalance}">0.00</span>
 														</div>
 													</div></li>
