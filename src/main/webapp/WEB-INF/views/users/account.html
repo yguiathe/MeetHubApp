@@ -251,6 +251,56 @@
 											<i><strong>C</strong></i>
 										</div>
 									</div>
+									<div class="col-md-7">
+										<div class="row act-details-values">
+											<div class="col-md-3 col-md-offset-1">
+												<h2>
+													<span th:text="${membership.primaryAccount.accountNumber}"></span>
+												</h2>
+											</div>
+											<div class="col-md-3">
+												<h2>
+													<span>Active</span>
+												</h2>
+											</div>
+										</div>
+										<div class="row act-details-labels">
+											<div class="col-md-3 col-md-offset-1">
+												<h5>
+													<span>Account Number</span>
+												</h5>
+											</div>
+											<div class="col-md-3">
+												<h5>
+													<span>Status</span>
+												</h5>
+											</div>
+										</div>
+										<div class="row act-details-values">
+											<div class="col-md-3 col-md-offset-1">
+												<h2>
+													<span>12/01/2018</span>
+												</h2>
+											</div>
+											<div class="col-md-3">
+												<h2>
+													<span>01/05/2019</span>
+												</h2>
+											</div>
+										</div>
+										<div class="row act-details-labels">
+											<div class="col-md-3 col-md-offset-1">
+												<h5>
+													<span>Open Date</span>
+												</h5>
+											</div>
+											<div class="col-md-3">
+												<h5>
+													<span>Last Activity Date</span>
+												</h5>
+											</div>
+										</div>
+									</div>
 									<div class="col-md-3">
 										<div class="act-summary-bal-div text-center">
 											<h1>
@@ -259,6 +309,13 @@
 													th:text="${membership.primaryAccount.accountBalance}">0.00</span></strong>
 											</h1>
 										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 col-md-offset-7">
+										<h4>
+											<span>Balance</span>
+										</h4>
 									</div>
 								</div>
 							</div>
@@ -277,8 +334,8 @@
 											class="actions">Make a transfer</span>
 									</button>
 									<button type="button" class="btn btn-default">
-										<i class="fas fa-print"></i>&nbsp;&nbsp;<span
-											class="actions">Print statement</span>
+										<i class="fas fa-print"></i>&nbsp;&nbsp;<span class="actions">Print
+											statement</span>
 									</button>
 								</div>
 							</div>

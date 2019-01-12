@@ -195,7 +195,7 @@ section#main .login-form {
 	border-color: #ddd;
 }
 
-.fa-credit-card, .fa-money, .fa-book, .fa-exchange-alt {
+.fa-print, .fa-minus-circle, .fa-plus-circle, .fa-exchange-alt {
 	color: #afc836;
 }
 
@@ -331,7 +331,8 @@ div.table-responsive > table > thead > tr > th {
 
 .act-summary-bal-div{
 	color: slategrey;
-	font-size: 80px;
+	font-size: 100px;
+	font-style: italic;
 	border-bottom-style: solid;
 	border-bottom-color: darkgray;
 }
@@ -348,52 +349,21 @@ div.table-responsive > table > thead > tr > th {
     background-color: #d9edf7;
 }
 
-.circle::before,
-.circle::after {
-  position: absolute;
-  z-index: -1;
-  display: block;
-  content: '';
-}
-.circle,
-.circle::before,
-.circle::after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: all .5s;
-  transition: all .5s;
-}
-
-.circle {
-  position: relative;
-  z-index: 2;
-  background-color: #fff;
-  border: 2px solid #009eda;
-  color: #009eda;
-  line-height: 50px;
-  overflow: hidden;
-}
-
 .btn-circle:hover {
-  color: orange;
-}
-.circle::after {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  -webkit-transform: scale(.5);
-  transform: scale(.5);
-}
-.circle:hover::after {
-  background: #5c5eae;
-  border-radius: 50%;
-  -webkit-transform: scale(.9);
-  transform: scale(.9);
+  background-color: #009eda;
+  color: white;
 }
 
 div.panel-footer.act-summary-actions > div > button{
 	color: orange;
+}
+
+.act-details-values{
+	color: slategrey;
+	border-bottom-style: solid;
+	border-bottom-color: darkgray;
+}
+
+.act-details-labels{
+	color: #009eda;
 }
