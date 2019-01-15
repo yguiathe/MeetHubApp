@@ -335,6 +335,7 @@ div.table-responsive > table > thead > tr > th {
 	font-style: italic;
 	border-bottom-style: solid;
 	border-bottom-color: darkgray;
+	margin-right: 15px;
 }
 
 .btn-circle {
@@ -371,4 +372,8 @@ div.panel-footer.act-summary-actions > div > button{
 div.panel.panel-default.act-summary > div.panel-body{
 	border-bottom-style: double;
 	border-bottom-color: #afc836;
+}
+
+#balance-lab{
+	text-align: center;
 }

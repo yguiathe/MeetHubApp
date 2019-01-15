@@ -252,69 +252,85 @@
 										</div>
 									</div>
 									<div class="col-md-7">
-										<div class="row act-details-values">
-											<div class="col-md-4">
-												<h3>
+										<div class="row">
+											<div class="col-md-4 act-details-values">
+												<h4>
 													<span th:text="${membership.primaryAccount.accountNumber}"></span>
-												</h3>
+												</h4>
 											</div>
-											<div class="col-md-4 col-md-offset-2">
-												<h3>
+											<div class="col-md-2">
+											</div>
+											<div class="col-md-4 act-details-values">
+												<h4>
 													<span>Active</span>
-												</h3>
+												</h4>
+											</div>
+											<div class="col-md-2">
 											</div>
 										</div>
-										<div class="row act-details-labels">
-											<div class="col-md-4">
-												<h5>
+										<div class="row">
+											<div class="col-md-4 act-details-labels">
+												<h6>
 													<span>Account Number</span>
-												</h5>
+												</h6>
 											</div>
-											<div class="col-md-4 col-md-offset-2">
-												<h5>
+											<div class="col-md-2">
+											</div>
+											<div class="col-md-4 act-details-labels">
+												<h6>
 													<span>Status</span>
-												</h5>
+												</h6>
+											</div>
+											<div class="col-md-2">
 											</div>
 										</div>
-										<div class="row act-details-values">
-											<div class="col-md-4">
-												<h3>
+										<div class="row">
+											<div class="col-md-4 act-details-values">
+												<h4>
 													<span>12/01/2018</span>
-												</h3>
+												</h4>
 											</div>
-											<div class="col-md-4 col-md-offset-2">
-												<h3>
+											<div class="col-md-2">
+											</div>
+											<div class="col-md-4 act-details-values">
+												<h4>
 													<span>01/05/2019</span>
-												</h3>
+												</h4>
+											</div>
+											<div class="col-md-2">
 											</div>
 										</div>
-										<div class="row act-details-labels">
-											<div class="col-md-4">
-												<h5>
+										<div class="row">
+											<div class="col-md-4 act-details-labels">
+												<h6>
 													<span>Open Date</span>
-												</h5>
+												</h6>
 											</div>
-											<div class="col-md-4 col-md-offset-2">
-												<h5>
+											<div class="col-md-2">
+											</div>
+											<div class="col-md-4 act-details-labels">
+												<h6>
 													<span>Last Activity Date</span>
-												</h5>
+												</h6>
+											</div>
+											<div class="col-md-2">
 											</div>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="row">
 											<div class="act-summary-bal-div text-center">
-												<h1>
+												<h2>
 													<strong><i class="fas fa-dollar-sign"
 														aria-hidden="true"></i> <span
 														th:text="${membership.primaryAccount.accountBalance}">0.00</span></strong>
-												</h1>
+												</h2>
 											</div>
 										</div>
-										<div class="row act-details-labels">
-											<h4>
+										<div class="row act-details-labels" id="balance-lab">
+											<h5>
 												<span>Balance</span>
-											</h4>
+											</h5>
 										</div>
 									</div>
 								</div>
