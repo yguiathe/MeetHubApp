@@ -376,7 +376,6 @@
 												<tr>
 													<th>Post Date</th>
 													<th>Description</th>
-													<th>Type</th>
 													<th>Status</th>
 													<th>Amount</th>
 													<th>Available Balance</th>
@@ -387,8 +386,11 @@
 													data-th-each="primaryTransaction : ${primaryTransactionList}">
 													<td data-th-text="${primaryTransaction.date}">...</td>
 													<td data-th-text="${primaryTransaction.description}">...</td>
-													<td data-th-text="${primaryTransaction.type}">...</td>
 													<td data-th-text="${primaryTransaction.status}">...</td>
+													<td th:switch="${primaryTransaction.type}">
+														<span th:case="'DEP'" th:style="'color: green;'" th:text="${primaryTransaction.amount}"></span>
+														<span th:case="'WTD'" th:style="'color: red;'" th:text="|(${primaryTransaction.amount})|"></span>
+													</td>
 													<td data-th-text="${primaryTransaction.amount}">...</td>
 													<td data-th-text="${primaryTransaction.availableBalance}">...</td>
 												</tr>
