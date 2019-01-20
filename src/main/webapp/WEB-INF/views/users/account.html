@@ -350,8 +350,8 @@
 						</div>
 						<div class="panel panel-default" id="depositForm">
 							<form method="POST" class="form-horizontal"
-							th:action="@{/account/deposit}" action="#"
-							th:object="${depositForm}">
+								th:action="@{/account/deposit}" action="#"
+								th:object="${depositForm}">
 								<div class="panel-heading main-color-bg">
 									<h3 class="panel-title trx-form-title">Deposit</h3>
 								</div>
@@ -392,19 +392,18 @@
 												</div>
 											</div>
 										</div>
-										<input type="hidden" />
-										<input type="hidden" name="operationType" id="operationType" value="deposit"/>
+										<input type="hidden" /> <input type="hidden"
+											name="operationType" id="operationType" value="deposit" />
 									</div>
 								</div>
 								<div class="panel-footer">
 									<div class="btn-group" role="group" aria-label="...">
 										<button type="button" class="btn btn-default blue-btn">
-											<i class="fas fa-plus-circle"></i>&nbsp;&nbsp;<span
-												>Deposit</span>
+											<i class="fas fa-plus-circle"></i>&nbsp;&nbsp;<span>Deposit</span>
 										</button>
-										<button type="button" class="btn btn-default blue-btn" id="depositFormClose-btn">
-											<i class="fas fa-times"></i>&nbsp;&nbsp;<span
-												>Close</span>
+										<button type="button" class="btn btn-default blue-btn"
+											id="depositFormClose-btn">
+											<i class="fas fa-times"></i>&nbsp;&nbsp;<span>Close</span>
 										</button>
 									</div>
 								</div>
@@ -488,7 +487,8 @@
 												<label for="accountType" class="form-labels">1.
 													Please select type of operation:</label> <select
 													class="form-control" th:field="*{operationType}"
-													name="operationType2" id="operationType2" required="required">
+													name="operationType2" id="operationType2"
+													required="required">
 													<option disabled="disabled" value="default"
 														selected="selected">-- select operation --</option>
 													<option th:each="type : ${operationTypes}"
@@ -567,7 +567,6 @@
 				<!-- /.modal-dialog -->
 			</div>
 			<!-- /.modal -->
-		</div>
 		</div>
 	</section>
 
