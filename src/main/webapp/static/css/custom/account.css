@@ -300,10 +300,6 @@ section#main .login-form {
 	z-index: 0;
 }
 
-.cs-form-group{
-	padding-left: 15px;
-}
-
 div.table-responsive > table > thead > tr > th {
 	color: #009eda;
 	font-size: 12px;
