@@ -377,3 +377,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 #balance-lab{
 	text-align: center;
 }
+
+#depositForm{
+	display: none;
+}

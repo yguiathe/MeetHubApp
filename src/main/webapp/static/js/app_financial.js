@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
 	$("#depositForm").submit(function(event) {
 
 		// Disble the search button
-		enableSearchButton(false);
+		enableDepositButton(false);
 
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
@@ -23,6 +23,15 @@ jQuery(document).ready(function($) {
 		loadNextTrxPage($(this).attr('href'));
 
 	});
+	
+	$("#deposit-btn").click(function(event){
+		$("#depositForm").show();
+	});
+	
+	$("#depositFormClose-btn").click(function(event){
+		$("#depositForm").hide();
+	});
+
 
 });
 
@@ -89,13 +98,13 @@ function depositOrWithdraw() {
 		},
 		done : function(e) {
 			console.log("DONE");
-			enableSearchButton(true);
+			enableDepositButton(true);
 		}
 	});
 
 }
 
-function enableSearchButton(flag) {
+function enableDepositButton(flag) {
 	$("#deposit").prop("disabled", flag);
 }
 
