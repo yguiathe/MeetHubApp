@@ -381,3 +381,8 @@ div.panel.panel-default.act-summary > div.panel-body{
 #depositForm{
 	display: none;
 }
+
+.form-instructions{
+	font-weight: bold;
+	color: slategrey;
+}
