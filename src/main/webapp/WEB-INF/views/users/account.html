@@ -357,15 +357,17 @@
 								</div>
 								<div class="panel-body">
 									<div class="row">
-										<h4>Select the account for deposit and enter deposit
-											amount.</h4>
+										<div class="col-sm-offset-2 col-sm-6 act-details-labels">
+											<h5>Select the account for deposit and enter deposit
+											amount.</h5>
+										</div>
 									</div>
 									<div class="row">
 										<div class="form-group">
 											<label for="actType"
-												class="col-sm-2 control-label form-labels">Deposit
+												class="col-sm-2 control-label form-labels act-details-labels">Deposit
 												to</label>
-											<div class="col-sm-10">
+											<div class="col-sm-8">
 												<select class="form-control" th:field="*{accountType}"
 													name="accountType" id="accountType" required="required">
 													<option disabled="disabled" value="default"
@@ -377,16 +379,16 @@
 										</div>
 										<div class="form-group">
 											<label for="trxAmount"
-												class="col-sm-2 control-label form-labels">Amount</label>
-											<div class="col-sm-10">
-												<span class="input-group-addon">$</span> <input
+												class="col-sm-2 control-label form-labels act-details-labels">Amount</label>
+											<div class="col-sm-8 input-group">
+												<div class="input-group-addon">$</div> <input
 													th:field="*{amount}" type="text" name="amount" id="amount"
 													class="form-control"
 													aria-label="Amount (to the nearest dollar)" />
 											</div>
 										</div>
 										<div class="form-group">
-											<div class="col-sm-offset-2 col-sm-10">
+											<div class="col-sm-offset-2 col-sm-6">
 												<div class="alert alert-info" role="alert">
 													<b>Note: </b>Your deposit will be processed immediately.
 												</div>
