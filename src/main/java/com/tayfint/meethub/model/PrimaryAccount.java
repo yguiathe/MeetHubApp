@@ -1,6 +1,7 @@
 package com.tayfint.meethub.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,7 +26,15 @@ public class PrimaryAccount {
 	private Long id;
 	private BigDecimal accountBalance;
 	private int accountNumber;
+	private Date openDate;
+	private Date closeDate;
+	private boolean isActive;
 	
+	public PrimaryAccount() {
+		this.openDate = new Date();
+		this.isActive = true;
+	}
+
 	@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PrimaryTransaction> primaryTransactionList;
 
@@ -60,4 +69,28 @@ public class PrimaryAccount {
     public void setPrimaryTransactionList(List<PrimaryTransaction> primaryTransactionList) {
         this.primaryTransactionList = primaryTransactionList;
     }
+
+	public Date getOpenDate() {
+		return openDate;
+	}
+
+	public void setOpenDate(Date openDate) {
+		this.openDate = openDate;
+	}
+
+	public Date getCloseDate() {
+		return closeDate;
+	}
+
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 }

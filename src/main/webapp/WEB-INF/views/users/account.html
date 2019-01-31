@@ -260,8 +260,12 @@
 											</div>
 											<div class="col-md-2"></div>
 											<div class="col-md-4 act-details-values">
-												<h4>
-													<span>Active</span>
+												<h4 th:switch="${membership.primaryAccount.isActive}">
+													<span
+													th:case="'true'" th:style="'color: green;'"
+													th:text="#{meethub.active}"></span> <span
+													th:case="'false'" th:style="'color: red;'"
+													th:text="#{meethub.inactive}"></span>
 												</h4>
 											</div>
 											<div class="col-md-2"></div>
@@ -283,7 +287,7 @@
 										<div class="row">
 											<div class="col-md-4 act-details-values">
 												<h4>
-													<span>12/01/2018</span>
+													<span th:text="${membership.primaryAccount.openDate}"></span>
 												</h4>
 											</div>
 											<div class="col-md-2"></div>
