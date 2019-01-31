@@ -262,9 +262,9 @@
 											<div class="col-md-4 act-details-values">
 												<h4 th:switch="${membership.primaryAccount.isActive}">
 													<span
-													th:case="'true'" th:style="'color: green;'"
+													th:case="'1'" th:style="'color: green;'"
 													th:text="#{meethub.active}"></span> <span
-													th:case="'false'" th:style="'color: red;'"
+													th:case="'0'" th:style="'color: red;'"
 													th:text="#{meethub.inactive}"></span>
 												</h4>
 											</div>

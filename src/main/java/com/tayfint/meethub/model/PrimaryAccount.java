@@ -28,7 +28,7 @@ public class PrimaryAccount {
 	private int accountNumber;
 	private Date openDate;
 	private Date closeDate;
-	private boolean isActive;
+	private Boolean isActive;
 	
 	public PrimaryAccount() {
 		this.openDate = new Date();
@@ -86,11 +86,11 @@ public class PrimaryAccount {
 		this.closeDate = closeDate;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 }
