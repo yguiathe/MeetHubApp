@@ -25,11 +25,11 @@ jQuery(document).ready(function($) {
 	});
 	
 	$("#deposit-btn").click(function(event){
-		$("#depositForm").show();
+		$("#depositDiv").show();
 	});
 	
 	$("#depositFormClose-btn").click(function(event){
-		$("#depositForm").hide();
+		$("#depositDiv").hide();
 	});
 
 
