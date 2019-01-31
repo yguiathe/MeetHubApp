@@ -267,7 +267,9 @@
 													th:case="'0'" th:style="'color: red;'"
 													th:text="#{meethub.inactive}"></span>
 												</h4>-->
-												<h4><span>Active</span></h4>
+												<h4>
+													<span th:if="${membership.primaryAccount.isActive} ? 'ACTIVE' : 'RETIRED'" th:style="'color: green;'"></span>
+												</h4>
 											</div>
 											<div class="col-md-2"></div>
 										</div>
@@ -288,7 +290,7 @@
 										<div class="row">
 											<div class="col-md-4 act-details-values">
 												<h4>
-													<span th:text="${membership.primaryAccount.openDate}"></span>
+													<span th:text="${#dates.format(membership.primaryAccount.openDate, 'dd-MMM-yyyy')}"></span>
 												</h4>
 											</div>
 											<div class="col-md-2"></div>
