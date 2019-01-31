@@ -28,11 +28,11 @@ public class SavingsAccount {
     private BigDecimal accountBalance;
     private Date openDate;
 	private Date closeDate;
-	private Boolean isActive;
+	private boolean active;
 	
 	public SavingsAccount() {
 		this.openDate = new Date();
-		this.isActive = true;
+		this.active = true;
 	}
 
     @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -86,13 +86,12 @@ public class SavingsAccount {
 		this.closeDate = closeDate;
 	}
 
-	public Boolean isActive() {
-		return isActive;
+	public boolean isActive() {
+		return active;
 	}
 
-	public void setActive(Boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(boolean isActive) {
+		this.active = isActive;
 	}
-
 
 }

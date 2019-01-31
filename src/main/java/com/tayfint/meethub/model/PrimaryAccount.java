@@ -28,11 +28,11 @@ public class PrimaryAccount {
 	private int accountNumber;
 	private Date openDate;
 	private Date closeDate;
-	private boolean isActive;
+	private boolean active;
 	
 	public PrimaryAccount() {
 		this.openDate = new Date();
-		this.isActive = true;
+		this.active = true;
 	}
 
 	@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -87,10 +87,10 @@ public class PrimaryAccount {
 	}
 
 	public boolean isActive() {
-		return isActive;
+		return active;
 	}
 
 	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+		this.active = isActive;
 	}
 }
