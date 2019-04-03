@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 @Entity
-@Table(name = "account")
+@Table(name = "app_account")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "acctType", length = 3)
 public abstract class Account {
@@ -35,7 +35,7 @@ public abstract class Account {
 	private int accountNumber;
 	private Date openDate = new Date();
 	
-	@Column(name = "accttype", insertable = false, updatable = false)
+	@Column(name = "acctType", insertable = false, updatable = false)
 	private String acctType;
 	private Date closeDate;
 	private boolean active = true;

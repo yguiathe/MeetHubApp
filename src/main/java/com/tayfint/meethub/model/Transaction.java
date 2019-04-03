@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "app_transaction")
 public class Transaction {
 
 	@Id
