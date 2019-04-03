@@ -97,7 +97,7 @@ public class UserController {
 			userService.createUser(user, userRoles);
 			securityService.autologin(user.getUsername(), user.getPassword());
 
-			return "redirect:my_memberships.go";
+			return "redirect:memberships";
 
 		}
 

@@ -1,12 +1,8 @@
 package com.tayfint.meethub.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,33 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Membership;
-import com.tayfint.meethub.model.dto.DepositWithdrawDTO;
+import com.tayfint.meethub.model.dto.AccountDto;
 import com.tayfint.meethub.service.AccountService;
-import com.tayfint.meethub.service.MembershipService;
-import com.tayfint.meethub.service.TransactionService;
-import com.tayfint.meethub.service.UserService;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 @SessionAttributes("membership")
 public class AccountController {
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private AccountService accountService;
-
-	@Autowired
-	private MembershipService membershipService;
-
-	@Autowired
-	private TransactionService transactionService;
 
 	static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
@@ -77,25 +60,27 @@ public class AccountController {
 		return new Membership();
 	}
 
-	@RequestMapping(value = "/deposit", method = RequestMethod.POST)
-	public String depositOrWithdrawPOST(@RequestBody DepositWithdrawDTO depositForm,
-			@SessionAttribute("membership") Membership membership, Model model) {
-		DepositWithdrawDTO dto = new DepositWithdrawDTO();
-		logger.debug("************** OperationType: " + depositForm.getOperationType());
-		logger.debug("************** Amount: " + depositForm.getAmount());
-		if (depositForm.getOperationType().equalsIgnoreCase("deposit")) {
-			dto = accountService.deposit(depositForm.getAccountType(),
-					Double.parseDouble(depositForm.getAmount().toPlainString()), membership);
-		} else {
-			dto = accountService.withdraw(depositForm.getAccountType(),
-					Double.parseDouble(depositForm.getAmount().toPlainString()), membership);
-		}
-		logger.debug("************** Transaction Done!!");
-		model.addAttribute("depositForm", dto);
+	@RequestMapping(value = "/deposit/{toAccountId}", method = RequestMethod.POST)
+	public String deposit(@RequestBody AccountDto acctDto,
+			@PathVariable Long toAccountId, Model model) {
+		logger.debug("************** Amount: " + acctDto.getBalance());
+		Account act = accountService.deposit(accountService.findById(toAccountId), acctDto.getBalance());
+		logger.debug("************** Deposit Done!!");
+		model.addAttribute("acctDto", new AccountDto(act.getBalance(), act.getAccountNumber(), act.getAcctType(), act.isActive()));
+		return "fragments/successful_transaction :: depositOrWithdrawal";
+	}
+	
+	@RequestMapping(value = "/withdraw/{fromAccountId}", method = RequestMethod.POST)
+	public String withdraw(@RequestBody AccountDto acctDto,
+			@PathVariable Long fromAccountId, Model model) {
+		logger.debug("************** Amount: " + acctDto.getBalance());
+		Account act = accountService.withdraw(accountService.findById(fromAccountId), acctDto.getBalance());
+		logger.debug("************** Withdrawal Done!!");
+		model.addAttribute("acctDto", new AccountDto(act.getBalance(), act.getAccountNumber(), act.getAcctType(), act.isActive()));
 		return "fragments/successful_transaction :: depositOrWithdrawal";
 	}
 
-	@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
 	public String showAccount(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, @RequestParam(defaultValue="0") int page, Model model) {
 
 		DepositWithdrawDTO depositForm = new DepositWithdrawDTO();
@@ -119,14 +104,14 @@ public class AccountController {
 		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership, page));
 
 		return "users/account";
-	}
+	}*/
 	
-	@RequestMapping(value = "/checkingActTrxPage", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/checkingActTrxPage", method = RequestMethod.GET)
 	public String getcheckingActTrxPage(@SessionAttribute("membership") Membership membership, @RequestParam(defaultValue="0") int page, Model model) {
 		logger.debug("************** Membership ID: " + membership.getId());
 		model.addAttribute("primaryTransactionList", transactionService.findPrimaryTransactionList(membership, page));
 
 		return "fragments/transactions_tabs :: checkingActTrxPage";
-	}
+	}*/
 
 }

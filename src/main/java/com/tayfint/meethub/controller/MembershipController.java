@@ -11,17 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.dto.AccountDto;
 import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
 @Controller
+@RequestMapping("/memberships")
 @SessionAttributes("userFirstName")
 public class MembershipController {
 
@@ -39,15 +43,15 @@ public class MembershipController {
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
-			return "users/membership";
+			return "users/memberships";
 		} else {
 			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()));
 			// POST/REDIRECT/GET
-			return "redirect:my_memberships.go";
+			return "redirect:memberships";
 		}
 	}
 	
-	@RequestMapping(value = "/my_memberships.go", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showMembership(Principal principal, Model model) {
 
 		Meeting mtg = new Meeting();
@@ -61,7 +65,17 @@ public class MembershipController {
 		model.addAttribute("userFirstName", user.getFirstName());
 		model.addAttribute("memberships", membershipService.findMembershipByUser(user));
 
-		return "users/membership";
+		return "users/memberships";
+	}
+	
+	@RequestMapping(value = "/{membershipId}/accounts", method = RequestMethod.GET)
+	public String showAccounts(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, Model model) {
+
+		AccountDto acctDto = new AccountDto();
+		model.addAttribute("acctDto", acctDto);
+		model.addAttribute("userFirstName", userFirstName);
+		model.addAttribute("accountsList", membershipService.fetchMembershipAccounts(membershipId));
+		return "users/accounts";
 	}
 	
 }

@@ -2,6 +2,7 @@ package com.tayfint.meethub.model;
 // default package
 // Generated Apr 3, 2018 7:09:29 PM by Hibernate Tools 5.2.0.CR1
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -62,38 +62,26 @@ public class Membership implements java.io.Serializable {
 	@Column(name = "TERMINATION_DATE")
 	private Date terminationDate;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-    private PrimaryAccount primaryAccount;
+	@OneToMany(mappedBy = "membership", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts = new ArrayList<>();
 
-	@OneToOne(fetch = FetchType.EAGER)
-    private SavingsAccount savingsAccount;
-    
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Recipient> recipientList;
-
-	public PrimaryAccount getPrimaryAccount() {
-		return primaryAccount;
+	public List<Account> getAccounts() {
+		return accounts;
 	}
 
-	public void setPrimaryAccount(PrimaryAccount primaryAccount) {
-		this.primaryAccount = primaryAccount;
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
-
-	public SavingsAccount getSavingsAccount() {
-		return savingsAccount;
-	}
-
-	public void setSavingsAccount(SavingsAccount savingsAccount) {
-		this.savingsAccount = savingsAccount;
-	}
-
-	public List<Recipient> getRecipientList() {
-		return recipientList;
-	}
-
-	public void setRecipientList(List<Recipient> recipientList) {
-		this.recipientList = recipientList;
-	}
+	
+	public void addAccount(Account account) {
+		accounts.add(account);
+		account.setMembership(this);
+    }
+ 
+    public void removeAccount(Account account) {
+    	accounts.remove(account);
+    	account.setMembership(null);
+    }
 
 	public Long getId() {
 		return this.id;

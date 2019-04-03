@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tayfint.meethub.dao.MembershipDao;
+import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.User;
@@ -23,8 +24,8 @@ public class MembershipServiceImpl implements MembershipService {
     private AccountService accountService;
 
 	public void save(Membership membership) {
-		membership.setPrimaryAccount(accountService.createPrimaryAccount());
-		membership.setSavingsAccount(accountService.createSavingsAccount());
+		membership.addAccount(accountService.createPrimaryAccount());
+		membership.addAccount(accountService.createSavingsAccount());
 		membershipDao.save(membership);
 	}
 
@@ -54,6 +55,11 @@ public class MembershipServiceImpl implements MembershipService {
 	@Override
 	public Membership findMembershipById(Long membershipId) {
 		return membershipDao.findOne(membershipId);
+	}
+
+	@Override
+	public List<Account> fetchMembershipAccounts(Long membershipId) {
+		return findMembershipById(membershipId).getAccounts();
 	}
 
 }

@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/signin")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/my_memberships.go")
+				.defaultSuccessUrl("/memberships")
 				.permitAll()
 				.and()
 			.rememberMe()

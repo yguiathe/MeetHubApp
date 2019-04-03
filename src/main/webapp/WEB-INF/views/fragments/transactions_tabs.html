@@ -8,9 +8,12 @@
 				<tr data-th-each="primaryTransaction : ${primaryTransactionList}">
 					<td data-th-text="${primaryTransaction.date}">...</td>
 					<td data-th-text="${primaryTransaction.description}">...</td>
-					<td data-th-text="${primaryTransaction.type}">...</td>
 					<td data-th-text="${primaryTransaction.status}">...</td>
-					<td data-th-text="${primaryTransaction.amount}">...</td>
+					<td th:switch="${primaryTransaction.type}"><span
+						th:case="'DEP'" th:style="'color: green;'"
+						th:text="${primaryTransaction.amount}"></span> <span
+						th:case="'WTD'" th:style="'color: red;'"
+						th:text="|(${primaryTransaction.amount})|"></span></td>
 					<td data-th-text="${primaryTransaction.availableBalance}">...</td>
 				</tr>
 			</tbody>

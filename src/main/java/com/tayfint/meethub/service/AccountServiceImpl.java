@@ -8,14 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tayfint.meethub.dao.PrimaryAccountDao;
-import com.tayfint.meethub.dao.SavingsAccountDao;
-import com.tayfint.meethub.model.Membership;
-import com.tayfint.meethub.model.PrimaryAccount;
-import com.tayfint.meethub.model.PrimaryTransaction;
+import com.tayfint.meethub.dao.AccountDao;
+import com.tayfint.meethub.dao.TransactionDao;
+import com.tayfint.meethub.model.Account;
+import com.tayfint.meethub.model.CheckingAccount;
+import com.tayfint.meethub.model.InvestmentAccount;
+import com.tayfint.meethub.model.LoanAccount;
 import com.tayfint.meethub.model.SavingsAccount;
-import com.tayfint.meethub.model.SavingsTransaction;
-import com.tayfint.meethub.model.dto.DepositWithdrawDTO;
+import com.tayfint.meethub.model.Transaction;
+import com.tayfint.meethub.model.TransactionStatus;
+import com.tayfint.meethub.model.TransactionType;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -23,97 +25,107 @@ public class AccountServiceImpl implements AccountService {
 	private static int nextAccountNumber = 1000000;
 
     @Autowired
-    private PrimaryAccountDao primaryAccountDao;
-
+    private AccountDao accountDao;
+    
     @Autowired
-    private SavingsAccountDao savingsAccountDao;
-
-    @Autowired
-    private TransactionService transactionService;
+	private TransactionDao transactionDao;
     
     static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
-    public PrimaryAccount createPrimaryAccount() {
-        PrimaryAccount primaryAccount = new PrimaryAccount();
-        primaryAccount.setAccountBalance(new BigDecimal(0.0));
+    public Account createPrimaryAccount() {
+        Account primaryAccount = new CheckingAccount();
+        primaryAccount.setBalance(new BigDecimal(0.0));
         primaryAccount.setAccountNumber(accountGen());
 
-        primaryAccountDao.save(primaryAccount);
+        accountDao.save(primaryAccount);
 
-        return primaryAccountDao.findByAccountNumber(primaryAccount.getAccountNumber());
+        return accountDao.findByAccountNumber(primaryAccount.getAccountNumber());
     }
 
-    public SavingsAccount createSavingsAccount() {
-        SavingsAccount savingsAccount = new SavingsAccount();
-        savingsAccount.setAccountBalance(new BigDecimal(0.0));
+    public Account createSavingsAccount() {
+        Account savingsAccount = new SavingsAccount();
+        savingsAccount.setBalance(new BigDecimal(0.0));
         savingsAccount.setAccountNumber(accountGen());
 
-        savingsAccountDao.save(savingsAccount);
+        accountDao.save(savingsAccount);
 
-        return savingsAccountDao.findByAccountNumber(savingsAccount.getAccountNumber());
+        return accountDao.findByAccountNumber(savingsAccount.getAccountNumber());
     }
-    
-    public DepositWithdrawDTO deposit(String accountType, double amount, Membership membership) {
-    	DepositWithdrawDTO dto = new DepositWithdrawDTO();
-    	dto.setOperationType("Deposit");
-    	dto.setAccountType(accountType);
-        if (accountType.equalsIgnoreCase("Primary")) {
-            PrimaryAccount primaryAccount = membership.getPrimaryAccount();
-            primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
-            primaryAccountDao.save(primaryAccount);
 
-            Date date = new Date();
+	@Override
+	public Account createLoanAccount() {
+		Account loanAccount = new LoanAccount();
+		loanAccount.setBalance(new BigDecimal(0.0));
+		loanAccount.setAccountNumber(accountGen());
 
-            PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Deposit to Primary Account", "DEP", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-            transactionService.savePrimaryDepositTransaction(primaryTransaction);
-            
-            dto.setAmount(primaryAccount.getAccountBalance());
-            
-        } else if (accountType.equalsIgnoreCase("Savings")) {
-            SavingsAccount savingsAccount = membership.getSavingsAccount();
-            savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().add(new BigDecimal(amount)));
-            savingsAccountDao.save(savingsAccount);
+        accountDao.save(loanAccount);
 
-            Date date = new Date();
-            SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Deposit to savings Account", "DEP", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-            transactionService.saveSavingsDepositTransaction(savingsTransaction);
-            dto.setAmount(savingsAccount.getAccountBalance());
-        }
-        
-        return dto;
-    }
-    
-    public DepositWithdrawDTO withdraw(String accountType, double amount, Membership membership) {
-    	DepositWithdrawDTO dto = new DepositWithdrawDTO();
-    	dto.setOperationType("Withdrawal");
-    	dto.setAccountType(accountType);
-        if (accountType.equalsIgnoreCase("Primary")) {
-            PrimaryAccount primaryAccount = membership.getPrimaryAccount();
-            primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
-            primaryAccountDao.save(primaryAccount);
+        return accountDao.findByAccountNumber(loanAccount.getAccountNumber());
+	}
 
-            Date date = new Date();
+	@Override
+	public Account createInvestmentAccount() {
+		Account investmentAccount = new InvestmentAccount();
+		investmentAccount.setBalance(new BigDecimal(0.0));
+		investmentAccount.setAccountNumber(accountGen());
 
-            PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Withdraw from Primary Account", "WTD", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-            transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
-            dto.setAmount(primaryAccount.getAccountBalance());
-        } else if (accountType.equalsIgnoreCase("Savings")) {
-            SavingsAccount savingsAccount = membership.getSavingsAccount();
-            savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
-            savingsAccountDao.save(savingsAccount);
+        accountDao.save(investmentAccount);
 
-            Date date = new Date();
-            SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Withdraw from savings Account", "WTD", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-            transactionService.saveSavingsWithdrawTransaction(savingsTransaction);
-            dto.setAmount(savingsAccount.getAccountBalance());
-        }
-        
-        return dto;
-    }
+        return accountDao.findByAccountNumber(investmentAccount.getAccountNumber());
+	}
+	
+	@Override
+	public Account deposit(Account toAccount, BigDecimal amount) {
+		BigDecimal balance = toAccount.getBalance().add(amount);
+		Long toAcctId = toAccount.getId();
+		transactionDao.save(new Transaction(new Date(), "meethub.deposit." + getTrsDescAppender(toAccount),
+				TransactionType.DEPOSIT.toString(), TransactionStatus.PROCESSED.toString(), amount,
+				balance, toAccount, null, toAcctId));
+		toAccount.setBalance(balance);
+		accountDao.updateBalanceByAcctId(toAcctId, balance);
+		return toAccount;
+	}
+
+	@Override
+	public Account withdraw(Account fromAccount, BigDecimal amount) {
+		BigDecimal balance = fromAccount.getBalance().subtract(amount);
+		Long fromAcctId = fromAccount.getId();
+		transactionDao.save(new Transaction(new Date(), "meethub.withdraw." + getTrsDescAppender(fromAccount),
+				TransactionType.WITHDRAW.toString(), TransactionStatus.PROCESSED.toString(), amount,
+				balance, fromAccount, fromAccount.getId(), null));
+		fromAccount.setBalance(balance);
+		accountDao.updateBalanceByAcctId(fromAcctId, balance);
+		return fromAccount;
+	}
+
+	@Override
+	public Account transfer(String transferFrom, String transferTo, BigDecimal amount, Account fromAccount,
+			Account toAccount) {
+		return fromAccount;
+	}
+
+	public String getTrsDescAppender(Account account) {
+		String description = "";
+		if (account instanceof CheckingAccount) {
+			description += "checking";
+		} else if (account instanceof SavingsAccount) {
+			description += "saving";
+		} else if (account instanceof LoanAccount) {
+			description += "loan";
+		} else if (account instanceof InvestmentAccount) {
+			description += "investment";
+		} else {
+			description += "others";
+		}
+		return description;
+	}
     
     private int accountGen() {
         return ++nextAccountNumber;
     }
-    
 
+	@Override
+	public Account findById(Long id) {
+		return accountDao.findById(id);
+	}
 }

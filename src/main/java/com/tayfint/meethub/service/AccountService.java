@@ -1,13 +1,20 @@
 package com.tayfint.meethub.service;
 
-import com.tayfint.meethub.model.Membership;
-import com.tayfint.meethub.model.PrimaryAccount;
-import com.tayfint.meethub.model.SavingsAccount;
-import com.tayfint.meethub.model.dto.DepositWithdrawDTO;
+import java.math.BigDecimal;
+
+import com.tayfint.meethub.model.Account;
 
 public interface AccountService {
-	PrimaryAccount createPrimaryAccount();
-    SavingsAccount createSavingsAccount();
-    DepositWithdrawDTO deposit(String accountType, double amount, Membership membership);
-    DepositWithdrawDTO withdraw(String accountType, double amount, Membership membership);
+	Account createPrimaryAccount();
+    Account createSavingsAccount();
+    Account createLoanAccount();
+    Account createInvestmentAccount();
+    
+    Account deposit(Account toAccount, BigDecimal amount);
+
+	Account withdraw(Account fromAccount, BigDecimal amount);
+    
+    Account transfer(String transferFrom, String transferTo, BigDecimal amount, Account fromAccount, Account toAccount);
+    
+    Account findById(Long id);
 }
