@@ -32,7 +32,7 @@ public class MeetingController {
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
-			return "users/membership";
+			return "user/listMemberships";
 		} else {
 			meetingService.saveMeeting(meeting);
 			redirectAttributes.addFlashAttribute("meeting", meeting);

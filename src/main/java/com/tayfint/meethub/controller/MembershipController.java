@@ -25,7 +25,7 @@ import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
 @Controller
-@RequestMapping("/memberships")
+@RequestMapping("/user")
 @SessionAttributes("userFirstName")
 public class MembershipController {
 
@@ -37,21 +37,21 @@ public class MembershipController {
 	@Autowired
 	private MembershipService membershipService;
 	
-	@RequestMapping(value = "/saveMembership.go", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveMembership", method = RequestMethod.POST)
 	public String saveMembership(@ModelAttribute("meetingForm") Meeting meeting,
 			BindingResult result, Principal principal, final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
-			return "users/memberships";
+			return "user/listMemberships";
 		} else {
 			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()));
 			// POST/REDIRECT/GET
-			return "redirect:memberships";
+			return "redirect:listMemberships";
 		}
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/listMemberships", method = RequestMethod.GET)
 	public String showMembership(Principal principal, Model model) {
 
 		Meeting mtg = new Meeting();
@@ -65,7 +65,7 @@ public class MembershipController {
 		model.addAttribute("userFirstName", user.getFirstName());
 		model.addAttribute("memberships", membershipService.findMembershipByUser(user));
 
-		return "users/memberships";
+		return "user/memberships";
 	}
 	
 	@RequestMapping(value = "/{membershipId}/accounts", method = RequestMethod.GET)
@@ -75,7 +75,7 @@ public class MembershipController {
 		model.addAttribute("acctDto", acctDto);
 		model.addAttribute("userFirstName", userFirstName);
 		model.addAttribute("accountsList", membershipService.fetchMembershipAccounts(membershipId));
-		return "users/accounts";
+		return "user/accounts";
 	}
 	
 }
