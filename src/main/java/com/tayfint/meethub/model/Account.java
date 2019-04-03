@@ -34,6 +34,8 @@ public abstract class Account {
 	private BigDecimal balance;
 	private int accountNumber;
 	private Date openDate = new Date();
+	
+	@Column(name = "accttype", insertable = false, updatable = false)
 	private String acctType;
 	private Date closeDate;
 	private boolean active = true;
