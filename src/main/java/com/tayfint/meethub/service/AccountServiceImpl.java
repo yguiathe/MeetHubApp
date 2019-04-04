@@ -3,6 +3,8 @@ package com.tayfint.meethub.service;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ import com.tayfint.meethub.model.Transaction;
 import com.tayfint.meethub.model.TransactionStatus;
 import com.tayfint.meethub.model.TransactionType;
 
-@Service
+@Service("accountService")
+@Transactional
 public class AccountServiceImpl implements AccountService {
 	
 	private static int nextAccountNumber = 1000000;
