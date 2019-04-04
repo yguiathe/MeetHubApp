@@ -47,7 +47,7 @@ public class MembershipController {
 		} else {
 			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()));
 			// POST/REDIRECT/GET
-			return "redirect:Memberships";
+			return "redirect:/User/Memberships";
 		}
 	}
 	
