@@ -50,7 +50,7 @@ public class UserController {
 	}
 
 	// list page
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/Users", method = RequestMethod.GET)
 	public String showAllUsers(Model model) {
 
 		logger.debug("showAllUsers()");
@@ -63,7 +63,7 @@ public class UserController {
 	// 1. @ModelAttribute bind form value
 	// 2. @Validated form validator
 	// 3. RedirectAttributes for flash value
-	@RequestMapping(value = "/register.go", method = RequestMethod.POST)
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String saveOrUpdateUser(@ModelAttribute("userForm") @Validated User user,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
@@ -97,14 +97,14 @@ public class UserController {
 			userService.createUser(user, userRoles);
 			securityService.autologin(user.getUsername(), user.getPassword());
 
-			return "redirect:memberships";
+			return "redirect:User/Memberships";
 
 		}
 
 	}
 
 	// show add user form
-	@RequestMapping(value = {"/signUp"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/registration"}, method = RequestMethod.GET)
 	public String showAddUserForm(Model model) {
 
 		logger.debug("showAddUserForm()");

@@ -25,7 +25,7 @@ import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/User")
 @SessionAttributes("userFirstName")
 public class MembershipController {
 
@@ -43,15 +43,15 @@ public class MembershipController {
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
-			return "user/listMemberships";
+			return "user/Memberships";
 		} else {
 			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()));
 			// POST/REDIRECT/GET
-			return "redirect:listMemberships";
+			return "redirect:Memberships";
 		}
 	}
 	
-	@RequestMapping(value = "/listMemberships", method = RequestMethod.GET)
+	@RequestMapping(value = "/Memberships", method = RequestMethod.GET)
 	public String showMembership(Principal principal, Model model) {
 
 		Meeting mtg = new Meeting();
@@ -65,7 +65,7 @@ public class MembershipController {
 		model.addAttribute("userFirstName", user.getFirstName());
 		model.addAttribute("memberships", membershipService.findMembershipByUser(user));
 
-		return "user/memberships";
+		return "user/membershipsList";
 	}
 	
 	@RequestMapping(value = "/{membershipId}/accounts", method = RequestMethod.GET)

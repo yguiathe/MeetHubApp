@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/*", "/index.html", "/signUp", "/register.go").permitAll()
+				.antMatchers("/*", "/index.html", "/signUp", "/registration").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/signin")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/user/listMemberships")
+				.defaultSuccessUrl("/User/Memberships")
 				.permitAll()
 				.and()
 			.rememberMe()
