@@ -43,7 +43,7 @@ public class MembershipController {
 		if (result.hasErrors()) {
 			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
 			//populateDefaultModel(model);
-			return "user/Memberships";
+			return "User/Memberships";
 		} else {
 			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()));
 			// POST/REDIRECT/GET
@@ -65,7 +65,7 @@ public class MembershipController {
 		model.addAttribute("userFirstName", user.getFirstName());
 		model.addAttribute("memberships", membershipService.findMembershipByUser(user));
 
-		return "user/membershipsList";
+		return "User/membershipsList";
 	}
 	
 	@RequestMapping(value = "/{membershipId}/accounts", method = RequestMethod.GET)
@@ -75,7 +75,7 @@ public class MembershipController {
 		model.addAttribute("acctDto", acctDto);
 		model.addAttribute("userFirstName", userFirstName);
 		model.addAttribute("accountsList", membershipService.fetchMembershipAccounts(membershipId));
-		return "user/accounts";
+		return "User/accounts";
 	}
 	
 }
