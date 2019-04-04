@@ -25,7 +25,7 @@ import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
 @Controller
-@RequestMapping("/User")
+@RequestMapping("/User/Memberships")
 @SessionAttributes("userFirstName")
 public class MembershipController {
 
@@ -51,7 +51,7 @@ public class MembershipController {
 		}
 	}
 	
-	@RequestMapping(value = "/Memberships", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showMembership(Principal principal, Model model) {
 
 		Meeting mtg = new Meeting();
@@ -68,7 +68,7 @@ public class MembershipController {
 		return "User/membershipsList";
 	}
 	
-	@RequestMapping(value = "/{membershipId}/accounts", method = RequestMethod.GET)
+	@RequestMapping(value = "/{membershipId}/Accounts", method = RequestMethod.GET)
 	public String showAccounts(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, Model model) {
 
 		AccountDto acctDto = new AccountDto();

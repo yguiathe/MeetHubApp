@@ -10,20 +10,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.dto.AccountDto;
 import com.tayfint.meethub.service.AccountService;
+import com.tayfint.meethub.service.MembershipService;
 
 @Controller
-@RequestMapping("/accounts")
+@RequestMapping("/User/Accounts")
 @SessionAttributes("membership")
 public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private MembershipService membershipService;
 
 	static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
@@ -79,6 +84,7 @@ public class AccountController {
 		model.addAttribute("acctDto", new AccountDto(act.getBalance(), act.getAccountNumber(), act.getAcctType(), act.isActive()));
 		return "fragments/successful_transaction :: depositOrWithdrawal";
 	}
+	
 
 	/*@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
 	public String showAccount(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, @RequestParam(defaultValue="0") int page, Model model) {
