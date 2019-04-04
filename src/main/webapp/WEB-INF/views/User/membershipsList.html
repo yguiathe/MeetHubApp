@@ -63,7 +63,7 @@
 					<!-- Website Overview -->
 					<div class="panel panel-default collapse" id="createMeeting">
 						<form method="POST" class="form-horizontal"
-							th:action="@{saveMembership}" action="#"
+							th:action="@{Memberships/saveMembership}" action="#"
 							th:object="${meetingForm}">
 							<div class="panel-heading main-color-bg">
 								<h3 class="panel-title">New Meeting</h3>
@@ -158,7 +158,7 @@
 									</div>
 									<div class="row">
 										<div class="col-md-7">
-											<a class="btn btn-default blue-btn" th:href="@{'/' + ${membership.id} + '/Accounts'}">Go
+											<a class="btn btn-default blue-btn" th:href="@{'/User/Memberships/' + ${membership.id} + '/Accounts'}">Go
 												to Meeting</a>
 										</div>
 										<div class="col-md-5">
