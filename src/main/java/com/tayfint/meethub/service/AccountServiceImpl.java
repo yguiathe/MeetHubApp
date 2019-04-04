@@ -40,9 +40,7 @@ public class AccountServiceImpl implements AccountService {
         primaryAccount.setBalance(new BigDecimal(0.0));
         primaryAccount.setAccountNumber(accountGen());
 
-        accountDao.save(primaryAccount);
-
-        return accountDao.findByAccountNumber(primaryAccount.getAccountNumber());
+        return accountDao.save(primaryAccount);
     }
 
     public Account createSavingsAccount() {
@@ -50,9 +48,7 @@ public class AccountServiceImpl implements AccountService {
         savingsAccount.setBalance(new BigDecimal(0.0));
         savingsAccount.setAccountNumber(accountGen());
 
-        accountDao.save(savingsAccount);
-
-        return accountDao.findByAccountNumber(savingsAccount.getAccountNumber());
+        return accountDao.save(savingsAccount);
     }
 
 	@Override
@@ -61,9 +57,7 @@ public class AccountServiceImpl implements AccountService {
 		loanAccount.setBalance(new BigDecimal(0.0));
 		loanAccount.setAccountNumber(accountGen());
 
-        accountDao.save(loanAccount);
-
-        return accountDao.findByAccountNumber(loanAccount.getAccountNumber());
+        return accountDao.save(loanAccount);
 	}
 
 	@Override
@@ -72,9 +66,7 @@ public class AccountServiceImpl implements AccountService {
 		investmentAccount.setBalance(new BigDecimal(0.0));
 		investmentAccount.setAccountNumber(accountGen());
 
-        accountDao.save(investmentAccount);
-
-        return accountDao.findByAccountNumber(investmentAccount.getAccountNumber());
+        return accountDao.save(investmentAccount);
 	}
 	
 	@Override
