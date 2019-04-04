@@ -51,7 +51,7 @@ public class MembershipController {
 		}
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showMembership(Principal principal, Model model) {
 
 		Meeting mtg = new Meeting();
