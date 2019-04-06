@@ -62,7 +62,6 @@ public class MembershipServiceImpl implements MembershipService {
 
 	@Override
 	public Membership fetchMembershipWithAccounts(Long membershipId) {
-		logger.debug("*** Service Layer #####");
 		return membershipDao.findByIdAndFetchAccountsEagerly(membershipId);
 	}
 

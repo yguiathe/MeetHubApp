@@ -28,6 +28,39 @@ function getFinSummaryChart() {
 	}
 }
 
+function getQuarTrendsChart() {
+	ctx = document.getElementById("quarterTrends");
+	if (ctx != null) {
+		var myBarChartGrp = new Chart(document.getElementById("bar-chart-grouped"), {
+		    type: 'bar',
+		    data: {
+		      labels: ["Jan", "Feb", "Mar"],
+		      datasets: [
+		        {
+		          label: "Contributions",
+		          backgroundColor: "#009eda",
+		          data: [133,221,783]
+		        }, {
+		          label: "Savings",
+		          backgroundColor: "#afc836",
+		          data: [408,547,675]
+		        }, {
+			      label: "Loans",
+			      backgroundColor: "#orange",
+			      data: [250,400,50]
+			    }
+		      ]
+		    },
+		    options: {
+		      title: {
+		        display: true,
+		        text: 'Amount (thousands)'
+		      }
+		    }
+		});
+	}
+}
+
 function getFinTrendChart() {
 	finChart = document.getElementById("finTrenChart");
 	if(finChart != null){
@@ -61,3 +94,5 @@ function getFinTrendChart() {
 getFinSummaryChart();
 
 getFinTrendChart();
+
+getQuarTrendsChart();

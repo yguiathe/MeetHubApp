@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.User;
-import com.tayfint.meethub.model.dto.AccountDto;
 import com.tayfint.meethub.service.MembershipService;
 import com.tayfint.meethub.service.UserService;
 
@@ -74,7 +73,6 @@ public class MembershipController {
 
 		//AccountDto acctDto = new AccountDto();
 		Membership membership = membershipService.fetchMembershipWithAccounts(membershipId);
-		logger.debug("**** Yvan :" + membership.toString() + " #####");
 		//model.addAttribute("acctDto", acctDto);
 		model.addAttribute("userFirstName", userFirstName);
 		model.addAttribute("membership", membership);
