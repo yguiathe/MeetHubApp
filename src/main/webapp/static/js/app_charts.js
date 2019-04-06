@@ -45,7 +45,7 @@ function getQuarTrendsChart() {
 					data : [ 408, 547, 675 ]
 				}, {
 					label : "Loans",
-					backgroundColor : "#orange",
+					backgroundColor : "orange",
 					data : [ 250, 400, 50 ]
 				} ]
 			},
