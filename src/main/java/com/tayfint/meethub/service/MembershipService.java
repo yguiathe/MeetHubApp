@@ -2,7 +2,6 @@ package com.tayfint.meethub.service;
 
 import java.util.List;
 
-import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.User;
@@ -19,6 +18,6 @@ public interface MembershipService {
 	
 	Membership findMembershipByUserAndMeeting(User user, Meeting meeting);
 	
-	List<Account> fetchMembershipAccounts (Long membershipId);
+	Membership fetchMembershipWithAccounts (Long membershipId);
 	
 }

@@ -2,7 +2,10 @@ package com.tayfint.meethub.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.Membership;
@@ -14,5 +17,8 @@ public interface MembershipDao extends CrudRepository<Membership,Long> {
 	Membership findByUserAndMeeting(User user, Meeting meeting);
 	
 	void deleteById(Long membershipId);
+	
+	@Query("SELECT m FROM Membership m JOIN FETCH m.accounts WHERE m.id = (:id)")
+    Membership findByIdAndFetchAccountsEagerly(@Param("id") Long id);
 
 }

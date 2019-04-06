@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tayfint.meethub.dao.MembershipDao;
-import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.User;
@@ -22,7 +23,9 @@ public class MembershipServiceImpl implements MembershipService {
 	
 	@Autowired
     private AccountService accountService;
-
+	
+	static final Logger logger = LoggerFactory.getLogger(MembershipServiceImpl.class);
+	
 	public void save(Membership membership) {
 		membership.addAccount(accountService.createPrimaryAccount());
 		membership.addAccount(accountService.createSavingsAccount());
@@ -58,8 +61,9 @@ public class MembershipServiceImpl implements MembershipService {
 	}
 
 	@Override
-	public List<Account> fetchMembershipAccounts(Long membershipId) {
-		return findMembershipById(membershipId).getAccounts();
+	public Membership fetchMembershipWithAccounts(Long membershipId) {
+		logger.debug("*** Service Layer #####");
+		return membershipDao.findByIdAndFetchAccountsEagerly(membershipId);
 	}
 
 }

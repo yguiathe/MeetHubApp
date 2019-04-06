@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tayfint.meethub.model.Meeting;
+import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.dto.AccountDto;
 import com.tayfint.meethub.service.MembershipService;
@@ -71,10 +72,12 @@ public class MembershipController {
 	@RequestMapping(value = "/{membershipId}/Accounts", method = RequestMethod.GET)
 	public String showAccounts(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, Model model) {
 
-		AccountDto acctDto = new AccountDto();
-		model.addAttribute("acctDto", acctDto);
+		//AccountDto acctDto = new AccountDto();
+		Membership membership = membershipService.fetchMembershipWithAccounts(membershipId);
+		logger.debug("**** Yvan :" + membership.toString() + " #####");
+		//model.addAttribute("acctDto", acctDto);
 		model.addAttribute("userFirstName", userFirstName);
-		model.addAttribute("accountsList", membershipService.fetchMembershipAccounts(membershipId));
+		model.addAttribute("membership", membership);
 		return "User/accounts";
 	}
 	
