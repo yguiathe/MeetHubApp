@@ -100,10 +100,10 @@ body {
 	text-align: center;
 	font-weight: bold;
 	width: 100%;
-	/* Set the fixed height of the footer here */
+	/* Set the fixed height of the footer here #cccccc*/
 	height: 60px;
 	padding: 20px;
-	background: #cccccc;
+	background: white;
 }
 
 /* Badges */
@@ -385,6 +385,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 .app-page-header{
 	color: #afc836;
+	margin-top: 0px;
 }
 
 .app-page-hr{
@@ -405,4 +406,8 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 .savings-account-hr{
 	border-top: 5px solid #8291e2;
+}
+
+.account-list-footer{
+	background-color: #40b945;
 }

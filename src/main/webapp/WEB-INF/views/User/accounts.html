@@ -40,7 +40,7 @@
 							class="actions">Dashboards</span></a> <a role="tab" data-toggle="tab"
 							href="#myAccounts" class="list-group-item"><i
 							class="fas fa-piggy-bank"></i>&nbsp;&nbsp;<span id="top-menu"
-							class="actions">My Accounts<span>&nbsp;&nbsp;</span><span
+							class="actions">My Accounts<span>&nbsp;</span><span
 								class="badge" th:text="${#lists.size(membership.accounts)}"></span></span></a><a
 							role="tab" data-toggle="tab" href="#messages"
 							class="list-group-item"><span
@@ -153,41 +153,47 @@
 									th:each="account : ${membership.accounts}">
 									<div class="col-sm-12 panel panel-default">
 										<div class="panel-body">
-												<div th:switch="${account.acctType}">
-													<div th:case="'CHK'">
-														<h5 th:text="#{meethub.accountType.primary}" th:class="'checking-account-header'"></h5>
-														<hr th:class="'checking-account-hr'"/>
+											<div class="row">
+												<div class="col-sm-12">
+													<div th:switch="${account.acctType}">
+														<div th:case="'CHK'">
+															<h5 th:text="#{meethub.accountType.primary}"
+																th:class="'checking-account-header'"></h5>
+															<hr th:class="'checking-account-hr'" />
+														</div>
+														<div th:case="'SAV'">
+															<h5 th:text="#{meethub.accountType.savings}"
+																th:class="'savings-account-header'"></h5>
+															<hr th:class="'savings-account-hr'" />
+														</div>
 													</div>
-													<div th:case="'SAV'">
-														<h5 th:text="#{meethub.accountType.savings}" th:class="'savings-account-header'"></h5>
-														<hr th:class="'savings-account-hr'"/>
-													</div>
+													<p
+														th:text="${account.accountNumber} + '  |  ' + ${#calendars.format(account.openDate,'dd MMMM yyyy')}"></p>
+													<p th:text="${account.balance}"></p>
 												</div>
-												<p th:text="${account.accountNumber} + '  |  ' + ${#calendars.format(account.openDate,'dd MMMM yyyy')}"></p>
-												<p th:text="${account.balance}"></p>
-										</div>
-										<div class="panel-footer">
-										<div class="row">
-											<div class="col-sm-6">
-												<h6>Available:</h6>
-												<p th:text="${account.balance}"></p>
 											</div>
-											<div class="col-sm-6">
-												<h6>Overdraft limit:</h6>
-												<p>50.00</p>
+											<div class="row account-list-footer">
+												<div class="col-sm-6">
+													<h6>Available:</h6>
+													<p th:text="${account.balance}"></p>
+												</div>
+												<div class="col-sm-6">
+													<h6>Overdraft limit:</h6>
+													<p>50.00</p>
+												</div>
 											</div>
-										</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="list-group">
-									<a href="#" class="list-group-item active main-color-bg"> Quick Links </a> <a
-										href="#" class="list-group-item">Dapibus ac facilisis in</a> <a
-										href="#" class="list-group-item">Morbi leo risus</a> <a
-										href="#" class="list-group-item">Porta ac consectetur ac</a> <a
-										href="#" class="list-group-item">Vestibulum at eros</a>
+									<a href="#" class="list-group-item active main-color-bg">
+										Quick Links </a> <a href="#" class="list-group-item">Dapibus
+										ac facilisis in</a> <a href="#" class="list-group-item">Morbi
+										leo risus</a> <a href="#" class="list-group-item">Porta ac
+										consectetur ac</a> <a href="#" class="list-group-item">Vestibulum
+										at eros</a>
 								</div>
 							</div>
 						</div>
