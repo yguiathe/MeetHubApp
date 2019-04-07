@@ -382,3 +382,19 @@ div.panel.panel-default.act-summary > div.panel-body{
 	font-weight: bold;
 	color: slategrey;
 }
+
+.page-header{
+	color: #afc836;
+}
+
+.page-hr{
+	border-top: 5px solid grey;
+}
+
+.checking-account{
+	color: #b9ffb9;
+}
+
+.savings-account{
+	color: #ccd0e6;
+}
