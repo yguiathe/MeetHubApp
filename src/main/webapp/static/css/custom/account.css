@@ -417,11 +417,14 @@ div.panel.panel-default.act-summary > div.panel-body{
 }
 
 .account-list-footer{
-	background-color: #40b945;
 	color: white;
 }
 
 .acct-list-body{
 	padding-left: 0.5px;
     padding-right: 0.5px;
+}
+
+#myAccounts > div > div.col-sm-7.col-sm-offset-1 > div > div > div > div.row > div > p{
+	color: slategrey;
 }
