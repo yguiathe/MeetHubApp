@@ -383,18 +383,26 @@ div.panel.panel-default.act-summary > div.panel-body{
 	color: slategrey;
 }
 
-.page-header{
+.app-page-header{
 	color: #afc836;
 }
 
-.page-hr{
+.app-page-hr{
 	border-top: 5px solid grey;
 }
 
-.checking-account{
-	color: #b9ffb9;
+.checking-account-header{
+	color: #40b945;
 }
 
-.savings-account{
-	color: #ccd0e6;
+.checking-account-hr{
+	border-top: 5px solid #40b945;
+}
+
+.savings-account-header{
+	color: #8291e2;
+}
+
+.savings-account-hr{
+	border-top: 5px solid #8291e2;
 }

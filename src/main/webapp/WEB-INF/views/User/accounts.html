@@ -143,24 +143,31 @@
 					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-header">My Accounts</h3>
-								<hr class="page-hr" />
+								<h3 class="app-page-header">My Accounts</h3>
+								<hr class="app-page-hr" />
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-5 col-sm-offset-1">
+							<div class="col-sm-7 col-sm-offset-1">
 								<div class="row account-list"
 									th:each="account : ${membership.accounts}">
 									<div class="col-sm-12 panel panel-default">
 										<div class="panel-body">
 												<div th:switch="${account.acctType}">
-													<h5 th:case="'CHK'" th:text="#{meethub.accountType.primary}" th:class="'checking-account'"></h5>
-													<h5 th:case="'SAV'" th:text="#{meethub.accountType.savings}" th:class="'savings-account'"></h5>
+													<div th:case="'CHK'">
+														<h5 th:text="#{meethub.accountType.primary}" th:class="'checking-account-header'"></h5>
+														<hr th:class="'checking-account-hr'"/>
+													</div>
+													<div th:case="'SAV'">
+														<h5 th:text="#{meethub.accountType.savings}" th:class="'savings-account-header'"></h5>
+														<hr th:class="'savings-account-hr'"/>
+													</div>
 												</div>
-												<p th:text="${account.accountNumber} + '  |  ' + ${account.openDate}"></p>
+												<p th:text="${account.accountNumber} + '  |  ' + ${#calendars.format(account.openDate,'dd MMMM yyyy')}"></p>
 												<p th:text="${account.balance}"></p>
 										</div>
 										<div class="panel-footer">
+										<div class="row">
 											<div class="col-sm-6">
 												<h6>Available:</h6>
 												<p th:text="${account.balance}"></p>
@@ -170,12 +177,13 @@
 												<p>50.00</p>
 											</div>
 										</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4 col-sm-offset-2">
-								<div class="list-group main-color-bg">
-									<a href="#" class="list-group-item active"> Quick Links </a> <a
+							<div class="col-sm-4">
+								<div class="list-group">
+									<a href="#" class="list-group-item active main-color-bg"> Quick Links </a> <a
 										href="#" class="list-group-item">Dapibus ac facilisis in</a> <a
 										href="#" class="list-group-item">Morbi leo risus</a> <a
 										href="#" class="list-group-item">Porta ac consectetur ac</a> <a
