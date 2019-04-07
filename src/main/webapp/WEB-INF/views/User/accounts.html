@@ -154,7 +154,7 @@
 									<div class="col-sm-12 panel panel-default">
 										<div class="panel-body">
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-sm-12 acct-list-body">
 													<div th:switch="${account.acctType}">
 														<div th:case="'CHK'">
 															<h5 th:text="#{meethub.accountType.primary}"
@@ -172,14 +172,26 @@
 													<p th:text="${account.balance}"></p>
 												</div>
 											</div>
-											<div class="row account-list-footer">
-												<div class="col-sm-6">
-													<h6>Available:</h6>
-													<p th:text="${account.balance}"></p>
+											<div th:switch="${account.acctType}">
+												<div th:case="'CHK'" class="row account-list-footer chk-acct-list-footer">
+													<div class="col-sm-6">
+														<h6>Available:</h6>
+														<p th:text="${account.balance}"></p>
+													</div>
+													<div class="col-sm-6">
+														<h6>Overdraft limit:</h6>
+														<p>50.00</p>
+													</div>
 												</div>
-												<div class="col-sm-6">
-													<h6>Overdraft limit:</h6>
-													<p>50.00</p>
+												<div th:case="'SAV'" class="row account-list-footer sav-acct-list-footer">
+													<div class="col-sm-6">
+														<h6>Available:</h6>
+														<p th:text="${account.balance}"></p>
+													</div>
+													<div class="col-sm-6">
+														<h6>Overdraft limit:</h6>
+														<p>50.00</p>
+													</div>
 												</div>
 											</div>
 										</div>

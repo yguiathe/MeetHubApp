@@ -400,6 +400,10 @@ div.panel.panel-default.act-summary > div.panel-body{
 	border-top: 5px solid #40b945;
 }
 
+.chk-acct-list-footer{
+	background-color: #40b945;
+}
+
 .savings-account-header{
 	color: #8291e2;
 }
@@ -408,6 +412,16 @@ div.panel.panel-default.act-summary > div.panel-body{
 	border-top: 5px solid #8291e2;
 }
 
+.sav-acct-list-footer{
+	background-color: #8291e2;
+}
+
 .account-list-footer{
 	background-color: #40b945;
+	color: white;
+}
+
+.acct-list-body{
+	padding-left: 0.5px;
+    padding-right: 0.5px;
 }
