@@ -153,14 +153,12 @@
 									th:each="account : ${membership.accounts}">
 									<div class="col-sm-12 panel panel-default">
 										<div class="panel-body">
-											<div class="col-sm-12">
 												<div th:switch="${account.acctType}">
 													<h5 th:case="'CHK'" th:text="#{meethub.accountType.primary}" th:class="'checking-account'"></h5>
 													<h5 th:case="'SAV'" th:text="#{meethub.accountType.savings}" th:class="'savings-account'"></h5>
 												</div>
 												<p th:text="${account.accountNumber} + '  |  ' + ${account.openDate}"></p>
 												<p th:text="${account.balance}"></p>
-											</div>
 										</div>
 										<div class="panel-footer">
 											<div class="col-sm-6">
