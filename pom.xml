@@ -10,6 +10,12 @@
 
 	<build>
 		<finalName>MeetHub</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 	<name>MeetHubApp</name>
@@ -114,8 +120,7 @@
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
-			<version>3.3.1</version><!--$NO-MVN-MAN-VER$-->
+			<version>3.3.1</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
-
 	</dependencies>
 </project>
