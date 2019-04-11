@@ -19,7 +19,7 @@ public class MeetingServiceImpl implements MeetingService {
 	
 	@Override
 	public Meeting findByMeetingId(Long meetingId) {
-		return meetingDao.findById(meetingId);
+		return meetingDao.findOne(meetingId);
 	}
 
 	@Override
