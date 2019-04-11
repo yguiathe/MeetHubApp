@@ -16,5 +16,5 @@ public interface AccountDao extends CrudRepository<Account,Long> {
     @Query("update Account a set a.balance = :balance where a.id = :id")
     void updateBalanceByAcctId(@Param("id") Long id, @Param("balance") BigDecimal balance);
     
-    Account findOne(Long id);
+    Account findById(Long id);
 }

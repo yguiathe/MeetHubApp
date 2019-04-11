@@ -8,7 +8,7 @@ import com.tayfint.meethub.model.Meeting;
 
 public interface MeetingDao extends CrudRepository<Meeting,Long> {
 	
-	Meeting findOne(Long meetingId);
+	Meeting findById(Long meetingId);
 	
 	Meeting findByName(String name);
 	

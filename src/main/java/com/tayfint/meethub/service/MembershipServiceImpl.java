@@ -57,7 +57,7 @@ public class MembershipServiceImpl implements MembershipService {
 
 	@Override
 	public Membership findMembershipById(Long membershipId) {
-		return membershipDao.findOne(membershipId);
+		return membershipDao.findById(membershipId);
 	}
 
 	@Override

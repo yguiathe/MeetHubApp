@@ -21,6 +21,6 @@ public interface MembershipDao extends CrudRepository<Membership,Long> {
 	@Query("SELECT m FROM Membership m JOIN FETCH m.accounts WHERE m.id = (:id)")
     Membership findByIdAndFetchAccountsEagerly(@Param("id") Long id);
 
-	Membership findOne(Long membershipId);
+	Membership findById(Long membershipId);
 
 }

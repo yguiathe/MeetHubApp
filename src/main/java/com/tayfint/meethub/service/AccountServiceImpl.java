@@ -121,6 +121,6 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account findById(Long id) {
-		return accountDao.findOne(id);
+		return accountDao.findById(id);
 	}
 }
