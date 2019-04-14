@@ -117,7 +117,7 @@ $(".account-list").click(function(){
 	alert("Hello div!");
 });
 
-function activateAccount(event) {
+function activateAccount(event, id) {
 	  alert("Hello button!");
 	  event.stopPropagation();
 }
