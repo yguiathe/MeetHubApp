@@ -420,13 +420,13 @@ div.panel.panel-default.act-summary > div.panel-body{
 	background-color: #009eda;
 }
 
-.account-list, .add-account-btn{
+.account-list{
 	padding-left: 15px;
-	cursor: pointer;
 }
 
 .view-acct-btn.active, .view-acct-btn.hover{
 	border-color: #bce8f1;
+	cursor: pointer;
 }
 
 .account-list-footer{

@@ -118,6 +118,6 @@ $(".account-list").click(function(){
 });
 
 function activateAccount(event, id) {
-	  alert("Hello button!");
+	  alert("Hello button!" + id);
 	  event.stopPropagation();
 }
