@@ -39,10 +39,10 @@
 							class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;&nbsp;<span
 							class="actions">Dashboards</span></a> <a role="tab" data-toggle="tab"
 							href="#myAccounts" class="list-group-item"><i
-							class="fas fa-piggy-bank"></i>&nbsp;&nbsp;<span
-							class="actions">My Accounts<span>&nbsp;</span><span
-								class="badge" th:text="${#lists.size(membership.accounts)}"></span></span></a><a
-							role="tab" data-toggle="tab" href="#messages"
+							class="fas fa-piggy-bank"></i>&nbsp;&nbsp;<span class="actions">My
+								Accounts<span>&nbsp;</span><span class="badge"
+								th:text="${#lists.size(membership.accounts)}"></span>
+						</span></a><a role="tab" data-toggle="tab" href="#messages"
 							class="list-group-item"><span
 							class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;&nbsp;<span
 							class="actions">Messages</span></a><a role="tab" data-toggle="tab"
@@ -149,7 +149,8 @@
 					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="app-page-header" th:text="#{meethub.myAccounts}">My Accounts</h3>
+								<h3 class="app-page-header" th:text="#{meethub.myAccounts}">My
+									Accounts</h3>
 								<hr class="app-page-hr" />
 							</div>
 						</div>
@@ -157,7 +158,7 @@
 							<div class="col-sm-8">
 								<div class="row account-list"
 									th:each="account : ${membership.accounts}">
-									<div class="col-sm-12 panel panel-default">
+									<div class="col-sm-12 panel panel-default view-acct-btn">
 										<div class="panel-body">
 											<div class="row">
 												<div class="col-sm-12 acct-list-body">
@@ -183,13 +184,16 @@
 													<div class="col-sm-3">
 														<div class="row">
 															<div class="btn-group" role="group" aria-label="...">
-																<button type="button" class="btn btn-default" th:onclick="|activateAccount(event, '${account.id}')|">
+																<button type="button" class="btn btn-default"
+																	th:onclick="|activateAccount(event, '${account.id}')|">
 																	<i class="fas fa-toggle-on"></i>
 																</button>
-																<button type="button" class="btn btn-default" th:onclick="|deleteAccount(event, '${account.id}')|">
+																<button type="button" class="btn btn-default"
+																	th:onclick="|deleteAccount(event, '${account.id}')|">
 																	<i class="fas fa-trash-alt"></i>
 																</button>
-																<button type="button" class="btn btn-default" th:onclick="|viewAccount(event, '${account.id}')|">
+																<button type="button" class="btn btn-default"
+																	th:onclick="|viewAccount(event, '${account.id}')|">
 																	<i class="fas fa-receipt"></i>
 																</button>
 															</div>
@@ -226,17 +230,25 @@
 								</div>
 								<div class="row add-account-btn">
 									<div class="col-sm-3">
-										<i class="fas fa-plus"></i>
+										<div class="btn-group btn-group-lg" role="group"
+											aria-label="...">
+											<button type="button" class="btn btn-default">
+												<i class="fas fa-plus"></i>
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="list-group">
-									<a href="#" class="list-group-item active main-color-bg" th:text="#{meethub.quickLinks}">
-										Quick Links </a> <a href="#" class="list-group-item"><span class="actions" th:text="#{meethub.borrow}">Borrow</span></a>
-										<a href="#" class="list-group-item"><span class="actions" th:text="#{meethub.startInvestment}">Start a
-										project</span></a> <a href="#" class="list-group-item"><span class="actions" th:text="#{meethub.newAccount}">New
-										Account</span></a>
+									<a href="#" class="list-group-item active main-color-bg"
+										th:text="#{meethub.quickLinks}"> Quick Links </a> <a href="#"
+										class="list-group-item"><span class="actions"
+										th:text="#{meethub.borrow}">Borrow</span></a> <a href="#"
+										class="list-group-item"><span class="actions"
+										th:text="#{meethub.startInvestment}">Start a project</span></a> <a
+										href="#" class="list-group-item"><span class="actions"
+										th:text="#{meethub.newAccount}">New Account</span></a>
 								</div>
 							</div>
 						</div>
