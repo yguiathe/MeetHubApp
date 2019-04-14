@@ -199,6 +199,10 @@ section#main .login-form {
 	color: #afc836;
 }
 
+.fa-toggle-on, .fa-trash-alt, .fa-receipt{
+	color: darkgray;
+}
+
 .dash-box {
 	text-align: center;
 	margin-bottom: 10px;
@@ -414,6 +418,10 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 .sav-acct-list-footer{
 	background-color: #009eda;
+}
+
+.account-list{
+	padding-left: 15px;
 }
 
 .account-list-footer{
