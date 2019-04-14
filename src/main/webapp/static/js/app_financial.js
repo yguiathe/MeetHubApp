@@ -117,6 +117,6 @@ $(".account-list").click(function(){
 	alert("Hello div!");
 });
 
-function msg() {
+function activateAccount() {
 	  alert("Hello button!");
 }

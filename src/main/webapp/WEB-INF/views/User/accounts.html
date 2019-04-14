@@ -39,7 +39,7 @@
 							class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;&nbsp;<span
 							class="actions">Dashboards</span></a> <a role="tab" data-toggle="tab"
 							href="#myAccounts" class="list-group-item"><i
-							class="fas fa-piggy-bank"></i>&nbsp;&nbsp;<span id="top-menu"
+							class="fas fa-piggy-bank"></i>&nbsp;&nbsp;<span
 							class="actions">My Accounts<span>&nbsp;</span><span
 								class="badge" th:text="${#lists.size(membership.accounts)}"></span></span></a><a
 							role="tab" data-toggle="tab" href="#messages"
@@ -113,6 +113,12 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="messages">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="app-page-header" th:text="#{meethub.myMessages}"></h3>
+								<hr class="app-page-hr" />
+							</div>
+						</div>
 						<div class="panel-heading main-color-bg">
 							<h3 class="panel-title">New Message</h3>
 						</div>
@@ -143,7 +149,7 @@
 					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="app-page-header">My Accounts</h3>
+								<h3 class="app-page-header" th:text="#{meethub.myAccounts}">My Accounts</h3>
 								<hr class="app-page-hr" />
 							</div>
 						</div>
@@ -226,11 +232,11 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="list-group">
-									<a href="#" class="list-group-item active main-color-bg">
-										Quick Links </a> <a href="#" class="list-group-item actions">Get
-										a loan</a> <a href="#" class="list-group-item actions">Start a
-										project</a> <a href="#" class="list-group-item actions">New
-										Account</a>
+									<a href="#" class="list-group-item active main-color-bg" th:text="#{meethub.quickLinks}">
+										Quick Links </a> <a href="#" class="list-group-item"><span class="actions" th:text="#{meethub.borrow}">Borrow</span></a>
+										<a href="#" class="list-group-item"><span class="actions" th:text="#{meethub.startInvestment}">Start a
+										project</span></a> <a href="#" class="list-group-item"><span class="actions" th:text="#{meethub.newAccount}">New
+										Account</span></a>
 								</div>
 							</div>
 						</div>
