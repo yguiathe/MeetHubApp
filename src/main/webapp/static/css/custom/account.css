@@ -393,27 +393,27 @@ div.panel.panel-default.act-summary > div.panel-body{
 }
 
 .checking-account-header{
-	color: #40b945;
+	color: #afc836;
 }
 
 .checking-account-hr{
-	border-top: 5px solid #40b945;
+	border-top: 5px solid #afc836;
 }
 
 .chk-acct-list-footer{
-	background-color: #40b945;
+	background-color: #afc836;
 }
 
 .savings-account-header{
-	color: #8291e2;
+	color: #009eda;
 }
 
 .savings-account-hr{
-	border-top: 5px solid #8291e2;
+	border-top: 5px solid #009eda;
 }
 
 .sav-acct-list-footer{
-	background-color: #8291e2;
+	background-color: #009eda;
 }
 
 .account-list-footer{
