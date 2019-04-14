@@ -176,14 +176,16 @@
 													</div>
 													<div class="col-sm-3">
 														<div class="row">
-															<div class="col-sm-4">
-																<i class="fas fa-toggle-on"></i>
-															</div>
-															<div class="col-sm-4">
-																<i class="fas fa-trash-alt"></i>
-															</div>
-															<div class="col-sm-4">
-																<i class="fas fa-receipt"></i>
+															<div class="btn-group" role="group" aria-label="...">
+																<button type="button" class="btn btn-default" th:onclick="|activateAccount('${account.id}')|">
+																	<i class="fas fa-toggle-on"></i>
+																</button>
+																<button type="button" class="btn btn-default" th:onclick="|deleteAccount('${account.id}')|">
+																	<i class="fas fa-trash-alt"></i>
+																</button>
+																<button type="button" class="btn btn-default" th:onclick="|viewAccount('${account.id}')|">
+																	<i class="fas fa-receipt"></i>
+																</button>
 															</div>
 														</div>
 													</div>
@@ -216,15 +218,19 @@
 										</div>
 									</div>
 								</div>
+								<div class="row account-list">
+									<div class="col-sm-3">
+										<i class="fas fa-plus"></i>
+									</div>
+								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="list-group">
 									<a href="#" class="list-group-item active main-color-bg">
-										Quick Links </a> <a href="#" class="list-group-item">Dapibus
-										ac facilisis in</a> <a href="#" class="list-group-item">Morbi
-										leo risus</a> <a href="#" class="list-group-item">Porta ac
-										consectetur ac</a> <a href="#" class="list-group-item">Vestibulum
-										at eros</a>
+										Quick Links </a> <a href="#" class="list-group-item actions">Get
+										a loan</a> <a href="#" class="list-group-item actions">Start a
+										project</a> <a href="#" class="list-group-item actions">New
+										Account</a>
 								</div>
 							</div>
 						</div>

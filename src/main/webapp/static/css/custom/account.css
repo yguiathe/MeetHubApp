@@ -199,7 +199,7 @@ section#main .login-form {
 	color: #afc836;
 }
 
-.fa-toggle-on, .fa-trash-alt, .fa-receipt{
+.fa-toggle-on, .fa-trash-alt, .fa-receipt, .fa-plus{
 	color: darkgray;
 }
 
@@ -435,4 +435,8 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 #myAccounts > div > div.col-sm-7.col-sm-offset-1 > div > div > div > div.row > div > p{
 	color: slategrey;
+}
+
+#myAccounts > div > div.col-sm-8 > div > div > div > div.row > div.row > div.col-sm-9 > p{
+	color: slategray;
 }

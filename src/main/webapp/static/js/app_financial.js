@@ -113,21 +113,10 @@ function display(data) {
 	$('#confirmationMsg').fadeIn("slow");
 }
 
-//* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
+$(".account-list").click(function(){
+	alert("Hello div!");
+});
 
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-	  this.classList.toggle("main-color-bg");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      this.classList.remove("main-color-bg");
-      document.getElementById("top-menu").style.color = "";
-      dropdownContent.style.display = "none";
-    } else {
-      document.getElementById("top-menu").style.color = "white";
-      dropdownContent.style.display = "block";
-    }
-  });
+function msg() {
+	  alert("Hello button!");
 }
