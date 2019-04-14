@@ -420,8 +420,12 @@ div.panel.panel-default.act-summary > div.panel-body{
 	background-color: #009eda;
 }
 
-.account-list{
+.account-list, .add-account-btn{
 	padding-left: 15px;
+}
+
+.account-list.active, .account-list.hover, .add-account-btn.active, .add-account-btn.hover {
+	border-color: #bce8f1;
 }
 
 .account-list-footer{
