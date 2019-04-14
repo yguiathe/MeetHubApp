@@ -422,6 +422,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 .account-list, .add-account-btn{
 	padding-left: 15px;
+	cursor: pointer;
 }
 
 .account-list.active, .account-list.hover, .add-account-btn.active, .add-account-btn.hover {
