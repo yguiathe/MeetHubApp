@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="acct_details" th:fragment="acct_details">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="app-page-header" th:text="#{meethub.myAccounts}">My
+					Accounts</h3>
+				<hr class="app-page-hr" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-7">
+				<div class="panel panel-default act-summary">
+					<div class="panel-heading main-color-bg">
+						<h3 class="panel-title">Checking Account</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-2">
+								<div class="btn-circle">
+									<i><strong>C</strong></i>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="row">
+									<div class="col-md-4 act-details-values">
+										<h4>
+											<span th:text="${membership.primaryAccount.accountNumber}"></span>
+										</h4>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4 act-details-values">
+										<h4 th:switch="${membership.primaryAccount.active}">
+											<span th:case="true" th:style="'color: green;'"
+												th:text="#{meethub.active}"></span> <span th:case="false"
+												th:style="'color: red;'" th:text="#{meethub.inactive}"></span>
+										</h4>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 act-details-labels">
+										<h6>
+											<span>Account Number</span>
+										</h6>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4 act-details-labels">
+										<h6>
+											<span>Status</span>
+										</h6>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 act-details-values">
+										<h4>
+											<span
+												th:text="${#dates.format(membership.primaryAccount.openDate, 'dd-MMM-yyyy')}"></span>
+										</h4>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4 act-details-values">
+										<h4>
+											<span>05-JAN-2019</span>
+										</h4>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 act-details-labels">
+										<h6>
+											<span>Open Date</span>
+										</h6>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4 act-details-labels">
+										<h6>
+											<span>Last Activity Date</span>
+										</h6>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="row">
+									<div class="act-summary-bal-div text-center">
+										<h2>
+											<strong><i class="fas fa-dollar-sign"
+												aria-hidden="true"></i> <span
+												th:text="${membership.primaryAccount.accountBalance}"
+												id="balance">0.00</span></strong>
+										</h2>
+									</div>
+								</div>
+								<div class="row act-details-labels" id="balance-lab">
+									<h5>
+										<span>Balance</span>
+									</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer act-summary-actions">
+						<div class="btn-group" role="group" aria-label="...">
+							<button type="button" class="btn btn-default" id="deposit-btn">
+								<i class="fas fa-plus-circle"></i>&nbsp;&nbsp;<span
+									class="actions">Deposit</span>
+							</button>
+							<button type="button" class="btn btn-default">
+								<i class="fas fa-minus-circle"></i>&nbsp;&nbsp;<span
+									class="actions">Withdraw</span>
+							</button>
+							<button type="button" class="btn btn-default">
+								<i class="fas fa-exchange-alt"></i>&nbsp;&nbsp;<span
+									class="actions">Make a transfer</span>
+							</button>
+							<button type="button" class="btn btn-default">
+								<i class="fas fa-print"></i>&nbsp;&nbsp;<span class="actions">Print
+									statement</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-5"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading main-color-bg">
+				<h3 class="panel-title">Transactions</h3>
+			</div>
+			<div class="panel-body">
+				<div id="checking">
+					<div class="row">
+						<div class="col-md-8">
+							<input class="form-control" type="text"
+								placeholder="Filter Transactions..."></input>
+						</div>
+					</div>
+					<br></br>
+					<div class="table-responsive">
+						<table id="checkingTrxTbl"
+							class="table table-hover transactions-tbl">
+							<thead>
+								<tr>
+									<th>Post Date</th>
+									<th>Description</th>
+									<th>Status</th>
+									<th>Amount</th>
+									<th>Available Balance</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									data-th-each="primaryTransaction : ${primaryTransactionList}">
+									<td data-th-text="${primaryTransaction.date}">...</td>
+									<td data-th-text="${primaryTransaction.description}">...</td>
+									<td data-th-text="${primaryTransaction.status}">...</td>
+									<td th:switch="${primaryTransaction.type}"><span
+										th:case="'DEP'" th:style="'color: green;'"
+										th:text="${primaryTransaction.amount}"></span> <span
+										th:case="'WTD'" th:style="'color: red;'"
+										th:text="|(${primaryTransaction.amount})|"></span></td>
+									<td data-th-text="${primaryTransaction.availableBalance}">...</td>
+								</tr>
+							</tbody>
+						</table>
+						<hr />
+						<ul class="nav nav-pills">
+							<li class="nav-item"
+								th:each="i : ${#numbers.sequence(0,primaryTransactionList.totalPages -1)}">
+								<a th:href="@{/account/checkingActTrxPage/(page=${i})}"
+								th:text="${i}" class="nav-link"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

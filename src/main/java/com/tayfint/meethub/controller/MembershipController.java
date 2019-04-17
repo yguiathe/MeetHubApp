@@ -26,7 +26,7 @@ import com.tayfint.meethub.service.UserService;
 
 @Controller
 @RequestMapping("/User/Memberships")
-@SessionAttributes("userFirstName")
+@SessionAttributes({"userFirstName", "membership"})
 public class MembershipController {
 
 	static final Logger logger = LoggerFactory.getLogger(MembershipController.class);
@@ -76,7 +76,7 @@ public class MembershipController {
 		//model.addAttribute("acctDto", acctDto);
 		model.addAttribute("userFirstName", userFirstName);
 		model.addAttribute("membership", membership);
-		return "User/accounts";
+		return "User/meetings";
 	}
 	
 }

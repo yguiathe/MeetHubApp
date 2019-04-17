@@ -75,7 +75,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler);
+				.accessDeniedHandler(accessDeniedHandler)
+				.and()
+			.sessionManagement()
+				.maximumSessions(2);
 	}
 	
 	@Override

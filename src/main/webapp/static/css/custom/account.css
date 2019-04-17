@@ -424,7 +424,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 	padding-left: 15px;
 }
 
-.view-acct-btn.active, .view-acct-btn.hover{
+.view-acct-btn:active, .view-acct-btn:hover{
 	border-color: #bce8f1;
 	cursor: pointer;
 }
