@@ -108,7 +108,7 @@ body {
 
 /* Badges */
 .actions {
-	color: orange;
+	color: unset;
 }
 
 .list-group-item, .nav-link {
@@ -438,10 +438,10 @@ div.panel.panel-default.act-summary > div.panel-body{
     padding-right: 0.5px;
 }
 
-#myAccounts > div > div.col-sm-7.col-sm-offset-1 > div > div > div > div.row > div > p{
-	color: slategrey;
-}
+/* #myAccounts > div > div.col-sm-7.col-sm-offset-1 > div > div > div > div.row > div > p{ */
+/* 	color: slategrey; */
+/* } */
 
-#myAccounts > div > div.col-sm-8 > div > div > div > div.row > div.row > div.col-sm-9 > p{
+#myAccounts > div > div.col-sm-8 > div > div > div > div.row > div.row > div.col-sm-8 > p{
 	color: slategray;
 }

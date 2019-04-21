@@ -32,6 +32,9 @@ jQuery(document).ready(function($) {
 		$("#depositDiv").hide();
 	});
 
+	$(".account-list").click(function(){
+		getAccountDetails();
+	});
 
 });
 
@@ -113,9 +116,15 @@ function display(data) {
 	$('#confirmationMsg').fadeIn("slow");
 }
 
-$(".account-list").click(function(){
-	alert("Hello div!");
-});
+function getAccountDetails() {
+	setAjaxHeader();
+	
+	//create url to request fragment
+    var url = "/User/Accounts/1";
+
+    //load fragment and replace content
+    $('#myAccounts').load(url);
+}
 
 function activateAccount(event, id) {
 	  alert("Hello button!" + id);

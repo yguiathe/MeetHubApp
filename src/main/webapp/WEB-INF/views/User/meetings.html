@@ -173,27 +173,25 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-sm-9">
+													<div class="col-sm-8">
 														<p
 															th:text="${account.accountNumber} + '  |  ' + ${#calendars.format(account.openDate,'dd MMMM yyyy')}"></p>
 														<p th:text="${account.balance}"></p>
 													</div>
-													<div class="col-sm-3">
-														<div class="row">
-															<div class="btn-group" role="group" aria-label="...">
-																<button type="button" class="btn btn-default"
-																	th:onclick="|activateAccount(event, '${account.id}')|">
-																	<i class="fas fa-toggle-on"></i>
-																</button>
-																<button type="button" class="btn btn-default"
-																	th:onclick="|deleteAccount(event, '${account.id}')|">
-																	<i class="fas fa-trash-alt"></i>
-																</button>
-																<button type="button" class="btn btn-default"
-																	th:onclick="|viewAccount(event, '${account.id}')|">
-																	<i class="fas fa-receipt"></i>
-																</button>
-															</div>
+													<div class="col-sm-4">
+														<div class="btn-group" role="group" aria-label="...">
+															<button type="button" class="btn btn-default"
+																th:onclick="|activateAccount(event, '${account.id}')|">
+																<i class="fas fa-toggle-on"></i>
+															</button>
+															<button type="button" class="btn btn-default"
+																th:onclick="|deleteAccount(event, '${account.id}')|">
+																<i class="fas fa-trash-alt"></i>
+															</button>
+															<button type="button" class="btn btn-default"
+																th:onclick="|viewAccount(event, '${account.id}')|">
+																<i class="fas fa-receipt"></i>
+															</button>
 														</div>
 													</div>
 												</div>

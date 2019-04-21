@@ -5,21 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
 import com.tayfint.meethub.model.Account;
-import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.dto.AccountDto;
 import com.tayfint.meethub.service.AccountService;
 
 @Controller
 @RequestMapping("/User/Accounts")
-@SessionAttributes("membership")
 public class AccountController {
 
 	@Autowired
@@ -55,10 +50,6 @@ public class AccountController {
 	 * 
 	 * return "savingsAccount"; }
 	 */
-	@ModelAttribute("membership")
-	public Membership getMembersip() {
-		return new Membership();
-	}
 
 	@RequestMapping(value = "/deposit/{toAccountId}", method = RequestMethod.POST)
 	public String deposit(@RequestBody AccountDto acctDto,
@@ -80,6 +71,11 @@ public class AccountController {
 		return "fragments/successful_transaction :: depositOrWithdrawal";
 	}
 	
+	@RequestMapping(value = "/{acctId}", method = RequestMethod.GET)
+	public String showAccount(@PathVariable Long acctId, Model model) {
+		
+		return "fragments/account :: acct_details";
+	}
 
 	/*@RequestMapping(value = "/{membershipId}", method = RequestMethod.GET)
 	public String showAccount(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, @RequestParam(defaultValue="0") int page, Model model) {
