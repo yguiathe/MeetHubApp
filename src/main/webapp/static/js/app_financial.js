@@ -120,7 +120,7 @@ function getAccountDetails() {
 	setAjaxHeader();
 	
 	//create url to request fragment
-    var url = "/User/Accounts/1";
+    var url = "/MeetHub/User/Accounts/1";
 
     //load fragment and replace content
     $('#myAccounts').load(url);
