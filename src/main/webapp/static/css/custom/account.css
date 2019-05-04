@@ -445,3 +445,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 #myAccounts > div > div.col-sm-8 > div > div > div > div.row > div.row > div.col-sm-8 > p{
 	color: slategray;
 }
+
+.number-font{
+	font-family: 'Roboto Mono', monospace;
+}

@@ -89,8 +89,41 @@ function getFinTrendChart() {
 	}
 }
 
+function getIOTrendChart() {
+	finChart = document.getElementById("chart-1");
+	if (finChart != null) {
+		ctx = finChart.getContext('2d');
+		var myLineChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : [ 'Jan', 'Feb', 'Mar' ],
+				datasets : [ {
+					label : 'Deposits',
+					data : [ 5000, 10000, 45000, 25000, 1000, 10000, 0 ],
+					borderColor : "#afc836",
+					fill : true
+				}, {
+					label : 'Withdrawals',
+					data : [ 15000, 15000, 20000, 15000, 20000, 25000, 15000 ],
+					borderColor : "#009eda",
+					fill : true
+				} ]
+			},
+			options: {
+		        scales: {
+		            yAxes: [{
+		                stacked: true
+		            }]
+		        }
+		    }
+		});
+	}
+}
+
 getFinSummaryChart();
 
 getFinTrendChart();
 
 getQuarTrendsChart();
+
+getIOTrendChart();
