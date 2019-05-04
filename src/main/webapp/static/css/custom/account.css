@@ -469,3 +469,11 @@ div.panel.panel-default.act-summary > div.panel-body{
 #transactions-panel{
 	margin-top: 20px;
 }
+
+#acct-details{
+	margin-top: 20px;
+}
+
+.pagination{
+	margin: 0px;
+}
