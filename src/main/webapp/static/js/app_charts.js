@@ -99,13 +99,15 @@ function getIOTrendChart() {
 				labels : [ 'Jan', 'Feb', 'Mar' ],
 				datasets : [ {
 					label : 'Deposits',
-					data : [ 5000, 10000, 45000, 25000, 1000, 10000, 0 ],
+					data : [ 5000, 10000, 45000 ],
 					borderColor : "#afc836",
+					backgroundColor : "#afc836",
 					fill : true
 				}, {
 					label : 'Withdrawals',
-					data : [ 15000, 15000, 20000, 15000, 20000, 25000, 15000 ],
+					data : [ 15000, 15000, 20000 ],
 					borderColor : "#009eda",
+					backgroundColor : "#009eda",
 					fill : true
 				} ]
 			},
@@ -125,5 +127,3 @@ getFinSummaryChart();
 getFinTrendChart();
 
 getQuarTrendsChart();
-
-getIOTrendChart();

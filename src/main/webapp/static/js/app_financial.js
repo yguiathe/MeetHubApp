@@ -124,6 +124,8 @@ function getAccountDetails() {
 
     //load fragment and replace content
     $('#myAccounts').fadeOut("slow").load(url).fadeIn('slow');
+    
+    getIOTrendChart();
 }
 
 function activateAccount(event, id) {

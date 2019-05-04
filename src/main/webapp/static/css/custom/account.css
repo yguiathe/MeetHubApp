@@ -449,3 +449,23 @@ div.panel.panel-default.act-summary > div.panel-body{
 .number-font{
 	font-family: 'Roboto Mono', monospace;
 }
+
+#transaction-menu{
+	margin: 25px 0 25px 0;
+}
+
+.graph-headers{
+	padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: #afc836;
+    border-top-style: double;
+    border-bottom-style: double;
+}
+
+.large-font{
+	font-size: x-large;
+}
+
+#transactions-panel{
+	margin-top: 20px;
+}
