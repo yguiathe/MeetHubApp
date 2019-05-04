@@ -122,8 +122,9 @@ section#main .login-form {
 }
 
 .form-labels, .navbar-text {
-	font-weight: normal;
-	color: #555;
+	font-weight: 600;
+	font-size: inherit;
+	color: slategrey;
 }
 
 .welcome-text, .navbar-username {
@@ -458,6 +459,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 	padding-top: 10px;
     padding-bottom: 10px;
     border-top: #afc836;
+    border-bottom: #afc836;
     border-top-style: double;
     border-bottom-style: double;
 }

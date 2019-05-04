@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
 		$("#depositDiv").hide();
 	});
 
-	$(".account-list").click(function(){
+	$(".account-list").on("click", function(){
 		getAccountDetails();
 		getIOTrendChart();
 	});
