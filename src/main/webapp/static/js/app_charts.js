@@ -99,7 +99,7 @@ function getIOTrendChart() {
 				labels : [ 'Jan', 'Feb', 'Mar' ],
 				datasets : [ {
 					label : 'Deposits',
-					data : [ 5000, 17000, 45000 ],
+					data : [ 5000, 17000, 18000 ],
 					borderColor : "#afc836",
 					backgroundColor : "#afc836",
 					fill : true
