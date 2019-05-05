@@ -4,15 +4,14 @@
 <body>
 	<th:block th:fragment="acct_details">
 		<div class="panel panel-default">
-			<div class="panel-heading" th:text="#{meethub.myAccounts}">Panel
-				heading without title</div>
+			<div class="panel-heading number-font main-color-bg" th:text="#{meethub.myAccounts}">Account Number - 12232XXXX</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="row">
-						<div class="col-sm-4 col-sm-offset-1">
-							<h5 class="number-font">Account Number - 12232XXXX</h5>
+						<div class="col-sm-4">
+							<button type="button" class="btn btn-default">Back to My Accounts</button>
 						</div>
-						<div class="col-sm-3 col-sm-offset-4">
+						<div class="col-sm-3 col-sm-offset-5">
 							<div class="btn-toolbar" role="toolbar" aria-label="...">
 								<div class="btn-group" role="group" aria-label="...">
 									<button type="button" class="btn btn-default">Deposit</button>
@@ -74,7 +73,9 @@
 							</div>
 						</div>
 					</div>
+					<hr class="app-page-hr" />
 				</div>
+				<hr class="app-page-hr" />
 				<div class="row" id="transaction-menu">
 					<div class="col-sm-4 col-sm-offset-4">
 						<div class="btn-group btn-group-justified" role="group"

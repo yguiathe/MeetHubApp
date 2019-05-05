@@ -395,6 +395,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 .app-page-hr{
 	border-top: 5px solid grey;
+	width: 70%;
 }
 
 .checking-account-header{

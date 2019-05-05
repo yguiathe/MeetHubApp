@@ -34,8 +34,7 @@ jQuery(document).ready(function($) {
 
 	$(".account-list").on("click", function(){
 		getAccountDetails();
-		getIOTrendChart();
-		console.log("Passed");
+		console.log(document.getElementById("chart-1"));
 	});
 
 });
