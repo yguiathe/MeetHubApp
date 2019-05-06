@@ -112,7 +112,18 @@ function getIOTrendChart() {
 				} ]
 			},
 			options: {
-		        showLines: false,  // disable for all datasets
+				scales: {
+			        xAxes: [{
+			            gridLines: {
+			                display:false
+			            }
+			        }],
+			        yAxes: [{
+			            gridLines: {
+			                display:false
+			            }   
+			        }]
+			    }, 
 		        legend : {
 		        	position: 'bottom'
 		        }
