@@ -110,7 +110,13 @@ function getIOTrendChart() {
 					backgroundColor : "#009eda",
 					fill : true
 				} ]
-			}
+			},
+			options: {
+		        showLines: false,  // disable for all datasets
+		        legend : {
+		        	position: bottom
+		        }
+		    }
 		});
 	}
 }
