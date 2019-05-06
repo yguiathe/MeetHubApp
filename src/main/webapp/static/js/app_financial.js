@@ -36,7 +36,6 @@ jQuery(document).ready(function($) {
 
 $(".account-list").on("click", function(){
 	getAccountDetails();
-	getIOTrendChart();
 });
 
 function setAjaxHeader(){
@@ -125,6 +124,7 @@ function getAccountDetails() {
 
     //load fragment and replace content
     $('#myAccounts').fadeOut("slow").load(url).fadeIn('slow');
+    getIOTrendChart();
 }
 
 function activateAccount(event, id) {
