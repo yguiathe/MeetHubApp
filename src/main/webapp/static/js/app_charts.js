@@ -114,7 +114,7 @@ function getIOTrendChart() {
 			options: {
 		        showLines: false,  // disable for all datasets
 		        legend : {
-		        	position: bottom
+		        	position: 'bottom'
 		        }
 		    }
 		});
