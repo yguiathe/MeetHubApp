@@ -395,6 +395,10 @@ div.panel.panel-default.act-summary > div.panel-body{
 
 .app-page-hr{
 	border-top: 5px solid grey;
+}
+
+.act-page-hr{
+	border-top: 5px solid grey;
 	width: 70%;
 }
 

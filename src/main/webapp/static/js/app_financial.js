@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
 
 	$(".account-list").on("click", function(){
 		getAccountDetails();
-		console.log(document.getElementById("chart-1"));
+		console.log($("chart-1")[0]);
 	});
 
 });
