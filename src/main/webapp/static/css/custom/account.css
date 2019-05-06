@@ -398,8 +398,9 @@ div.panel.panel-default.act-summary > div.panel-body{
 }
 
 .act-page-hr{
-	border-top: 5px solid grey;
-	width: 70%;
+	border-top: 1px solid #009eda;
+	width: 65%;
+	opacity: 0.3;
 }
 
 .checking-account-header{
@@ -457,7 +458,7 @@ div.panel.panel-default.act-summary > div.panel-body{
 }
 
 #transaction-menu{
-	margin: 25px 0 25px 0;
+	margin: 0 0 25px 0;
 }
 
 .graph-headers{

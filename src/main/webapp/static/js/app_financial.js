@@ -32,11 +32,11 @@ jQuery(document).ready(function($) {
 		$("#depositDiv").hide();
 	});
 
-	$(".account-list").on("click", function(){
-		getAccountDetails();
-		console.log($("chart-1")[0]);
-	});
+});
 
+$(".account-list").on("click", function(){
+	getAccountDetails();
+	getIOTrendChart();
 });
 
 function setAjaxHeader(){
