@@ -123,8 +123,9 @@ function getAccountDetails() {
     var url = "/MeetHub/User/Accounts/1";
 
     //load fragment and replace content
-    $('#myAccounts').fadeOut("slow").load(url).fadeIn('slow');
-    getIOTrendChart();
+    $('#myAccounts').fadeOut("slow").load(url, function (){
+    	getIOTrendChart();
+    }).fadeIn('slow');
 }
 
 function activateAccount(event, id) {
