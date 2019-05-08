@@ -39,11 +39,11 @@ $(".account-list").on("click", function() {
 });
 
 $("[data-toggle=popover]").each(function(i, obj) {
-
+	console.log($(this).attr('id'));
 	$(this).popover({
 		html : true,
 		content : function() {
-			var id = $(this).attr('id')
+			var id = $(this).attr('id');
 			return $('#popover-content-' + id).html();
 		}
 	});
