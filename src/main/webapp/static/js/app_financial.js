@@ -31,17 +31,6 @@ jQuery(document).ready(function($) {
 	$("#depositFormClose-btn").click(function(event) {
 		$("#depositDiv").hide();
 	});
-	
-	$("[data-toggle=popover]").each(function(i, obj) {
-		$(this).popover({
-			html : true,
-			content : function() {
-				var id = $(this).attr('id');
-				return $('#popover-content-' + id).html();
-			}
-		});
-
-	});
 
 });
 
@@ -136,6 +125,18 @@ function getAccountDetails() {
 	// load fragment and replace content
 	$('#myAccounts').fadeOut("slow").load(url, function() {
 		getIOTrendChart();
+		$("[data-toggle=popover]").popover({
+			html : true,
+			content : function() {
+				var content = $(this).attr("data-popover-content");
+				return $(content).children(".popover-body").html();
+			},
+			title : function() {
+				var title = $(this).attr("data-popover-content");
+				return $(title).children(".popover-heading").html();
+			}
+		});
+
 	}).fadeIn('slow');
 }
 
