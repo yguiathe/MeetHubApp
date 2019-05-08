@@ -31,23 +31,22 @@ jQuery(document).ready(function($) {
 	$("#depositFormClose-btn").click(function(event) {
 		$("#depositDiv").hide();
 	});
+	
+	$("[data-toggle=popover]").each(function(i, obj) {
+		$(this).popover({
+			html : true,
+			content : function() {
+				var id = $(this).attr('id');
+				return $('#popover-content-' + id).html();
+			}
+		});
+
+	});
 
 });
 
 $(".account-list").on("click", function() {
 	getAccountDetails();
-});
-
-$("[data-toggle=popover]").each(function(i, obj) {
-	console.log($(this).attr('id'));
-	$(this).popover({
-		html : true,
-		content : function() {
-			var id = $(this).attr('id');
-			return $('#popover-content-' + id).html();
-		}
-	});
-
 });
 
 function setAjaxHeader() {
