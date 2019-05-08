@@ -78,7 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.accessDeniedHandler(accessDeniedHandler)
 				.and()
 			.sessionManagement()
-				.maximumSessions(2);
+				.maximumSessions(100)
+				.maxSessionsPreventsLogin(false)
+				.expiredUrl("/login");
 	}
 	
 	@Override
