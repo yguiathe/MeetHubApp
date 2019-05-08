@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
 		depositOrWithdraw();
 
 	});
-	
+
 	$("#checking > div.table-responsive > ul > li > a").click(function(event) {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
@@ -23,22 +23,34 @@ jQuery(document).ready(function($) {
 		loadNextTrxPage($(this).attr('href'));
 
 	});
-	
-	$("#deposit-btn").click(function(event){
+
+	$("#deposit-btn").click(function(event) {
 		$("#depositDiv").show();
 	});
-	
-	$("#depositFormClose-btn").click(function(event){
+
+	$("#depositFormClose-btn").click(function(event) {
 		$("#depositDiv").hide();
 	});
 
 });
 
-$(".account-list").on("click", function(){
+$(".account-list").on("click", function() {
 	getAccountDetails();
 });
 
-function setAjaxHeader(){
+$("[data-toggle=popover]").each(function(i, obj) {
+
+	$(this).popover({
+		html : true,
+		content : function() {
+			var id = $(this).attr('id')
+			return $('#popover-content-' + id).html();
+		}
+	});
+
+});
+
+function setAjaxHeader() {
 	$.ajaxSetup({
 		headers : {
 			'X-CSRF-TOKEN' : $('input[name="_csrf"]').attr('value')
@@ -46,9 +58,9 @@ function setAjaxHeader(){
 	});
 }
 
-function loadNextTrxPage(url){
+function loadNextTrxPage(url) {
 	setAjaxHeader();
-	
+
 	$.ajax({
 		type : "GET",
 		url : url,
@@ -67,7 +79,7 @@ function loadNextTrxPage(url){
 	});
 }
 
-function showNextTrxPage(data){
+function showNextTrxPage(data) {
 	$('#checkingTrxTbl tbody').html($(data).find('#trxPage > tr'));
 	$('#checkingTrxTbl tbody').fadeIn("slow");
 }
@@ -118,17 +130,17 @@ function display(data) {
 
 function getAccountDetails() {
 	setAjaxHeader();
-	
-	//create url to request fragment
-    var url = "/MeetHub/User/Accounts/1";
 
-    //load fragment and replace content
-    $('#myAccounts').fadeOut("slow").load(url, function (){
-    	getIOTrendChart();
-    }).fadeIn('slow');
+	// create url to request fragment
+	var url = "/MeetHub/User/Accounts/1";
+
+	// load fragment and replace content
+	$('#myAccounts').fadeOut("slow").load(url, function() {
+		getIOTrendChart();
+	}).fadeIn('slow');
 }
 
 function activateAccount(event, id) {
-	  alert("Hello button!" + id);
-	  event.stopPropagation();
+	alert("Hello button!" + id);
+	event.stopPropagation();
 }

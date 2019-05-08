@@ -28,52 +28,52 @@
 					</div>
 					<hr class="act-page-hr" />
 					<div class="row" id="acct-details">
-						<div class="col-sm-4 form-horizontal">
+						<div class="col-xs-4 form-horizontal">
 							<div class="form-group">
-								<label for="acctNum" class="col-sm-7 control-label form-labels">Account
+								<label for="acctNum" class="col-xs-7 control-label form-labels">Account
 									Number: </label>
-								<div class="col-sm-5">
+								<div class="col-xs-5">
 									<p class="form-control-static number-font">21341511</p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="openDate" class="col-sm-7 control-label form-labels">Open
+								<label for="openDate" class="col-xs-7 control-label form-labels">Open
 									Date: </label>
-								<div class="col-sm-5">
+								<div class="col-xs-5">
 									<p class="form-control-static number-font">May 5, 2018</p>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-4 form-horizontal">
+						<div class="col-xs-4 form-horizontal">
 							<div class="form-group">
-								<label for="status" class="col-sm-6 control-label form-labels">Status:
+								<label for="status" class="col-xs-6 control-label form-labels">Status:
 								</label>
-								<div class="col-sm-6">
+								<div class="col-xs-6">
 									<p class="form-control-static number-font">Active</p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="balance" class="col-sm-6 control-label form-labels">Available
+								<label for="balance" class="col-xs-6 control-label form-labels">Available
 									Balance: </label>
-								<div class="col-sm-6">
+								<div class="col-xs-6">
 									<p class="form-control-static number-font">$120,456.00</p>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-4 form-horizontal">
+						<div class="col-xs-4 form-horizontal">
 							<div class="form-group">
 								<label for="overdraft"
-									class="col-sm-6 control-label form-labels">Overdraft
+									class="col-xs-6 control-label form-labels">Overdraft
 									Limit: </label>
-								<div class="col-sm-6">
+								<div class="col-xs-6">
 									<p class="form-control-static number-font">$50,000.00</p>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="closeDate"
-									class="col-sm-6 control-label form-labels">Close Date:
+									class="col-xs-6 control-label form-labels">Close Date:
 								</label>
-								<div class="col-sm-6">
+								<div class="col-xs-6">
 									<p class="form-control-static number-font">N/A</p>
 								</div>
 							</div>
@@ -143,18 +143,18 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="row">
-									<div class="col-sm-3">
+									<div class="col-xs-3">
 										<p class="text-left">Transactions</p>
 									</div>
-									<div class="col-sm-4 col-sm-offset-5">
-										<form class="form-inline">
+									<div class="col-xs-9">
+										<form class="form-inline text-right">
 											<div class="form-group">
 												<input type="date" class="form-control" id="fromDate"
-													name="from"/>
+													name="from" />
 											</div>
 											<div class="form-group">
 												<input type="date" class="form-control" id="toDate"
-													name="to"/>
+													name="to" />
 											</div>
 											<button type="submit" class="btn btn-default">Search</button>
 										</form>
@@ -185,13 +185,16 @@
 												<div class="row">
 													<div class="col-xs-10">1,000.00</div>
 													<div class="col-xs-2">
-														<a href="#" data-toggle="tooltip"
-															title="Some tooltip text!"> <i
-															class="fas fa-ellipsis-h"></i>
+														<a href="#" data-container="body" data-toggle="popover"
+															data-placement="right" type="button" data-html="true" id="trs">
+															<i class="fas fa-ellipsis-h"></i>
 														</a>
-														<div class="tooltip top" role="tooltip">
-															<div class="tooltip-arrow"></div>
-															<div class="tooltip-inner">Some tooltip text!</div>
+														<div id="popover-content-trs" class="hide">
+															<ul class="list-group">
+																<li class="list-group-item">Dispute</li>
+																<li class="list-group-item">Delete</li>
+																<li class="list-group-item">Details</li>
+															</ul>
 														</div>
 													</div>
 												</div>
