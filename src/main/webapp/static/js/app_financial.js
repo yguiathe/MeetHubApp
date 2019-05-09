@@ -136,7 +136,7 @@ function getAccountDetails() {
 				return $(title).children(".popover-heading").html();
 			}
 		});
-
+		$('#myAccounts').removeAttr('style');
 	}).fadeIn('slow');
 }
 
