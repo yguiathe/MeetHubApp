@@ -38,7 +38,7 @@ $(".account-list").on("click", function() {
 	getAccountDetails();
 });
 
-$(".trs-btn").on("click", function(){
+$("#btn1").on("click", function(){
     $("#transactionModal").modal('show');
     console.log("Test1!");
 });
