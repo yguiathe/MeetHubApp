@@ -18,10 +18,14 @@
 						<div class="col-xs-3 col-xs-offset-5">
 							<div class="btn-toolbar" role="toolbar" aria-label="...">
 								<div class="btn-group" role="group" aria-label="...">
-									<button type="button" class="btn btn-default">Deposit</button>
+									<button type="button" class="btn btn-default"
+										data-toggle="modal" data-target="#transactionModal"
+										data-whatever="Deposit">Deposit</button>
 								</div>
 								<div class="btn-group" role="group" aria-label="...">
-									<button type="button" class="btn btn-default">Withdraw</button>
+									<button type="button" class="btn btn-default"
+										data-toggle="modal" data-target="#transactionModal"
+										data-whatever="Withdraw">Withdraw</button>
 								</div>
 							</div>
 						</div>
@@ -86,13 +90,74 @@
 						<div class="btn-group btn-group-justified" role="group"
 							aria-label="...">
 							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default">Freeze</button>
+								<button type="button" class="btn btn-default"
+									data-toggle="modal" data-target="#transactionModal"
+									data-whatever="Freeze">Freeze</button>
 							</div>
 							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default">Transfer</button>
+								<button type="button" class="btn btn-default"
+									data-toggle="modal" data-target="#transactionModal"
+									data-whatever="Transfer">Transfer</button>
 							</div>
 							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default">Print</button>
+								<button type="button" class="btn btn-default"
+									data-toggle="modal" data-target="#transactionModal"
+									data-whatever="Print">Print</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="transactionModal" tabindex="-1"
+						role="dialog" aria-labelledby="transactionModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header main-color-bg">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="transactionModalLabel">New
+										message</h4>
+								</div>
+								<div class="modal-body">
+									<form method="POST" 
+										th:action="@{/account/transaction}" action="#"
+										 id="transactionForm">
+										<div class="row text-center">
+											<p class="number-font">Amount</p>
+											<p>
+												<input type="text" class="form-control number-font large-font" id="trs-amount" placeholder="$10,000">
+											</p>
+											<hr class="act-page-hr"/>
+										</div>
+										<div class="row text-center">
+											<p class="number-font large-font">From</p>
+											<p>
+												<input type="text" class="form-control number-font large-font" id="trs-from" placeholder="My Checking - $30,000"></input>
+											</p>
+											<hr class="act-page-hr"/>
+										</div>
+										<div class="row text-center">
+											<p class="number-font large-font">To</p>
+											<p>
+												<input type="text" class="form-control number-font large-font" id="trs-to" placeholder="Bryan Demsley"></input>
+											</p>
+											<hr class="act-page-hr"/>
+										</div>
+										<div class="row text-center" id="trsSummary">
+											<p></p>
+										</div>
+										<div class="row">
+											<button type="button" class="btn btn-default">Cancel</button>
+											<button type="button" class="btn btn-info">Authorize</button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Send
+										message</button>
+								</div>
 							</div>
 						</div>
 					</div>
