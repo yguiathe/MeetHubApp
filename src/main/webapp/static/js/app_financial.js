@@ -137,9 +137,6 @@ function getAccountDetails() {
 			}
 		});
 		$('#myAccounts').removeAttr('style');
-		$(".trs-btn").on("click", function() {
-			$("#transactionModal").modal('show');
-		});
 		$('#transactionModal').on('show.bs.modal', function(event) {
 			var button = $(event.relatedTarget);
 			console.log(event);
