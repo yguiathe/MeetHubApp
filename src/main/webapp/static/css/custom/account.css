@@ -486,12 +486,30 @@ div.panel.panel-default.act-summary > div.panel-body{
 	margin: 0px;
 }
 
-.number-font .large-font{
+.number-font.large-font.text-center{
 	color: slategray;
 	border: none;
   	border-bottom: 2px solid #009eda;
 }
 
 #trsSummary{
-	border-bottom: 2px solid #afc836;
+	background-color: cadetblue;
+    color: white;
+    height: 80px;
+    padding-top: 25px;
+}
+
+@media (min-width: 768px)
+.modal-sm {
+    width: 450px;
+}
+
+#trs-form-btns{
+	border-top: 2px solid #afc836;
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+.trs-form-section{
+	margin-bottom: 15px;
 }
