@@ -142,9 +142,9 @@ function getAccountDetails() {
 		});
 		$('#transactionModal').on('show.bs.modal', function(event) {
 			var button = $(event.relatedTarget);
+			console.log(button);
 			var title = button.data('whatever'); // Extract info from data-*
 													// attributes
-			console.log(title);
 			// If necessary, you could initiate an AJAX request here (and then do the
 			// updating in a callback).
 			// Update the modal's content. We'll use jQuery here, but you could use a
