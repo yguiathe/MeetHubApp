@@ -142,7 +142,7 @@ function getAccountDetails() {
 		});
 		$('#transactionModal').on('show.bs.modal', function(event) {
 			var button = $(event.relatedTarget);
-			console.log(button);
+			console.log(event);
 			var title = button.data('whatever'); // Extract info from data-*
 													// attributes
 			// If necessary, you could initiate an AJAX request here (and then do the
