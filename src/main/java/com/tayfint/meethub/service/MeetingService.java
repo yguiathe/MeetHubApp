@@ -6,7 +6,7 @@ import com.tayfint.meethub.model.Meeting;
 
 public interface MeetingService {
 	
-	void saveMeeting(Meeting meeting);
+	Meeting saveMeeting(Meeting meeting);
 	
 	Meeting findByMeetingId(Long meetingId);
 	

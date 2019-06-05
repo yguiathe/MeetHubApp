@@ -2,6 +2,7 @@ package com.tayfint.meethub.configuration;
 
 import java.util.Locale;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -121,6 +122,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		resolver.setDefaultEncoding("utf-8");
 		resolver.setMaxUploadSize(10000000);
 		return resolver;
+	}
+	
+	@Bean
+	public ModelMapper modelMapper() {
+	    return new ModelMapper();
 	}
 
 }

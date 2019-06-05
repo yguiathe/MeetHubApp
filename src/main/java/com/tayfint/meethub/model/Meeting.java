@@ -214,10 +214,13 @@ public class Meeting implements java.io.Serializable {
 		this.shortDesc = shortDesc;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	/*public void setTerms(byte[] terms) {
 		this.terms = terms;
 	}*/
-	
 	
 
 }

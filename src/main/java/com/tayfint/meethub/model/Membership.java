@@ -52,8 +52,8 @@ public class Membership implements java.io.Serializable {
 	@Column(name = "CREATE_DATE")
 	private Date createDate = new Date(Calendar.getInstance().getTimeInMillis());
 	
-	@Column(name = "TYPE_CD")
-	private Boolean typeCd = true;
+	@Column(name = "TYPE_CD", length = 1)
+	private String typeCd;
 	
 	@Column(name = "IS_ACTIVE")
 	private Boolean isActive = true;
@@ -115,11 +115,11 @@ public class Membership implements java.io.Serializable {
 		this.createDate = createDate;
 	}
 
-	public Boolean getTypeCd() {
-		return this.typeCd;
+	public String getTypeCd() {
+		return typeCd;
 	}
 
-	public void setTypeCd(Boolean typeCd) {
+	public void setTypeCd(String typeCd) {
 		this.typeCd = typeCd;
 	}
 

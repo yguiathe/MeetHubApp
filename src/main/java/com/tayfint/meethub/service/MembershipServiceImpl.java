@@ -24,6 +24,9 @@ public class MembershipServiceImpl implements MembershipService {
 	@Autowired
     private AccountService accountService;
 	
+	@Autowired
+	private MeetingService meetingService;
+	
 	static final Logger logger = LoggerFactory.getLogger(MembershipServiceImpl.class);
 	
 	public void save(Membership membership) {
@@ -48,9 +51,10 @@ public class MembershipServiceImpl implements MembershipService {
 	}
 
 	@Override
-	public void saveMembership(Meeting meeting, User user) {
+	public void saveMembership(Meeting meeting, User user, String typeCd) {
 		Membership membership = new Membership();
-		membership.setMeeting(meeting);
+		membership.setTypeCd(typeCd);
+		membership.setMeeting(meetingService.saveMeeting(meeting));
 		membership.setUser(user);
 		save(membership);
 	}

@@ -8,7 +8,7 @@ import com.tayfint.meethub.model.User;
 
 public interface MembershipService {
 
-	void saveMembership(Meeting meeting, User user);
+	void saveMembership(Meeting meeting, User user, String typeCd);
 	
 	Membership findMembershipById(Long membershipId);
 	

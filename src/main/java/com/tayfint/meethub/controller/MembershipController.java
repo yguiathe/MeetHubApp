@@ -45,7 +45,8 @@ public class MembershipController {
 			//populateDefaultModel(model);
 			return "User/Memberships";
 		} else {
-			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()));
+			;
+			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()), "1");
 			// POST/REDIRECT/GET
 			return "redirect:/User/Memberships";
 		}

@@ -45,10 +45,10 @@ public class User implements UserDetails {
 	@Column(name = "USER_ID")
 	private Long userId;
 
-	@Column(name = "USERNAME", nullable = false, length = 50)
+	@Column(name = "USERNAME", length = 50)
 	private String username;
 
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD")
 	private String password;
 
 	@Transient
@@ -66,7 +66,10 @@ public class User implements UserDetails {
 	private Date blockedUntil;
 
 	@Column(name = "IS_DECEASED")
-	private Boolean isDeceased;
+	private Boolean isDeceased = false;
+	
+	@Column(name = "IS_GROUP")
+	private Boolean isGroup = false;
 
 	@Column(name = "PRIMARY_ID", length = 40)
 	private String primaryId;
@@ -79,7 +82,7 @@ public class User implements UserDetails {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date birthdate;
 
-	@Column(name = "FIRST_NAME", nullable = false, length = 45)
+	@Column(name = "FIRST_NAME", length = 45)
 	private String firstName;
 
 	@Column(name = "MIDDLE_NAME", length = 45)
@@ -479,4 +482,12 @@ public class User implements UserDetails {
 		return enabled;
 	}
 
+	public Boolean isGroup() {
+		return isGroup;
+	}
+
+	public void setIsGroup(Boolean isGroup) {
+		this.isGroup = isGroup;
+	}
+	
 }
