@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" type="image/png" th:href="@{/static/img/logo.png}" />
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous" />
+
+<title>Home</title>
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/static/css/bootstrap/bootstrap.min.css}"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link th:href="@{/static/css/custom/account.css}"
+	href="../../../static/css/custom/account.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div id="sidebar-wrapper">
+				<div class="logo">
+					<img class="rounded mx-auto d-block"
+						th:src="@{/static/img/logo.png}" width="70" height="70" alt="">
+				</div>
+				<div id="uname">
+					<h6 class="card-subtitle mb-2 text-muted text-center"
+						th:text="|${user.firstName} ${user.lastName}|">Alex Thompson</h6>
+				</div>
+				<ul class="nav app-v-nav">
+					<li class="nav-item active"><a class="nav-link"
+						href="#home-tab"> <i class="fas fa-home"></i>
+							<p>Home</p>
+					</a></li>
+					<li><a class="nav-link" href="#teams-tab"> <i
+							class="fas fa-users"></i>
+							<p>Teams</p>
+					</a></li>
+					<li><a class="nav-link" href="#applications-tab"> <i
+							class="fas fa-file-signature"></i>
+							<p>Applications</p>
+					</a></li>
+					<li><a class="nav-link" href="#profile-tab"> <i
+							class="fas fa-address-card"></i>
+							<p>Profile</p>
+					</a></li>
+					<li><a class="nav-link" href="#notifications-tab"> <i
+							class="fas fa-bell"></i>
+							<p>Notifications</p>
+					</a></li>
+					<li class="nav-item logout-btn"><a class="nav-link active"
+						href="/logout" th:href="@{#}"
+						onclick="$('#logout-form').submit();"> <i
+							class="fas fa-sign-out-alt"></i>
+							<p>Log out</p>
+					</a>
+						<form style="visibility: hidden" id="logout-form" method="post"
+							action="#" th:action="@{/logout}"></form></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Page Content -->
+		<div id="page-content-wrapper">
+			<nav
+				class="navbar navbar-expand-lg sticky-top justify-content-between">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item"><a class="navbar-brand" href="#"
+						id="menu-toggle"><i class="fas fa-align-left"></i></a></li>
+					<li class="nav-item"><a class="navbar-brand" href="#">Tayfint</a></li>
+				</ul>
+				<img class="rounded-circle" id="avatar"
+					th:src="${#strings.isEmpty(user.avatar)} ? @{/static/img/default-avatar.png} : |data:image/png;base64, ${user.avatar}|"
+					src="../../../static/img/default-avatar.png" width="35" height="35">
+			</nav>
+			<div class="content" id="home-tab">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 page-titles">
+							<h3>Home</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-7">
+							<div class="card card-profile card-stats">
+								<div class="card-avatar">
+									<a href="#"> <img class="rounded-circle"
+										th:src="${#strings.isEmpty(user.avatar)} ? @{/static/img/default-avatar.png} : |data:image/png;base64, ${user.avatar}|"
+										src="../../../static/img/default-avatar.png" width="124"
+										height="124">
+									</a>
+								</div>
+								<div class="card-body">
+									<h6 class="card-category text-gray" th:text="${user.employer}">CEO
+										/ Co-Founder</h6>
+									<h4 class="card-title"
+										th:text="|${user.firstName} ${user.lastName}|">Alex
+										Thompson</h4>
+									<p class="card-description" th:text="${user.intro}">Don't
+										be scared of the truth because we need to restart the human
+										foundation in truth And I love you like Kanye loves Kanye I
+										love Rick Owens’ bed design but the back is...</p>
+									<a href="#pablo" class="btn btn-primary">My Profile</a>
+								</div>
+							</div>
+							<div class="card card-stats">
+								<div class="card-header">
+									<h5 class="main-color">To Do List</h5>
+								</div>
+								<div class="card-body">
+									<div class="input-group mb-3">
+										<input type="text" name="task-insert"
+											class="form-control add_task_todo"
+											placeholder="Create your task list" required="">
+										<div class="input-group-append">
+											<button
+												class="btn waves-effect waves-light btn-primary btn-icon"
+												id="add-btn">
+												<i class="fa fa-plus"></i>
+											</button>
+										</div>
+									</div>
+									<div class="new-task">
+										<div class="to-do-list mb-3">
+											<div class="d-inline-block">
+												<label
+													class="check-task custom-control custom-checkbox d-flex justify-content-center">
+													<input type="checkbox" class="custom-control-input"
+													id="customCheck1" value=""> <span
+													class="custom-control-label app-label">Lorem Ipsum
+														Dolor Sit Amet</span>
+												</label>
+											</div>
+											<div class="float-right">
+												<a onclick="delete_todo(1);" href="#!"
+													class="delete_todolist"><i class="fas fa-trash-alt"></i></a>
+											</div>
+										</div>
+										<div class="to-do-list mb-3">
+											<div class="d-inline-block">
+												<label
+													class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+													<input type="checkbox" class="custom-control-input"
+													id="customCheck2" value=""> <span
+													class="custom-control-label app-label">Industry's
+														standard dummy text ever since the 1500s</span>
+												</label>
+											</div>
+											<div class="float-right">
+												<a onclick="delete_todo(2);" href="#!"
+													class="delete_todolist"><i class="fas fa-trash-alt"></i></a>
+											</div>
+										</div>
+										<div class="to-do-list mb-3">
+											<div class="d-inline-block">
+												<label
+													class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+													<input type="checkbox" class="custom-control-input"
+													id="customCheck3" value=""> <span
+													class="custom-control-label app-label">The point of
+														using Lorem Ipsum is that it has a more-or-less </span>
+												</label>
+											</div>
+											<div class="float-right">
+												<a onclick="delete_todo(3);" href="#!"
+													class="delete_todolist"><i class="fas fa-trash-alt"></i></a>
+											</div>
+										</div>
+										<div class="to-do-list mb-3" style="display: none;">
+											<div class="d-inline-block">
+												<label
+													class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+													<input type="checkbox" class="custom-control-input"
+													id="customCheck4" value=""> <span
+													class="custom-control-label app-label">Contrary to
+														popular belief</span>
+												</label>
+											</div>
+											<div class="float-right">
+												<a onclick="delete_todo(4);" href="#!"
+													class="delete_todolist"><i class="fas fa-trash-alt"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-offset-1 col-4">
+							<div class="card card-stats">
+								<div class="card-body text-center">
+									<i class="fas fa-users text-c-blue d-block f-40"></i>
+									<h4 class="m-t-20">
+										<span class="text-c-blue" th:text="${user.teamsCnt}">8.62k</span>
+										Teams
+									</h4>
+									<p class="m-b-20 card-description">Your Teams list is
+										growing</p>
+									<button class="btn btn-primary btn-sm btn-round">Manage
+										Teams</button>
+								</div>
+							</div>
+							<div class="card card-stats">
+								<div class="card-body text-center">
+									<i class="fas fa-file-signature text-c-green d-block f-40"></i>
+									<h4 class="m-t-20">
+										<span class="text-c-green" th:text="${user.applicationsCnt}">+40</span>
+										Applications
+									</h4>
+									<p class="m-b-20 card-description">You have applications
+										pending...</p>
+									<button class="btn btn-primary btn-sm btn-round">Check
+										them out</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content d-none" id="teams-tab">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 page-titles">
+							<div class="row justify-content-between">
+								<div class="col-3">
+									<h3>Teams</h3>
+								</div>
+								<div class="btn-toolbar" role="toolbar"
+									aria-label="Toolbar with button groups">
+									<div class="btn-group mr-2" role="group"
+										aria-label="First group">
+										<button type="button" class="btn btn-primary">
+											New <i class="far fa-plus-square"></i>
+										</button>
+									</div>
+									<div class="btn-group mr-2" role="group"
+										aria-label="Second group">
+										<button type="button" class="btn btn-primary">
+											Join <i class="fas fa-user-plus"></i>
+										</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card text-center">
+								<div class="card-body">
+									<p class="card-text lead">
+										<i class="fas fa-info-circle"></i>&nbsp;&nbsp;<span
+											th:text="#{meeting.no_meeting_msg}">With supporting
+											text below as a natural lead-in to additional content.</span>
+									</p>
+									<a href="#" class="btn btn-primary">New Team</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content d-none" id="applications-tab">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 page-titles">
+							<h3>Applications</h3>
+						</div>
+					</div>
+					<div class="row"></div>
+				</div>
+			</div>
+			<div class="content d-none" id="notifications-tab">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 page-titles">
+							<h3>Notifications</h3>
+						</div>
+					</div>
+					<div class="row"></div>
+				</div>
+			</div>
+			<div class="content d-none" id="profile-tab">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12 page-titles">
+							<h3>Profile</h3>
+						</div>
+					</div>
+					<div class="row"></div>
+				</div>
+			</div>
+			<footer class="footer">
+				<div class="container">
+					<nav>
+						<p class="copyright text-center">
+							©
+							<script>
+								document.write(new Date().getFullYear())
+							</script>
+							<a href="http://www.tayfint.com">Tayfint</a>, The Win-Win
+							Collaboration
+						</p>
+					</nav>
+				</div>
+			</footer>
+
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/static/js/bootstrap/bootstrap.min.js}"
+		src="../../static/js/bootstrap/bootstrap.min.js"></script>
+	<script th:src="@{/static/js/vendor/popper.min.js}"
+		src="../../static/js/vendor/popper.min.js"></script>
+
+	<!-- Menu toggle script -->
+	<script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("menuDisplayed");
+		});
+		$(document)
+				.ready(
+						function() {
+							$(".app-v-nav > li > a")
+									.not(":last")
+									.click(
+											function() {
+												$(".app-v-nav > li > a").not(
+														":last").parent()
+														.removeClass("active");
+												$(
+														"#page-content-wrapper > div.content:visible")
+														.toggleClass("d-none");
+												$(this).parent().toggleClass(
+														"active");
+												$($(this).attr('href'))
+														.removeClass("d-none");
+											});
+						});
+	</script>
+</body>
+</html>

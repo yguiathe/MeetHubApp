@@ -1,0 +1,265 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: header-css(title=#{meethub.home})">
+</head>
+<body>
+	<div th:replace="fragments/header :: header(true)"></div>
+
+	<header id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10">
+					<h1>
+						<i class="fas fa-suitcase" aria-hidden="true"></i>&nbsp;&nbsp; <span
+							th:text="${membership.meeting.name}">Meeting 101</span>
+					</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section id="breadcrumb">
+		<div class="container">
+			<ol class="breadcrumb">
+				<li class="active" th:text="#{meethub.home}">Home</li>
+			</ol>
+		</div>
+	</section>
+
+	<section id="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="list-group" role="tablist">
+						<a href="#" class="list-group-item active main-color-bg"> <span
+							class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+							Menu
+						</a> <a role="tab" data-toggle="tab" href="#dashboards"
+							class="list-group-item"><span
+							class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>&nbsp;&nbsp;<span
+							class="actions">Dashboards</span></a> <a role="tab" data-toggle="tab"
+							href="#myAccounts" class="list-group-item"><i
+							class="fas fa-piggy-bank"></i>&nbsp;&nbsp;<span class="actions">My
+								Accounts<span>&nbsp;</span><span class="badge"
+								th:text="${#lists.size(membership.accounts)}"></span>
+						</span></a><a role="tab" data-toggle="tab" href="#messages"
+							class="list-group-item"><span
+							class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;&nbsp;<span
+							class="actions">Messages</span></a><a role="tab" data-toggle="tab"
+							href="#roaster" class="list-group-item"><span
+							class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;<span
+							class="actions">Roaster</span></a><a role="tab" data-toggle="tab"
+							href="#settings" class="list-group-item"><span
+							class="glyphicon glyphicon-wrench" aria-hidden="true"></span>&nbsp;&nbsp;<span
+							class="actions">Settings</span></a>
+					</div>
+
+					<div class="well">
+						<h4>Announcements</h4>
+						<div class="alert alert-info" role="alert">
+							Heads up! This <a href="#" class="alert-link">alert needs
+								your attention</a>, but it's not super important.
+						</div>
+					</div>
+				</div>
+				<div class=" tab-content col-md-9">
+					<div role="tabpanel" class="tab-pane fade in active"
+						id="dashboards">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="panel panel-default">
+									<div class="panel-heading main-color-bg">
+										<h3 class="panel-title">Overview</h3>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-12">
+												<canvas id="myChart" width="200" height="200"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="panel panel-default">
+									<div class="panel-heading main-color-bg">
+										<h3 class="panel-title">Last Quarter Trends</h3>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-12">
+												<canvas id="quarterTrends" width="500" height="220"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-heading main-color-bg">
+										<h3 class="panel-title">Yearly Days Financial Trend</h3>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-12">
+												<canvas id="finTrenChart" width="550" height="200"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="messages">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="app-page-header" th:text="#{meethub.myMessages}"></h3>
+								<hr class="app-page-hr" />
+							</div>
+						</div>
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<label th:text="#{meethub.emailTo}">To</label> <input
+										type="text" class="form-control" placeholder="Recipient"
+										name="recipient" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{meethub.emailSubject}">Subject</label> <input
+										type="text" class="form-control"
+										placeholder="Important Request" name="subject" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{meethub.emailBody}">Body</label>
+									<textarea name="emailBody" class="form-control"
+										placeholder="Page Body" id="emailBody">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </textarea>
+								</div>
+								<input type="submit" class="btn btn-default" value="Send" />
+							</form>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="roaster"></div>
+					<div role="tabpanel" class="tab-pane fade" id="myAccounts">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="app-page-header" th:text="#{meethub.myAccounts}">My
+									Accounts</h3>
+								<hr class="app-page-hr" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="row account-list"
+									th:each="account : ${membership.accounts}">
+									<div class="col-sm-12 panel panel-default view-acct-btn">
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-sm-12 acct-list-body">
+													<div th:switch="${account.acctType}">
+														<div th:case="'CHK'">
+															<h5 th:text="#{meethub.accountType.primary}"
+																th:class="'checking-account-header'"></h5>
+															<hr th:class="'checking-account-hr'" />
+														</div>
+														<div th:case="'SAV'">
+															<h5 th:text="#{meethub.accountType.savings}"
+																th:class="'savings-account-header'"></h5>
+															<hr th:class="'savings-account-hr'" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-8">
+														<p
+															th:text="${account.accountNumber} + '  |  ' + ${#calendars.format(account.openDate,'dd MMMM yyyy')}"></p>
+														<p th:text="${account.balance}"></p>
+													</div>
+													<div class="col-sm-4">
+														<div class="btn-group" role="group" aria-label="...">
+															<button type="button" class="btn btn-default"
+																th:onclick="|activateAccount(event, '${account.id}')|">
+																<i class="fas fa-toggle-on"></i>
+															</button>
+															<button type="button" class="btn btn-default"
+																th:onclick="|deleteAccount(event, '${account.id}')|">
+																<i class="fas fa-trash-alt"></i>
+															</button>
+															<button type="button" class="btn btn-default"
+																th:onclick="|viewAccount(event, '${account.id}')|">
+																<i class="fas fa-receipt"></i>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div th:switch="${account.acctType}">
+												<div th:case="'CHK'"
+													class="row account-list-footer chk-acct-list-footer">
+													<div class="col-sm-6">
+														<h6>Available:</h6>
+														<p th:text="${account.balance}"></p>
+													</div>
+													<div class="col-sm-6">
+														<h6>Overdraft limit:</h6>
+														<p>50.00</p>
+													</div>
+												</div>
+												<div th:case="'SAV'"
+													class="row account-list-footer sav-acct-list-footer">
+													<div class="col-sm-6">
+														<h6>Available:</h6>
+														<p th:text="${account.balance}"></p>
+													</div>
+													<div class="col-sm-6">
+														<h6>Overdraft limit:</h6>
+														<p>50.00</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="btn-group btn-group-lg" role="group"
+											aria-label="...">
+											<button type="button" class="btn btn-default">
+												<i class="fas fa-plus"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="list-group">
+									<a href="#" class="list-group-item active main-color-bg"
+										th:text="#{meethub.quickLinks}"> Quick Links </a> <a href="#"
+										class="list-group-item"><span class="actions"
+										th:text="#{meethub.borrow}">Borrow</span></a> <a href="#"
+										class="list-group-item"><span class="actions"
+										th:text="#{meethub.startInvestment}">Start a project</span></a> <a
+										href="#" class="list-group-item"><span class="actions"
+										th:text="#{meethub.newAccount}">New Account</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="settings"></div>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<!-- <script>
+    $(document).ready(function() {
+        $('.transactions-tbl').DataTable();
+    } );
+</script> -->
+
+</body>
+</html>

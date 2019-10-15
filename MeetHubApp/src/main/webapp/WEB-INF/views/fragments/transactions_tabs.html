@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<div th:fragment="checkingActTrxPage">
+		<table>
+			<tbody id="trxPage">
+				<tr data-th-each="primaryTransaction : ${primaryTransactionList}">
+					<td data-th-text="${primaryTransaction.date}">...</td>
+					<td data-th-text="${primaryTransaction.description}">...</td>
+					<td data-th-text="${primaryTransaction.status}">...</td>
+					<td th:switch="${primaryTransaction.type}"><span
+						th:case="'DEP'" th:style="'color: green;'"
+						th:text="${primaryTransaction.amount}"></span> <span
+						th:case="'WTD'" th:style="'color: red;'"
+						th:text="|(${primaryTransaction.amount})|"></span></td>
+					<td data-th-text="${primaryTransaction.availableBalance}">...</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
