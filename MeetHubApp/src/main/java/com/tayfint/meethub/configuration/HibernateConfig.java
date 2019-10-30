@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -26,7 +25,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @ComponentScan(basePackages = "com.tayfint.meethub.configuration")
 @PropertySource(value = {"classpath:application.properties"})
 @EnableJpaRepositories("com.tayfint.meethub.dao")
-@EnableJpaAuditing
 public class HibernateConfig {
 	@Autowired
 	private Environment environment;

@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.tayfint.meethub.model.User;
 import com.tayfint.meethub.model.dto.UserDto;
 import com.tayfint.meethub.service.UserService;
 
+@SessionAttributes({"user"})
 @Controller
 public class HomeController {
 
@@ -50,7 +53,8 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home(Model model, Principal principal) {
 		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("user", mm.map(user, UserDto.class));
+		model.addAttribute("user", user);
+		model.addAttribute("userDto", mm.map(user, UserDto.class));
 		return "home";
 	}
 

@@ -68,16 +68,14 @@ public class UserServiceImpl implements UserService {
 
 	public void enableUser(String username) {
 		User user = findByUsername(username);
-		user.setEnabled(true);
+		user.setIsActive(true);
 		userDao.save(user);
 	}
 
 	public void disableUser(String username) {
 		User user = findByUsername(username);
-		user.setEnabled(false);
-		System.out.println(user.isEnabled());
+		user.setIsActive(false);
 		userDao.save(user);
-		System.out.println(username + " is disabled.");
 	}
 
 

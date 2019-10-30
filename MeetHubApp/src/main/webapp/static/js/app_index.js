@@ -28,9 +28,9 @@ function nextPrev(n) {
 	// This function will figure out which tab to display
 	var x = document.getElementsByClassName("form-tab");
 	
-	if (!(currentTab == x.length)){
-		x[currentTab].style.display = "none";
-	}
+	//if (n < 0 || currentTab == x.length - 1){
+	x[currentTab].style.display = "none";
+
 		
 	// Increase or decrease the current tab by 1:
 	currentTab = currentTab + n;
@@ -38,12 +38,12 @@ function nextPrev(n) {
 	if (currentTab >= x.length) {
 		// ... the form gets submitted:
 		document.getElementById("regForm").submit();
-		log.console("A");
+		console.log("A");
 		return false;
 	} else {
 		// Otherwise, display the correct tab:
 		showTab(currentTab);
-		log.console("B");
+		console.log("B");
 	}
 }
 

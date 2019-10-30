@@ -1,0 +1,238 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<div id="teams" th:fragment="teams">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12 page-titles">
+					<div class="row justify-content-between">
+						<div class="col-3">
+							<h3>Teams</h3>
+						</div>
+						<div class="btn-toolbar" role="toolbar"
+							aria-label="Toolbar with button groups">
+							<div class="btn-group mr-2" role="group" aria-label="First group">
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#newTeamModal">
+									New <i class="far fa-plus-square"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div th:if="${#lists.isEmpty(memberships)}" class="col-12">
+					<div class="card text-center">
+						<div class="card-body" style="height: 12rem; padding: 50px;">
+							<p class="card-text lead">
+								<i class="fas fa-info-circle"></i>&nbsp;&nbsp;<span
+									th:text="#{meeting.no_meeting_msg}">With supporting text
+									below as a natural lead-in to additional content.</span>
+							</p>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#newTeamModal">New Team</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="card card-stats">
+						<div class="card-header card-header-warning card-header-icon"
+							style="padding-bottom: 13px;">
+							<div class="card-icon">
+								<i class="fas fa-link team-icons"></i>
+							</div>
+							<p class="card-category">
+								<i class="fas fa-qrcode my-fa-color1"></i>
+							</p>
+							<h3 class="card-title">Join Team</h3>
+							<blockquote class="blockquote" style="font-size: 1.0rem">
+								<p>Enter your activation code below</p>
+							</blockquote>
+							<input class="form-control form-control-lg form-field"
+								style="text-align: center; width: 80%; margin: auto;"
+								type="text" placeholder="Code">
+						</div>
+						<div class="card-footer justify-content-between">
+							<div></div>
+							<button type="button" class="btn btn-primary">Join Team</button>
+						</div>
+					</div>
+				</div>
+				<div th:each="membership : ${memberships}"
+					th:attr="class=|col-lg-4 col-md-6 col-sm-6 ${membership.isActive}? '':' inactive-component'|"
+					class="col-lg-4 col-md-6 col-sm-6">
+					<div class="card card-stats">
+						<div class="card-header card-header-warning card-header-icon">
+							<div class="card-icon">
+								<i class="fas fa-users team-icons"></i>
+							</div>
+							<p class="card-category">
+								<i
+									th:attr="class=|fas ${membership.meeting.isPublic}? 'fa-globe-africa':'fa-lock' my-fa-color1|"
+									class="fas fa-lock my-fa-color1"></i>
+							</p>
+							<h3 class="card-title" th:text="${membership.meeting.name}">Team
+								#1</h3>
+							<blockquote class="blockquote" style="font-size: 1.0rem">
+								<p th:text="${membership.meeting.shortDesc}">Lorem ipsum
+									dolor sit amet, consectetur adipiscing elit. Integer posuere
+									erat a ante.</p>
+								<footer class="blockquote-footer">
+									<small class="text-muted"
+										th:text="|${membership.meeting.membersCnt} #{meethub.members}|">
+										300 Members </small>
+								</footer>
+							</blockquote>
+						</div>
+						<div class="card-footer justify-content-between">
+							<div>
+								<div th:if="${membership.typeCd} == 1">
+									<i class="fas fa-exclamation-triangle my-fa-color1"></i> <a
+										th:href="${membership.meeting.id}" href="#pablo">Administration</a>
+								</div>
+							</div>
+							<button type="button" class="btn btn-primary">Go to
+								Meeting</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- New Team Modal -->
+		<div class="modal fade" id="newTeamModal" tabindex="-1" role="dialog"
+			aria-labelledby="newTeamModal" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<form method="POST" th:action="@{/team}" action="#"
+					th:object="${meeting}" id="teamForm" enctype="multipart/form-data">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">New Team</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body container-fluid">
+							<div class="row">
+								<div class="col-4">
+									<div class="picture-container">
+										<div class="picture">
+											<img th:src="@{/static/img/default-avatar.png}"
+												class="picture-src" id="wizardPicturePreview"> <input
+												type="file" onchange="readURL(this);" th:field="*{logo}" name="logo"
+												class="inputfile">
+										</div>
+										<h6 class="description">Choose Picture</h6>
+									</div>
+								</div>
+								<div class="col-8">
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label for="administrator">Administrator</label> <input
+												type="text" class="form-control" id="administrator"
+												placeholder="Yourself">
+										</div>
+										<div class="form-group col-md-8">
+											<label for="teamName">Name <a href="#"
+												data-toggle="tooltip" data-placement="top"
+												title="Great team names are short and memorable. Need inspiration? How about urban-meme?"><i
+													class="fas fa-info-circle"></i></a></label> <input type="text"
+												class="form-control" id="teamName" placeholder="Team ABC" th:field="*{name}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="description">Description (optional)</label> <input
+											type="text" class="form-control" id="description"
+											placeholder="This group is da bomb" th:field="*{shortDesc}">
+									</div>
+								</div>
+							</div>
+							<h4 class="card-title">Contact</h4>
+							<hr />
+							<div class="row">
+								<div class="col-12">
+									<div class="form-row">
+										<div class="form-group col-md-7">
+											<label for="inputAddress2">Address</label> <input type="text"
+												class="form-control" id="inputAddress2"
+												placeholder="Apartment, studio, or floor" th:field="*{streetAddr}">
+										</div>
+										<div class="form-group col-md-5">
+											<label for="inputCity">City</label> <input type="text"
+												class="form-control" id="inputCity" th:field="*{city}">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="country">Country</label> <input type="text"
+												class="form-control" id="country" th:field="*{countryOfIncorp}">
+										</div>
+										<div class="form-group col-md-4">
+											<label for="province">State</label> <input type="text"
+												class="form-control" id="province" th:field="*{province}">
+										</div>
+										<div class="form-group col-md-2">
+											<label for="inputZip">Zip</label> <input type="text"
+												class="form-control" id="inputZip" th:field="*{zip}">
+										</div>
+									</div>
+								</div>
+							</div>
+							<h4 class="card-title">Visibility</h4>
+							<hr />
+							<div class="row">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3 form-check text-right">
+											<input class="form-check-input" type="radio"
+												name="visibility" id="publicRadio" value="0" th:field="*{isPublic}" checked>
+											<label class="form-check-label" for="publicRadio"> <i
+												class="fas fa-globe-africa visibility-icon"></i>
+											</label>
+										</div>
+										<div class="col-9">
+											<h6>Public</h6>
+											<p>Anyone can see this team.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3 form-check text-right">
+											<input class="form-check-input" type="radio"
+												name="visibility" id="privateRadio" value="1" th:field="*{isPublic}"> <label
+												class="form-check-label" for="privateRadio"><i
+												class="fas fa-lock visibility-icon"></i></label>
+										</div>
+										<div class="col-9">
+											<h6>Private</h6>
+											<p>You choose who can see this team.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr />
+							<div class="row justify-content-center">
+								<div class="custom-file col-6">
+									<input type="file" class="custom-file-input" id="customFile" th:field="*{terms}">
+									<label class="custom-file-label" for="customFile">Terms
+										& conditions</label>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Create
+								team</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

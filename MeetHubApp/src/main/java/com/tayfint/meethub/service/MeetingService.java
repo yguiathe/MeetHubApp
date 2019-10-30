@@ -1,23 +1,20 @@
 package com.tayfint.meethub.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.tayfint.meethub.model.Meeting;
+
 public interface MeetingService {
-
-	void add();
-
-	void update();
-
-	void delete();
-
-	void getParams();
-
-	void list();
-
-	void show();
-
-	void getAge();
-
-	void getMembers();
-
-	void getCode();
+	
+	Meeting saveMeeting(Meeting meeting);
+	
+	Optional<Meeting> findByMeetingId(Long meetingId);
+	
+	Meeting findByMeetingName(String name);
+	
+	void deleteMeetingById(Long meetingId);
+	
+	List<Meeting> findAllMeetings();
 
 }

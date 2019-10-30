@@ -1,13 +1,12 @@
 package com.tayfint.meethub.model;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Collection;
-
+import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -18,24 +17,24 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.tayfint.meethub.model.Authority;
 import com.tayfint.meethub.model.UserRole;
 
 @Entity
 @Table(name = "app_user")
 @EntityListeners(AuditingEntityListener.class)
-public class User extends BaseEntity implements UserDetails, Auditable {
+public class User extends BaseEntity implements UserDetails {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3348273711654520441L;
 
 	@Column(name = "USERNAME", length = 50)
 	private String username;
@@ -59,9 +58,6 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 
 	@Column(name = "IS_DECEASED")
 	private Boolean isDeceased = false;
-	
-	@Column(name = "IS_GROUP")
-	private Boolean isGroup = false;
 
 	@Column(name = "PRIMARY_ID", length = 40)
 	private String primaryId;
@@ -102,7 +98,7 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	private Double monthlySalary;
 
 	@Column(name = "IS_ACTIVE")
-	private Boolean enabled = true;
+	private Boolean isActive = true;
 
 	@Column(name = "MARITAL_STATUS_CD", length = 3)
 	private String maritalStatusCd;
@@ -132,25 +128,25 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles = new HashSet<>();
 
-	@Embedded
-	private Audit audit;
+	@CreatedBy
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime created;
+
+    @LastModifiedBy
+    @Column(nullable = false)
+    private String modifiedBy;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modified;
+
 	
 	public int getApplicationsCnt() {
 		return applicationsCnt;
-	}
-
-	@Override
-	public Audit getAudit() {
-		return this.audit;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		for (UserRole ur : userRoles) {
-			authorities.add(new Authority(ur.getRole().getName()));
-		}
-		return authorities;
 	}
 
 	public byte[] getAvatar() {
@@ -171,6 +167,14 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 
 	public String getConfirmPassword() {
 		return confirmPassword;
+	}
+
+	public LocalDateTime getCreated() {
+		return created;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
 	public String getEducation() {
@@ -212,7 +216,7 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	public String getLastName() {
 		return this.lastName;
 	}
-
+	
 	public Date getLastSuccessfulLogin() {
 		return this.lastSuccessfulLogin;
 	}
@@ -220,9 +224,17 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	public String getMaritalStatusCd() {
 		return this.maritalStatusCd;
 	}
-	
+
 	public String getMiddleName() {
 		return this.middleName;
+	}
+
+	public LocalDateTime getModified() {
+		return modified;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
 	}
 
 	public Double getMonthlySalary() {
@@ -261,40 +273,8 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 		return userRoles;
 	}
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public Boolean isGroup() {
-		return isGroup;
-	}
-
 	public void setApplicationsCnt(int applicationsCnt) {
 		this.applicationsCnt = applicationsCnt;
-	}
-
-	@Override
-	public void setAudit(Audit audit) {
-		this.audit = audit;		
 	}
 
 	public void setAvatar(byte[] avatar) {
@@ -308,13 +288,21 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	public void setBlockedUntil(Date blockedUntil) {
 		this.blockedUntil = blockedUntil;
 	}
-
+	
 	public void setCitizenship(String citizenship) {
 		this.citizenship = citizenship;
 	}
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public void setEducation(String education) {
@@ -324,17 +312,13 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public void setEmployer(String employer) {
 		this.employer = employer;
 	}
 
 	public void setEmploymentStatusCd(String employmentStatusCd) {
 		this.employmentStatusCd = employmentStatusCd;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public void setFailedLoginAttempts(Short failedLoginAttempts) {
@@ -356,11 +340,7 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 	public void setIsDeceased(Boolean isDeceased) {
 		this.isDeceased = isDeceased;
 	}
-
-	public void setIsGroup(Boolean isGroup) {
-		this.isGroup = isGroup;
-	}
-
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
@@ -375,6 +355,14 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
+	}
+
+	public void setModified(LocalDateTime modified) {
+		this.modified = modified;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
 	public void setMonthlySalary(Double monthlySalary) {
@@ -411,6 +399,47 @@ public class User extends BaseEntity implements UserDetails, Auditable {
 
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		for (UserRole ur : userRoles) {
+			authorities.add(new Authority(ur.getRole().getName()));
+		}
+		return authorities;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 }

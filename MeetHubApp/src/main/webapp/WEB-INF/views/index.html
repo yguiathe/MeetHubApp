@@ -26,6 +26,8 @@
 <!-- Custom styles for this template -->
 <link th:href="@{/static/css/custom/cover.css}"
 	href="../../../static/css/custom/cover.css" rel="stylesheet" />
+<link th:href="@{/static/css/custom/shared.css}"
+	href="../../../static/css/custom/shared.css" rel="stylesheet" />
 </head>
 <body class="text-center">
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -43,6 +45,9 @@
 				<form id="login" th:action="@{signin}" method="POST">
 					<div class="card">
 						<div class="card-body col-10 offset-1 justify-content-center">
+							<div class="card-icon-login">
+								<i class="fas fa-sign-in-alt team-icons"></i>
+							</div>
 							<div class="form-group">
 								<h3 class="d-flex justify-content-center">
 									<small class="lead app-lead" th:text="#{meethub.loginpage}">Login</small>
@@ -326,8 +331,8 @@
 	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script th:src="@{/static/js/bootstrap/bootstrap.min.js}"
-		src="../../static/js/bootstrap/bootstrap.min.js"></script>
-	<script th:src="@{/static/js/index.js}" src="../../static/js/index.js"></script>
+	<script th:src="@{/static/js/bootstrap/bootstrap.bundle.min.js}"
+		src="../../static/js/bootstrap/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/static/js/app_index.js}" src="../../static/js/app_index.js"></script>
 </body>
 </html>

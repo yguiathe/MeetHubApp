@@ -1,26 +1,40 @@
 package com.tayfint.meethub.service;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+
+import com.tayfint.meethub.model.Account;
+
 public interface AccountService {
 
-	void add();
+	Account createPrimaryAccount();
+    
+	Account createSavingsAccount();
+    
+	Account createLoanAccount();
+    
+	Account createInvestmentAccount();
 
 	void freeze();
 
 	void delete();
 
-	void deposit();
+	Account deposit(Account toAccount, BigDecimal amount);
 
-	void withdraw();
+	Account withdraw(Account fromAccount, BigDecimal amount);
+    
+    Account transfer(String transferFrom, String transferTo, BigDecimal amount, Account fromAccount, Account toAccount);
 
-	void transfer();
+	void hasSufficientFunds(Account acct);
 
-	void hasSufficientFunds();
-
-	void list();
+	List<Account> list();
 
 	void show();
 
-	void getStatement();
+	void getStatement(Account acct);
 
 	void borrow();
+
+	Optional<Account> findById(Long id);
 }
