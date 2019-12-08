@@ -42,7 +42,6 @@ public class UserController {
 	@Autowired
 	private RoleDao roleDao;
 
-	// Set a form validator
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(userFormValidator);

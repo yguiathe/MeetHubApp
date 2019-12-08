@@ -28,7 +28,7 @@ a {
 	font-weight: 200;
 	background-size: cover;
 	background-position: center center;
-	background: #fff;
+	background-image: linear-gradient(to bottom right, #f1f1f1 , #31708f);
 }
 
 #sidebar .sidebar-background, body>.navbar-collapse .sidebar-background
@@ -177,13 +177,13 @@ a {
 	font-size: 16px;
 	border-radius: 0;
 	min-height: 60px;
-	background-color: #31708f;
+	background-color: white;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	padding: 5px 15px;
 }
 
 .navbar-brand {
-	color: white;
+	color: #31708f;
 }
 
 .navbar-brand:hover {
@@ -232,7 +232,6 @@ a {
 
 .page-titles {
 	background: #f1f1f1;
-	margin: 0 0px 30px;
 	-webkit-box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 	box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 	padding-top: 10px;
@@ -245,8 +244,16 @@ a {
 }
 
 .card {
+	border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color: #333;
+    background: #fff;
+    width: 100%;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px
 		rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+	font-size: .875rem;
 }
 
 .card-profile .card-avatar {
@@ -264,10 +271,6 @@ a {
 
 .card-description, .app-label {
 	color: gray;
-}
-
-.card {
-	font-size: .875rem;
 }
 
 .card-stats .card-header.card-header-icon, .card-stats .card-header.card-header-text
@@ -307,14 +310,28 @@ a {
 	text-align: center;
 }
 
-.card [class*=card-header-] {
+.card-header-tabs {
 	margin: 0 15px;
 	padding: 0;
 	position: relative;
+	color: #fff;
+	background: linear-gradient(50deg,#3c89ae,#31708f)
 }
 
 .card .card-header {
 	z-index: 3 !important;
+}
+
+.card [class*=card-header-] {
+    margin: 0 15px;
+    padding: 0;
+    position: relative;
+}
+
+.card [class*=card-header-]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+    border-radius: 3px;
+    margin-top: -20px;
+    padding: 15px;
 }
 
 .card-title {
@@ -383,4 +400,58 @@ a {
 input#publicRadio.form-check-input {
     margin-top: 1rem;
     margin-left: -1.55rem;
+}
+
+/* Meeting page */
+.icon-shape {
+    display: inline-flex;
+    padding: 12px;
+    text-align: center;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.bg-gradient-dblue {
+    background: linear-gradient(87deg,#31708f 0,#4a9bc1 100%)!important;
+}
+
+.color-dblue {
+	color: #31708f;
+}
+
+.bg-gradient-lgreen {
+	background: linear-gradient(87deg,#1cc88a 0,#88eeca 100%)!important;
+	color: #1cc88a;
+}
+
+.color-lgreen {
+	color: #1cc88a;
+}
+
+.bg-gradient-lblue {
+    background: linear-gradient(87deg,#36b9cc 0,#268795 100%)!important;
+    color: #36b9cc;
+}
+
+.color-lblue {
+	color: #36b9cc;
+}
+
+.bg-gradient-yellow {
+    background: linear-gradient(87deg,#f6c23e 0,#fbdf97 100%)!important;
+    color: #f6c23e;
+}
+
+.color-yellow {
+	color: #f6c23e;
+}
+
+.act-crd-title {
+	color: gray;
 }

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tayfint.meethub.dao.MembershipDao;
+import com.tayfint.meethub.model.CheckingAccount;
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
+import com.tayfint.meethub.model.SavingsAccount;
 import com.tayfint.meethub.model.User;
 
 @Service("membershipService")
@@ -21,17 +23,11 @@ public class MembershipServiceImpl implements MembershipService {
 	@Autowired
 	MembershipDao membershipDao;
 	
-	@Autowired
-    private AccountService accountService;
-	
-	@Autowired
-	private MeetingService meetingService;
-	
 	static final Logger logger = LoggerFactory.getLogger(MembershipServiceImpl.class);
 	
 	public void save(Membership membership) {
-		membership.addAccount(accountService.createPrimaryAccount());
-		membership.addAccount(accountService.createSavingsAccount());
+		membership.addAccount(new CheckingAccount());
+		membership.addAccount(new SavingsAccount());
 		membershipDao.save(membership);
 	}
 
@@ -48,17 +44,6 @@ public class MembershipServiceImpl implements MembershipService {
 	@Override
 	public Membership findMembershipByUserAndMeeting(User user, Meeting meeting) {
 		return membershipDao.findByUserAndMeeting(user, meeting);
-	}
-
-	@Override
-	public void saveMembership(Meeting meeting, User user, String typeCd) {
-		Membership membership = new Membership();
-		membership.setTypeCd(typeCd);
-		user.setTeamsCnt(user.getTeamsCnt() + 1);
-		meeting.setMembersCnt(meeting.getMembersCnt() + 1);
-		membership.setMeeting(meetingService.saveMeeting(meeting));
-		membership.setUser(user);
-		save(membership);
 	}
 
 	@Override

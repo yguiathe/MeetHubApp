@@ -118,4 +118,24 @@ public class UserServiceImpl implements UserService {
 		return userDao.findAll();
 	}
 
+	public void IncrementTeamsCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setTeamsCnt(user.getTeamsCnt() + 1);
+	}
+	
+	public void decrementTeamsCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setTeamsCnt(user.getTeamsCnt() - 1);
+	}
+	
+	public void IncrementAppCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setApplicationsCnt(user.getApplicationsCnt() + 1);
+	}
+	
+	public void decrementAppCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setApplicationsCnt(user.getApplicationsCnt() - 1);
+	}
+
 }

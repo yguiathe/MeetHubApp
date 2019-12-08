@@ -10,6 +10,10 @@ public class InvestmentAccount extends Account {
 
 	private static final long serialVersionUID = -7561662185174613784L;
 	
+	public InvestmentAccount() {
+		super(new BigDecimal(0.0), "INV-" + accountGen(), true);
+	}
+	
 	private BigDecimal totalCost;
 	
 	private String projectName;

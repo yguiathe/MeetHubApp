@@ -11,6 +11,10 @@ public class SavingsAccount extends Account {
 
 	private static final long serialVersionUID = -3935889236630904623L;
 	
+	public SavingsAccount() {
+		super(new BigDecimal(0.0), "SAV-" + accountGen(), true);
+	}
+	
 	private float interestRate;
 	
 	private BigDecimal interestBalance;

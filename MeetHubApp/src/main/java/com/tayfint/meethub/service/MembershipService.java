@@ -25,7 +25,7 @@ public interface MembershipService {
 
 	void show();
 
-	void saveMembership(Meeting meeting, User user, String typeCd);
+	void save(Membership membership);
 	
 	Optional<Membership> findMembershipById(Long membershipId);
 	

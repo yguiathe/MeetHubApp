@@ -28,4 +28,12 @@ public interface UserService {
     void enableUser (String username);
 
     void disableUser (String username);
+    
+    void IncrementTeamsCnt(Long userId);
+    
+    void decrementTeamsCnt(Long userId);
+    
+    void IncrementAppCnt(Long userId);
+    
+    void decrementAppCnt(Long userId);
 }

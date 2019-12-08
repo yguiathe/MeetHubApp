@@ -1,14 +1,16 @@
 package com.tayfint.meethub.service;
 
+import org.springframework.data.domain.Page;
+import com.tayfint.meethub.model.Account;
+import com.tayfint.meethub.model.Transaction;
+
 public interface TransactionService {
 
-	void add();
-
-	void update();
-
-	void delete();
-
-	void list();
+	Page<Transaction> findByAccount(Account acct, int page);
 	
-	void export();
+	Page<Transaction> findByAccountAndOriginatorName(Account acct, String originatorName, int page);
+	
+	void deleteById(Long id);
+
+	Transaction save(Transaction transaction);
 }

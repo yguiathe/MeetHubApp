@@ -1,3 +1,5 @@
+$('#copyrightYear').html(new Date().getFullYear());
+
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -58,18 +60,6 @@ function fixStepIndicator(n) {
 	// ... and adds the "active" class on the current step:
 	x[n].className += " active";
 	y[n].className += " active";
-}
-
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-			$('.picture-src').attr('src', e.target.result);
-		};
-
-		reader.readAsDataURL(input.files[0]);
-	}
 }
 
 // JS for slider

@@ -1,14 +1,15 @@
 package com.tayfint.meethub.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,7 +33,7 @@ public class Meeting extends BaseEntity {
 	@Column(name = "SHORT_DESC", length = 1500)
 	private String shortDesc;
 
-	@Column(name = "LOGO")
+	@Column(name = "LOGO", length = 100000)
 	@Lob
 	private byte[] logo;
 
@@ -59,7 +60,7 @@ public class Meeting extends BaseEntity {
 	@Column(nullable = false)
 	private LocalDateTime modified;
 
-	@Column(name = "TERMS")
+	@Column(name = "TERMS", length = 17000000 )
 	@Lob
 	private byte[] terms;
 
@@ -71,16 +72,16 @@ public class Meeting extends BaseEntity {
 
 	@Column(name = "PRIMARY_ID", length = 40)
 	private String primaryId;
-	
+
 	@Column(name = "STREET_ADDR", length = 40)
 	private String streetAddr;
-	
+
 	@Column(name = "CITY", length = 20)
 	private String city;
-	
+
 	@Column(name = "PROVINCE", length = 20)
 	private String province;
-	
+
 	@Column(name = "ZIP", length = 10)
 	private String zip;
 
@@ -89,10 +90,12 @@ public class Meeting extends BaseEntity {
 
 	@Column(name = "IS_PUBLIC")
 	private boolean isPublic = true;
+	
+	@Column(name = "MIN_CONTRIBUTION")
+	private BigDecimal minContribution;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "MEETING_ID")
-	private Set<Account> accounts;
+	@OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL)
+	private Set<Account> accounts = new HashSet<Account>();
 
 	public void addAccount(Account account) {
 		accounts.add(account);
@@ -262,6 +265,14 @@ public class Meeting extends BaseEntity {
 
 	public void setIsPublic(boolean isPublic) {
 		this.isPublic = isPublic;
+	}
+
+	public BigDecimal getMinContribution() {
+		return minContribution;
+	}
+
+	public void setMinContribution(BigDecimal minContribution) {
+		this.minContribution = minContribution;
 	}
 
 }

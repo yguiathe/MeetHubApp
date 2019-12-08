@@ -57,19 +57,19 @@
 								<label for="username"><i class="fas fa-user"></i></label> <input
 									type="text" name="username" class="form-control form-field"
 									id="login-username" aria-describedby="usernameHelp"
-									placeholder="Username"/>
+									placeholder="Username" />
 							</div>
 							<div class="form-group">
 								<label for="password"><i class="fas fa-lock"></i></label> <input
 									type="password" name="password" class="form-control form-field"
-									id="login-password" placeholder="Password"/>
+									id="login-password" placeholder="Password" autocomplete="on" />
 							</div>
 							<div class="form-group">
 								<div class="form-row">
 									<div class="col">
 										<div class="custom-control custom-switch">
 											<input type="checkbox" class="custom-control-input"
-												id="remember-me" name="remember-me"/> <label
+												id="remember-me" name="remember-me" /> <label
 												class="custom-control-label" for="remember-me">Remember
 												me</label>
 											<!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
@@ -101,7 +101,7 @@
 
 		<div class="container all-form" id="registrationDiv">
 			<form method="POST" th:action="@{/register}" action="#"
-					th:object="${user}" id="regForm" enctype="multipart/form-data">
+				th:object="${user}" id="regForm" enctype="multipart/form-data">
 				<div class="row d-flex justify-content-center form-header">
 					<h3>
 						<small class="lead app-lead" th:text="#{meethub.signup}">Register</small>
@@ -124,9 +124,8 @@
 							<div class="picture">
 								<img th:src="@{/static/img/default-avatar.png}"
 									class="picture-src" id="wizardPicturePreview"> <input
-									type="file" onchange="readURL(this);"
-									th:field="*{avatar}" name="avatar"
-									class="inputfile">
+									type="file" onchange="readURL(this);" th:field="*{avatar}"
+									name="avatar" class="inputfile">
 							</div>
 							<h6 class="description">Choose Picture</h6>
 						</div>
@@ -135,27 +134,29 @@
 						<div class="form-row">
 							<div class="col-3 mb-3">
 								<!-- <label for="validationDefault01">First name</label> -->
-								<input type="text" class="form-control form-field" name="firstname"
-									id="firstname" placeholder="First name" th:field="*{firstName}"
-									required>
+								<input type="text" class="form-control form-field"
+									name="firstname" id="firstname" placeholder="First name"
+									th:field="*{firstName}" required>
 							</div>
 							<div class="col-4 mb-3">
 								<!-- <label for="validationDefault02">Last name</label> -->
-								<input type="text" class="form-control form-field" name="middlename"
-									id="middlename" placeholder="Middle name" th:field="*{middleName}"
-									required>
+								<input type="text" class="form-control form-field"
+									name="middlename" id="middlename" placeholder="Middle name"
+									th:field="*{middleName}" required>
 							</div>
 							<div class="col-5 mb-3">
 								<!-- <label for="validationDefault01">First name</label> -->
 								<input type="text" class="form-control form-field" id="lastname"
-									name="lastname" placeholder="Last name" th:field="*{lastName}" required>
+									name="lastname" placeholder="Last name" th:field="*{lastName}"
+									required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-7 mb-3">
 								<!-- <label for="validationDefault01">First name</label> -->
 								<input type="text" class="form-control form-field" id="intro"
-									placeholder="Fun facts about you..." th:field="*{intro}" name="intro" required>
+									placeholder="Fun facts about you..." th:field="*{intro}"
+									name="intro" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -168,7 +169,8 @@
 							<div class="col-5 mb-3">
 								<!-- <label for="validationDefault01">First name</label> -->
 								<input type="text" class="form-control form-field" id="birthcty"
-									placeholder="Country of birth" th:field="*{citizenship}" required>
+									placeholder="Country of birth" th:field="*{citizenship}"
+									required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -178,8 +180,8 @@
 									class="custom-control-label" for="male">Men</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="female" th:field="*{gender}" name="gender"
-									class="custom-control-input" value="F"> <label
+								<input type="radio" id="female" th:field="*{gender}"
+									name="gender" class="custom-control-input" value="F"> <label
 									class="custom-control-label" for="female">Female</label>
 							</div>
 						</div>
@@ -192,7 +194,8 @@
 					<div class="col-12">
 						<div class="form-row">
 							<div class="form-group col-4 offset-1">
-								<select th:field="*{maritalStatusCd}" id="marital_status" class="custom-select form-field">
+								<select th:field="*{maritalStatusCd}" id="marital_status"
+									class="custom-select form-field">
 									<option disabled selected value="">Marital Status</option>
 									<option value="0">Single</option>
 									<option value="1">Married</option>
@@ -201,8 +204,10 @@
 								</select>
 							</div>
 							<div class="form-group col-5 offset-1">
-								<select th:field="*{education}" id="education" class="custom-select form-field">
-									<option disabled selected value="">Highest Level of Education</option>
+								<select th:field="*{education}" id="education"
+									class="custom-select form-field">
+									<option disabled selected value="">Highest Level of
+										Education</option>
 									<option value="0">High School</option>
 									<option value="1">Some undergrad courses</option>
 									<option value="2">Bachelor</option>
@@ -216,7 +221,8 @@
 					<div class="col-12">
 						<div class="form-row">
 							<div class="form-group col-5 offset-1">
-								<select th:field="*{primaryIdType}" id="primaryIdType" class="custom-select form-field">
+								<select th:field="*{primaryIdType}" id="primaryIdType"
+									class="custom-select form-field">
 									<option disabled selected value="">Primary ID Type</option>
 									<option value="PP">Passport</option>
 									<option value="SSN">SSN</option>
@@ -225,15 +231,17 @@
 								</select>
 							</div>
 							<div class="form-group col-4 offset-1">
-								<input type="text" th:field="*{primaryId}" class="form-control form-field"
-									name="primaryId" id="primaryId" placeholder="ID" />
+								<input type="text" th:field="*{primaryId}"
+									class="form-control form-field" name="primaryId" id="primaryId"
+									placeholder="ID" />
 							</div>
 						</div>
 					</div>
 					<div class="col-12">
 						<div class="form-row">
 							<div class="form-group col-5 offset-1">
-								<select th:field="*{employmentStatusCd}" id="employmentstatuscd" class="custom-select form-field">
+								<select th:field="*{employmentStatusCd}" id="employmentstatuscd"
+									class="custom-select form-field">
 									<option disabled selected value="">Employment Status</option>
 									<option value="0">Self-Employed</option>
 									<option value="1">Employed</option>
@@ -243,7 +251,8 @@
 							</div>
 							<div class="form-group col-4 offset-1">
 								<input type="text" class="form-control form-field"
-									th:field="*{employer}" name="employer" id="employer" placeholder="Employer" />
+									th:field="*{employer}" name="employer" id="employer"
+									placeholder="Employer" />
 							</div>
 						</div>
 					</div>
@@ -252,9 +261,9 @@
 							<label for="monthlyincome">Monthly Income (in dollars): </label><span
 								id="income"></span>
 						</p>
-						<input type="range" th:field="*{monthlySalary}" class="custom-range form-field" min="1500"
-							max="500000" step="500" id="monthlyincome" value="100000"
-							data-thumbwidth="20">
+						<input type="range" th:field="*{monthlySalary}"
+							class="custom-range form-field" min="1500" max="500000"
+							step="500" id="monthlyincome" value="100000" data-thumbwidth="20">
 					</div>
 				</div>
 				<div class="row form-row-padding form-tab">
@@ -265,26 +274,31 @@
 						<div class="form-row col-8">
 							<div class="form-group col-6">
 								<input type="email" class="form-control form-field" id="email"
-									aria-describedby="emailHelp" th:field="*{email}" name="email" placeholder="Email">
+									aria-describedby="emailHelp" th:field="*{email}" name="email"
+									placeholder="Email">
 							</div>
 							<div class="form-group col-6">
 								<input type="text" class="form-control form-field" id="phone"
-									aria-describedby="phoneHelp" th:field="*{phone}" placeholder="Phone number">
+									aria-describedby="phoneHelp" th:field="*{phone}"
+									placeholder="Phone number">
 							</div>
 						</div>
 
 						<div class="form-group col-8">
 							<input type="text" class="form-control form-field" id="username"
-								aria-describedby="usernameHelp" th:field="*{username}" placeholder="Username">
+								aria-describedby="usernameHelp" th:field="*{username}"
+								placeholder="Username">
 						</div>
 						<div class="form-row col-8">
 							<div class="form-group col-6">
 								<input type="password" class="form-control form-field"
-									id="password" th:field="*{password}" name="password" placeholder="Password">
+									id="password" th:field="*{password}" name="password"
+									placeholder="Password" autocomplete="off">
 							</div>
 							<div class="form-group col-6">
 								<input type="password" class="form-control form-field"
-									id="cpassword" th:field="*{confirmPassword}" placeholder="Confirm password">
+									id="cpassword" th:field="*{confirmPassword}"
+									placeholder="Confirm password" autocomplete="off">
 							</div>
 						</div>
 					</div>
@@ -325,7 +339,9 @@
 
 		<footer class="mastfoot mt-auto">
 			<div class="inner">
-				<p>&copy; 2019 Tayfint, Inc.</p>
+				<p>
+					&copy; <span id="copyrightYear"> </span> Tayfint, Inc.
+				</p>
 			</div>
 		</footer>
 	</div>
@@ -333,6 +349,9 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script th:src="@{/static/js/bootstrap/bootstrap.bundle.min.js}"
 		src="../../static/js/bootstrap/bootstrap.bundle.min.js"></script>
-	<script th:src="@{/static/js/app_index.js}" src="../../static/js/app_index.js"></script>
+	<script th:src="@{/static/js/app_index.js}"
+		src="../../static/js/app_index.js"></script>
+	<script th:src="@{/static/js/app_shared.js}"
+		src="../../static/js/app_shared.js"></script>
 </body>
 </html>

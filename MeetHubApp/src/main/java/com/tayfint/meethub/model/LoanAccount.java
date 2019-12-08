@@ -12,6 +12,10 @@ public class LoanAccount extends Account {
 
 	private static final long serialVersionUID = -8677625912384414678L;
 	
+	public LoanAccount() {
+		super(new BigDecimal(0.0), "LOA-" + accountGen(), true);
+	}
+	
 	private float interestRate;
 	
 	private BigDecimal principal;

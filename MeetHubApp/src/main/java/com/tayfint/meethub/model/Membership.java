@@ -2,11 +2,13 @@ package com.tayfint.meethub.model;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,9 +21,11 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "app_membership")
+@EntityListeners(AuditingEntityListener.class)
 public class Membership extends BaseEntity {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -36,8 +40,14 @@ public class Membership extends BaseEntity {
 	private String typeCd;
 	
 	@Column(name = "IS_ACTIVE")
-	private Boolean isActive = true;
+	private Boolean isActive;
 	
+	public Membership() {
+		super();
+		this.typeCd = "0";
+		this.isActive = true;
+	}
+
 	@Column(name = "ACTIVATION_TOKEN", length = 10)
     private String activationToken;
 	
@@ -61,8 +71,8 @@ public class Membership extends BaseEntity {
     @Column(nullable = false)
     private LocalDateTime modified;
     
-    @OneToMany(mappedBy = "membership", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Account> accounts;
+    @OneToMany(mappedBy = "membership", cascade = CascadeType.ALL)
+    private Set<Account> accounts = new HashSet<Account>();
 
 	public Set<Account> getAccounts() {
 		return accounts;
