@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.tayfint.meethub.dao.RoleDao;
 import com.tayfint.meethub.dao.UserDao;
 import com.tayfint.meethub.model.User;
-import com.tayfint.meethub.model.security.UserRole;
+import com.tayfint.meethub.model.UserRole;
 
 @Service("userService")
 @Transactional
@@ -68,16 +68,14 @@ public class UserServiceImpl implements UserService {
 
 	public void enableUser(String username) {
 		User user = findByUsername(username);
-		user.setEnabled(true);
+		user.setIsActive(true);
 		userDao.save(user);
 	}
 
 	public void disableUser(String username) {
 		User user = findByUsername(username);
-		user.setEnabled(false);
-		System.out.println(user.isEnabled());
+		user.setIsActive(false);
 		userDao.save(user);
-		System.out.println(username + " is disabled.");
 	}
 
 
@@ -118,6 +116,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findUserList() {
 		return userDao.findAll();
+	}
+
+	public void IncrementTeamsCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setTeamsCnt(user.getTeamsCnt() + 1);
+	}
+	
+	public void decrementTeamsCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setTeamsCnt(user.getTeamsCnt() - 1);
+	}
+	
+	public void IncrementAppCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setApplicationsCnt(user.getApplicationsCnt() + 1);
+	}
+	
+	public void decrementAppCnt(Long userId) {
+		User user = userDao.findById(userId).get();	
+		user.setApplicationsCnt(user.getApplicationsCnt() - 1);
 	}
 
 }

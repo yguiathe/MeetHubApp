@@ -1,102 +1,110 @@
 package com.tayfint.meethub.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "app_transaction")
-public class Transaction {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "TRANSACTION_GEN")
-	@TableGenerator(name = "TRANSACTION_GEN", table = "hibernate_id", pkColumnName = "GEN_KEY", valueColumnName = "GEN_VALUE", pkColumnValue = "TRANS_GEN", allocationSize = 1)
-	@Column(name = "ID")
-	private Long id;
+@EntityListeners(AuditingEntityListener.class)
+public class Transaction extends BaseEntity {
+	
+	@Column(name = "availableBalance")
 	private BigDecimal availableBalance;
+	
+	@Column(name = "amount")
 	private BigDecimal amount;
+	
+	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "type")
 	private String type;
+	
+	@Column(name = "originator_name")
+	private String originatorName;
+	
+	@Column(name = "direction")
+	private String direction;
+	
+	@Column(name = "description")
 	private String description;
-	private Date date;
-	private Long fromAccountIid;
-	private Long toAccountIid;
+	
+	@Column(name = "notes", length=1000)
+	private String notes;
+	
+	@Column(name = "src_acct")
+	private Long srcAcct;
+	
+	@Column(name = "dest_acct")
+	private Long destAcct;
+	
+	@CreatedBy
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
 
-	public Transaction() {
-	}
+    @CreatedDate
+    @Column(name="transaction_date_time", nullable = false, updatable = false)
+    private LocalDateTime created;
 
-	public Transaction(Date date, String description, String type, String status, BigDecimal amount,
-			BigDecimal availableBalance, Account account, Long fromAccountId, Long toAccountId) {
-		this.date = date;
-		this.description = description;
-		this.type = type;
-		this.status = status;
-		this.amount = amount;
-		this.availableBalance = availableBalance;
-		this.account = account;
-		this.fromAccountIid = fromAccountId;
-		this.toAccountIid = toAccountId;
-	}
+    @LastModifiedBy
+    @Column(nullable = false)
+    private String modifiedBy;
 
-	@ManyToOne
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modified;
+    
+    @ManyToOne
 	@JoinColumn(name = "account_id")
 	private Account account;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
+	public Transaction(BigDecimal availableBalance, BigDecimal amount, String status, String type, String originatorName, String direction,
+			String description, Long srcAcct, Long destAcct, Account account, String notes) {
+		super();
+		this.availableBalance = availableBalance;
 		this.amount = amount;
+		this.status = status;
+		this.type = type;
+		this.originatorName = originatorName;
+		this.direction = direction;
+		this.description = description;
+		this.srcAcct = srcAcct;
+		this.destAcct = destAcct;
+		this.account = account;
+		this.notes = notes;
+	}
+
+	
+	
+	public Transaction(BigDecimal availableBalance, BigDecimal amount, String status, String type,
+			String originatorName, String direction, String description, Long destAcct, Account account, String notes) {
+		super();
+		this.availableBalance = availableBalance;
+		this.amount = amount;
+		this.status = status;
+		this.type = type;
+		this.originatorName = originatorName;
+		this.direction = direction;
+		this.description = description;
+		this.destAcct = destAcct;
+		this.account = account;
+		this.notes = notes;
+	}
+	
+	public Transaction() {
+		super();
 	}
 
 	public BigDecimal getAvailableBalance() {
@@ -107,6 +115,102 @@ public class Transaction {
 		this.availableBalance = availableBalance;
 	}
 
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getOriginatorName() {
+		return originatorName;
+	}
+
+	public void setOriginatorName(String originatorName) {
+		this.originatorName = originatorName;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Long getSrcAcct() {
+		return srcAcct;
+	}
+
+	public void setSrcAcct(Long srcAcct) {
+		this.srcAcct = srcAcct;
+	}
+
+	public Long getDestAcct() {
+		return destAcct;
+	}
+
+	public void setDestAcct(Long destAcct) {
+		this.destAcct = destAcct;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public LocalDateTime getCreated() {
+		return created;
+	}
+
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public LocalDateTime getModified() {
+		return modified;
+	}
+
+	public void setModified(LocalDateTime modified) {
+		this.modified = modified;
+	}
+
 	public Account getAccount() {
 		return account;
 	}
@@ -115,19 +219,12 @@ public class Transaction {
 		this.account = account;
 	}
 
-	public Long getToAccountIid() {
-		return toAccountIid;
+	public String getNotes() {
+		return notes;
 	}
 
-	public void setToAccountIid(Long toAccountIid) {
-		this.toAccountIid = toAccountIid;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
-
-	public Long getFromAccountIid() {
-		return fromAccountIid;
-	}
-
-	public void setFromAccountIid(Long fromAccountIid) {
-		this.fromAccountIid = fromAccountIid;
-	}
+    
 }

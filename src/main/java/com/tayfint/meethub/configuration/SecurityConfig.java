@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -33,54 +32,48 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
-	@Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}
-
+	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
 		auth.authenticationProvider(authenticationProvider());
 	}
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/*", "/index.html", "/signUp", "/registration").permitAll()
+				.antMatchers("/*", "/index.html").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
+				.loginPage("/")
 				.loginProcessingUrl("/signin")
 				.usernameParameter("username")
 				.passwordParameter("password")
-				.defaultSuccessUrl("/User/Memberships")
+				.defaultSuccessUrl("/home")
 				.permitAll()
 				.and()
-			.rememberMe()
+				.rememberMe()
 				.rememberMeCookieName("app-remember-me")
 				.rememberMeParameter("remember-me")
 				.tokenRepository(tokenRepository())
 				.tokenValiditySeconds(86400)
 				.and()
 			.csrf()
-				.and()
+				.disable()
 			.logout()
 				.permitAll()
-				.and()
-			.exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler)
 				.and()
 			.sessionManagement()
 				.maximumSessions(100)
 				.maxSessionsPreventsLogin(false)
-				.expiredUrl("/login");
+				.expiredUrl("/");
 	}
 	
 	@Override
@@ -97,14 +90,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
 		return authenticationProvider;
 	}
-
+	
 	@Bean
 	public PersistentTokenRepository tokenRepository() {
 	    JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl=new JdbcTokenRepositoryImpl();
 	    jdbcTokenRepositoryImpl.setDataSource(dataSource);
 	    return jdbcTokenRepositoryImpl;
 	}
-
+	
 	@Bean
 	public AuthenticationTrustResolver getAuthenticationTrustResolver() {
 		return new AuthenticationTrustResolverImpl();

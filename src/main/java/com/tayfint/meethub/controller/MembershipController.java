@@ -1,59 +1,45 @@
 package com.tayfint.meethub.controller;
 
-import java.security.Principal;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tayfint.meethub.model.Account;
 import com.tayfint.meethub.model.Meeting;
 import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.User;
+import com.tayfint.meethub.model.dto.UserDto;
+import com.tayfint.meethub.service.AccountService;
 import com.tayfint.meethub.service.MembershipService;
-import com.tayfint.meethub.service.UserService;
 
 @Controller
-@RequestMapping("/User/Memberships")
-@SessionAttributes({"userFirstName", "membership"})
+@SessionAttributes({ "membership" })
+@RequestMapping("/memberships")
 public class MembershipController {
 
 	static final Logger logger = LoggerFactory.getLogger(MembershipController.class);
-	
-	@Autowired
-	private UserService userService;
-	
+
 	@Autowired
 	private MembershipService membershipService;
-	
-	@RequestMapping(value = "/saveMembership", method = RequestMethod.POST)
-	public String saveMembership(@ModelAttribute("meetingForm") Meeting meeting,
-			BindingResult result, Principal principal, final RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
-		if (result.hasErrors()) {
-			logger.debug("Binding Errors : {}", result.getAllErrors().get(0));
-			//populateDefaultModel(model);
-			return "User/Memberships";
-		} else {
-			;
-			membershipService.saveMembership(meeting, userService.findByUsername(principal.getName()), "1");
-			// POST/REDIRECT/GET
-			return "redirect:/User/Memberships";
-		}
-	}
-	
+
+	@Autowired
+	private AccountService acctService;
+
+	@Autowired
+	private ModelMapper mm;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String showMembership(Principal principal, Model model) {
+	public String getAllMembershipsByUser(@SessionAttribute("user") User user, Model model) {
 
 		Meeting mtg = new Meeting();
 
@@ -61,23 +47,47 @@ public class MembershipController {
 		mtg.setName("Simo Guiadem");
 		mtg.setShortDesc("This is a short description of this meeting!");
 		mtg.setCountryOfIncorp("Cameroon");
-		model.addAttribute("meetingForm", mtg);
-		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("userFirstName", user.getFirstName());
+		mtg.setCity("Yaounde");
+		mtg.setStreetAddr("Ngousso");
+		mtg.setIsPublic(true);
+		model.addAttribute("meeting", mtg);
 		model.addAttribute("memberships", membershipService.findMembershipByUser(user));
 
-		return "User/membershipsList";
+		return "fragments/landing::teams";
 	}
-	
-	@RequestMapping(value = "/{membershipId}/Accounts", method = RequestMethod.GET)
-	public String showAccounts(@PathVariable Long membershipId, @SessionAttribute("userFirstName") String userFirstName, Model model) {
 
-		//AccountDto acctDto = new AccountDto();
-		Membership membership = membershipService.fetchMembershipWithAccounts(membershipId);
-		//model.addAttribute("acctDto", acctDto);
-		model.addAttribute("userFirstName", userFirstName);
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String getMembershipDetailsById(@PathVariable("id") Long membershipId, @SessionAttribute("user") User user,
+			Model model) {
+		logger.debug("Membership: " + membershipId);
+		BigDecimal checkingBal = new BigDecimal("0");
+		BigDecimal savingBal = new BigDecimal("0");
+		BigDecimal loanBal = new BigDecimal("0");
+		BigDecimal investmentBal = new BigDecimal("0");
+		model.addAttribute("userDto", mm.map(user, UserDto.class));
+		Membership membership = membershipService.findMembershipById(membershipId).get();
 		model.addAttribute("membership", membership);
-		return "User/meetings";
+		model.addAttribute("user", user);
+		for (Account account : acctService.findByMembership(membership)) {
+			switch (account.getAcctType()) {
+			case "CHK":
+				checkingBal = checkingBal.add(account.getBalance());
+				break;
+			case "SAV":
+				savingBal = savingBal.add(account.getBalance());
+				break;
+			case "LOA":
+				loanBal = loanBal.add(account.getBalance());
+				break;
+			case "INV":
+				investmentBal = investmentBal.add(account.getBalance());
+				break;
+			}
+		}
+		model.addAttribute("checkingBal", checkingBal);
+		model.addAttribute("savingBal", savingBal);
+		model.addAttribute("loanBal", loanBal);
+		model.addAttribute("investmentBal", investmentBal);
+		return "User/meeting";
 	}
-	
 }

@@ -1,7 +1,8 @@
 package com.tayfint.meethub.service;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -11,83 +12,94 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tayfint.meethub.dao.AccountDao;
-import com.tayfint.meethub.dao.TransactionDao;
 import com.tayfint.meethub.model.Account;
-import com.tayfint.meethub.model.CheckingAccount;
-import com.tayfint.meethub.model.InvestmentAccount;
-import com.tayfint.meethub.model.LoanAccount;
-import com.tayfint.meethub.model.SavingsAccount;
+import com.tayfint.meethub.model.Meeting;
+import com.tayfint.meethub.model.Membership;
 import com.tayfint.meethub.model.Transaction;
-import com.tayfint.meethub.model.TransactionStatus;
 import com.tayfint.meethub.model.TransactionType;
+import com.tayfint.meethub.model.TransactionStatus;
 
 @Service("accountService")
 @Transactional
 public class AccountServiceImpl implements AccountService {
-	
-	private static int nextAccountNumber = 1000000;
 
-    @Autowired
-    private AccountDao accountDao;
-    
-    @Autowired
-	private TransactionDao transactionDao;
-    
-    static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
+	@Autowired
+	private AccountDao accountDao;
 
-    public Account createPrimaryAccount() {
-        Account primaryAccount = new CheckingAccount();
-        primaryAccount.setBalance(new BigDecimal(0.0));
-        primaryAccount.setAccountNumber(accountGen());
+	@Autowired
+	private TransactionService transactionService;
 
-        return accountDao.save(primaryAccount);
-    }
-
-    public Account createSavingsAccount() {
-        Account savingsAccount = new SavingsAccount();
-        savingsAccount.setBalance(new BigDecimal(0.0));
-        savingsAccount.setAccountNumber(accountGen());
-
-        return accountDao.save(savingsAccount);
-    }
+	static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
 	@Override
-	public Account createLoanAccount() {
-		Account loanAccount = new LoanAccount();
-		loanAccount.setBalance(new BigDecimal(0.0));
-		loanAccount.setAccountNumber(accountGen());
-
-        return accountDao.save(loanAccount);
+	public Account save(Account acct) {
+		return accountDao.save(acct);
 	}
 
 	@Override
-	public Account createInvestmentAccount() {
-		Account investmentAccount = new InvestmentAccount();
-		investmentAccount.setBalance(new BigDecimal(0.0));
-		investmentAccount.setAccountNumber(accountGen());
+	public void freeze() {
+		// TODO Auto-generated method stub
 
-        return accountDao.save(investmentAccount);
 	}
-	
+
 	@Override
-	public Account deposit(Account toAccount, BigDecimal amount) {
+	public void delete() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Account deposit(Account toAccount, BigDecimal amount, String notes) {
 		BigDecimal balance = toAccount.getBalance().add(amount);
 		Long toAcctId = toAccount.getId();
-		transactionDao.save(new Transaction(new Date(), "meethub.deposit." + getTrsDescAppender(toAccount),
-				TransactionType.DEPOSIT.toString(), TransactionStatus.PROCESSED.toString(), amount,
-				balance, toAccount, null, toAcctId));
+		transactionService.save(new Transaction(balance, amount, TransactionStatus.PROCESSED.toString(),
+				TransactionType.DEPOSIT.toString(), "N/A", "I", "Cash Deposit", toAcctId, toAccount, notes));
 		toAccount.setBalance(balance);
 		accountDao.updateBalanceByAcctId(toAcctId, balance);
 		return toAccount;
 	}
 
 	@Override
-	public Account withdraw(Account fromAccount, BigDecimal amount) {
+	public Account contribute(Account fromAccount, Account toAccount, BigDecimal amount, String name, String notes) {
+		BigDecimal fromBalance = fromAccount.getBalance().subtract(amount);
+		BigDecimal toBalance = toAccount.getBalance().add(amount);
+		Long toAcctId = toAccount.getId();
+		Long fromAcctId = fromAccount.getId();
+		transactionService.save(new Transaction(fromBalance, amount, TransactionStatus.PROCESSED.toString(),
+				TransactionType.CONTRIBUTION.toString(), "N/A", "O", "Contribution", fromAcctId, fromAccount, notes));
+		fromAccount.setBalance(fromBalance);
+		accountDao.updateBalanceByAcctId(fromAcctId, fromBalance);
+		transactionService.save(new Transaction(toBalance, amount, TransactionStatus.PROCESSED.toString(),
+				TransactionType.CONTRIBUTION.toString(), name, "I", "Contribution from " + name, fromAcctId, toAcctId,
+				toAccount, notes));
+		toAccount.setBalance(toBalance);
+		accountDao.updateBalanceByAcctId(toAcctId, toBalance);
+		return fromAccount;
+	}
+
+	@Override
+	public Account addToSavings(Account fromAccount, Account toAccount, BigDecimal amount, String name, String notes) {
+		BigDecimal fromBalance = fromAccount.getBalance().subtract(amount);
+		BigDecimal toBalance = toAccount.getBalance().add(amount);
+		Long toAcctId = toAccount.getId();
+		Long fromAcctId = fromAccount.getId();
+		transactionService.save(new Transaction(fromBalance, amount, TransactionStatus.PROCESSED.toString(),
+				TransactionType.SAVING.toString(), "N/A", "O", "Savings", fromAcctId, fromAccount, notes));
+		fromAccount.setBalance(fromBalance);
+		accountDao.updateBalanceByAcctId(fromAcctId, fromBalance);
+		transactionService.save(new Transaction(toBalance, amount, TransactionStatus.PROCESSED.toString(),
+				TransactionType.SAVING.toString(), name, "I", "Savings from " + name, fromAcctId, toAcctId, toAccount, notes));
+		toAccount.setBalance(toBalance);
+		accountDao.updateBalanceByAcctId(toAcctId, toBalance);
+		return fromAccount;
+	}
+
+	@Override
+	public Account withdraw(Account fromAccount, BigDecimal amount, String notes) {
 		BigDecimal balance = fromAccount.getBalance().subtract(amount);
 		Long fromAcctId = fromAccount.getId();
-		transactionDao.save(new Transaction(new Date(), "meethub.withdraw." + getTrsDescAppender(fromAccount),
-				TransactionType.WITHDRAW.toString(), TransactionStatus.PROCESSED.toString(), amount,
-				balance, fromAccount, fromAccount.getId(), null));
+		transactionService.save(new Transaction(balance, amount, TransactionStatus.PROCESSED.toString(),
+				TransactionType.WITHDRAW.toString(), "N/A", "O", "Cash Withdrawal", fromAcctId, fromAccount, notes));
 		fromAccount.setBalance(balance);
 		accountDao.updateBalanceByAcctId(fromAcctId, balance);
 		return fromAccount;
@@ -96,31 +108,57 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account transfer(String transferFrom, String transferTo, BigDecimal amount, Account fromAccount,
 			Account toAccount) {
-		return fromAccount;
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public String getTrsDescAppender(Account account) {
-		String description = "";
-		if (account instanceof CheckingAccount) {
-			description += "checking";
-		} else if (account instanceof SavingsAccount) {
-			description += "saving";
-		} else if (account instanceof LoanAccount) {
-			description += "loan";
-		} else if (account instanceof InvestmentAccount) {
-			description += "investment";
-		} else {
-			description += "others";
-		}
-		return description;
-	}
-    
-    private int accountGen() {
-        return ++nextAccountNumber;
-    }
 
 	@Override
-	public Account findById(Long id) {
+	public boolean hasSufficientFunds(Account acct, BigDecimal amount) {
+		return acct.getBalance().subtract(amount).compareTo(new BigDecimal(0)) != 1;
+	}
+
+	@Override
+	public List<Account> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void getStatement(Account acct) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borrow() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Optional<Account> findById(Long id) {
 		return accountDao.findById(id);
 	}
+
+	@Override
+	public Account findByMembershipAndAcctType(Membership membership, String acctType) {
+		return accountDao.findByMembershipAndAcctType(membership, acctType);
+	}
+	
+	@Override
+	public Account findByMeetingAndAcctType(Meeting mtg, String acctType) {
+		return accountDao.findByMeetingAndAcctType(mtg, acctType);
+	}
+
+	@Override
+	public List<Account> findByMembership(Membership membership) {
+		return accountDao.findByMembership(membership);
+	}
+
 }

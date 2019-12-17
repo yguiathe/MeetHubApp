@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.tayfint.meethub.model.User;
-import com.tayfint.meethub.model.security.UserRole;
+import com.tayfint.meethub.model.UserRole;
 
 public interface UserService {
 	User findByUsername(String username);
@@ -28,4 +28,12 @@ public interface UserService {
     void enableUser (String username);
 
     void disableUser (String username);
+    
+    void IncrementTeamsCnt(Long userId);
+    
+    void decrementTeamsCnt(Long userId);
+    
+    void IncrementAppCnt(Long userId);
+    
+    void decrementAppCnt(Long userId);
 }

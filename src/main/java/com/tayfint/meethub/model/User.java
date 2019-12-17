@@ -1,49 +1,40 @@
 package com.tayfint.meethub.model;
 
-import java.sql.Blob;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Calendar;
-import java.util.Collection;
-
+import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.tayfint.meethub.model.security.Authority;
-import com.tayfint.meethub.model.security.UserRole;
+import com.tayfint.meethub.model.UserRole;
 
 @Entity
 @Table(name = "app_user")
-public class User implements UserDetails {
+@EntityListeners(AuditingEntityListener.class)
+public class User extends BaseEntity implements UserDetails {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "UserTab")
-	@TableGenerator(name = "UserTab", table = "hibernate_id", pkColumnName = "GEN_KEY", valueColumnName = "GEN_VALUE", pkColumnValue = "USER_GEN", allocationSize = 1)
-	@Column(name = "USER_ID")
-	private Long userId;
+	private static final long serialVersionUID = 3348273711654520441L;
 
 	@Column(name = "USERNAME", length = 50)
 	private String username;
@@ -67,9 +58,6 @@ public class User implements UserDetails {
 
 	@Column(name = "IS_DECEASED")
 	private Boolean isDeceased = false;
-	
-	@Column(name = "IS_GROUP")
-	private Boolean isGroup = false;
 
 	@Column(name = "PRIMARY_ID", length = 40)
 	private String primaryId;
@@ -87,17 +75,20 @@ public class User implements UserDetails {
 
 	@Column(name = "MIDDLE_NAME", length = 45)
 	private String middleName;
+	
+	@Column(name = "INTRO", length = 500)
+	private String intro;
 
 	@Column(name = "LAST_NAME", nullable = false, length = 45)
 	private String lastName;
 
-	@Column(name = "MAIDEN_NAME", length = 45)
-	private String maidenName;
-
-	@Column(name = "GENDER")
+	@Column(name = "GENDER", length = 1)
 	private String gender;
+	
+	@Column(name = "PHONE", length = 20)
+	private String phone;
 
-	@Column(name = "EDUCATION", length = 45)
+	@Column(name = "EDUCATION", length = 1)
 	private String education;
 
 	@Column(name = "OCCUPATION", length = 45)
@@ -107,11 +98,7 @@ public class User implements UserDetails {
 	private Double monthlySalary;
 
 	@Column(name = "IS_ACTIVE")
-	private Boolean enabled = true;
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
+	private Boolean isActive = true;
 
 	@Column(name = "MARITAL_STATUS_CD", length = 3)
 	private String maritalStatusCd;
@@ -122,61 +109,48 @@ public class User implements UserDetails {
 	@Column(name = "EMPLOYER", length = 100)
 	private String employer;
 
-	@Column(name = "CREATE_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createDate = new Date(Calendar.getInstance().getTimeInMillis());
-
 	@Column(name = "CITIZENSHIP", length = 45)
 	private String citizenship;
-
-	@Column(name = "NAME_SUFFIX", length = 45)
-	private String nameSuffix;
-
-	@Column(name = "NAME_PREFIX", length = 45)
-	private String namePrefix;
-
-	@Column(name = "ROW_UPDATE_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date rowUpdateDate = new Date(Calendar.getInstance().getTimeInMillis());
 
 	@Column(name = "EMAIL", length = 45)
 	private String email;
 
-	@Column(name = "PICTURE")
+	@Column(name = "TEAMS_CNT")
+	private int teamsCnt;
+	
+	@Column(name = "APPLICATIONS_CNT")
+	private int applicationsCnt;
+	
+	@Column(name = "AVATAR")
 	@Lob
-	private Blob picture;
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Membership> memberships;
+	private byte[] avatar;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles = new HashSet<>();
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (primaryId == null) {
-			if (other.primaryId != null)
-				return false;
-		} else if (!primaryId.equals(other.primaryId))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	@CreatedBy
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime created;
+
+    @LastModifiedBy
+    @Column(nullable = false)
+    private String modifiedBy;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modified;
+
+	
+	public int getApplicationsCnt() {
+		return applicationsCnt;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
 	}
 
 	public Date getBirthdate() {
@@ -195,8 +169,12 @@ public class User implements UserDetails {
 		return confirmPassword;
 	}
 
-	public Date getCreateDate() {
-		return this.createDate;
+	public LocalDateTime getCreated() {
+		return created;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
 	public String getEducation() {
@@ -227,6 +205,10 @@ public class User implements UserDetails {
 		return this.gender;
 	}
 
+	public String getIntro() {
+		return this.intro;
+	}
+
 	public Boolean getIsDeceased() {
 		return this.isDeceased;
 	}
@@ -234,13 +216,9 @@ public class User implements UserDetails {
 	public String getLastName() {
 		return this.lastName;
 	}
-
+	
 	public Date getLastSuccessfulLogin() {
 		return this.lastSuccessfulLogin;
-	}
-
-	public String getMaidenName() {
-		return this.maidenName;
 	}
 
 	public String getMaritalStatusCd() {
@@ -251,16 +229,16 @@ public class User implements UserDetails {
 		return this.middleName;
 	}
 
+	public LocalDateTime getModified() {
+		return modified;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
 	public Double getMonthlySalary() {
 		return this.monthlySalary;
-	}
-
-	public String getNamePrefix() {
-		return this.namePrefix;
-	}
-
-	public String getNameSuffix() {
-		return this.nameSuffix;
 	}
 
 	public String getOccupation() {
@@ -271,8 +249,8 @@ public class User implements UserDetails {
 		return this.password;
 	}
 
-	public Blob getPicture() {
-		return picture;
+	public String getPhone() {
+		return phone;
 	}
 
 	public String getPrimaryId() {
@@ -283,35 +261,24 @@ public class User implements UserDetails {
 		return this.primaryIdType;
 	}
 
-	public Date getRowUpdateDate() {
-		return this.rowUpdateDate;
-	}
-
-	public Long getUserId() {
-		return this.userId;
-	}
-
-	public Set<Membership> getMemberships() {
-		return memberships;
+	public int getTeamsCnt() {
+		return teamsCnt;
 	}
 
 	public String getUsername() {
 		return this.username;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((primaryId == null) ? 0 : primaryId.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
-	@Transient
-	public boolean isNew() {
-		return (this.userId == null);
+	public void setApplicationsCnt(int applicationsCnt) {
+		this.applicationsCnt = applicationsCnt;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 	public void setBirthdate(Date birthdate) {
@@ -321,7 +288,7 @@ public class User implements UserDetails {
 	public void setBlockedUntil(Date blockedUntil) {
 		this.blockedUntil = blockedUntil;
 	}
-
+	
 	public void setCitizenship(String citizenship) {
 		this.citizenship = citizenship;
 	}
@@ -330,8 +297,12 @@ public class User implements UserDetails {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public void setEducation(String education) {
@@ -362,20 +333,20 @@ public class User implements UserDetails {
 		this.gender = gender;
 	}
 
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
 	public void setIsDeceased(Boolean isDeceased) {
 		this.isDeceased = isDeceased;
 	}
-
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
 	public void setLastSuccessfulLogin(Date lastSuccessfulLogin) {
 		this.lastSuccessfulLogin = lastSuccessfulLogin;
-	}
-
-	public void setMaidenName(String maidenName) {
-		this.maidenName = maidenName;
 	}
 
 	public void setMaritalStatusCd(String maritalStatusCd) {
@@ -386,16 +357,16 @@ public class User implements UserDetails {
 		this.middleName = middleName;
 	}
 
+	public void setModified(LocalDateTime modified) {
+		this.modified = modified;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
 	public void setMonthlySalary(Double monthlySalary) {
 		this.monthlySalary = monthlySalary;
-	}
-
-	public void setNamePrefix(String namePrefix) {
-		this.namePrefix = namePrefix;
-	}
-
-	public void setNameSuffix(String nameSuffix) {
-		this.nameSuffix = nameSuffix;
 	}
 
 	public void setOccupation(String occupation) {
@@ -406,8 +377,8 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	public void setPicture(Blob picture) {
-		this.picture = picture;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public void setPrimaryId(String primaryId) {
@@ -418,36 +389,24 @@ public class User implements UserDetails {
 		this.primaryIdType = primaryIdType;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
-
-	public void setRowUpdateDate(Date rowUpdateDate) {
-		this.rowUpdateDate = rowUpdateDate;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public void setMemberships(Set<Membership> memberships) {
-		this.memberships = memberships;
+	public void setTeamsCnt(int teamsCnt) {
+		this.teamsCnt = teamsCnt;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", education=" + education + ", monthlySalary=" + monthlySalary + ", maritalStatusCd="
-				+ maritalStatusCd + ", email=" + email + "]";
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -479,15 +438,12 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return enabled;
+		// TODO Auto-generated method stub
+		return true;
 	}
-
-	public Boolean isGroup() {
-		return isGroup;
-	}
-
-	public void setIsGroup(Boolean isGroup) {
-		this.isGroup = isGroup;
+	
+	public String getFnLN() {
+		return getFirstName() + " " + getLastName();
 	}
 	
 }
