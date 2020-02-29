@@ -1,0 +1,132 @@
+entity Ride {
+	id Long,
+    pickupTime LocalDate,
+    dropoffTime LocalDate,
+    pickupLoc String,
+    dropoffLoc String,
+    type RideType,
+    cost Double
+}
+
+enum RideType {
+	SHARED, SOLO
+}
+
+entity UserAccount {
+	id Long,
+    openDate LocalDate,
+    closeDate LocalDate,
+    state AccountStatus,
+    age Integer,
+    totalDistance Double,
+    totalRides Integer,
+	type AccountType
+}
+
+enum AccountStatus {
+	OPEN, CLOSE, SUSPENDED
+}
+
+enum AccountType {
+	DRIVER, PASSENGER
+}
+
+entity Setting {
+	id Long,
+    code String,
+    description String,
+    value String,
+    lastUpdate LocalDate
+}
+
+enum TransactionType {
+	PENDING, APPROVED, PROCESSING, CANCELLED
+}
+
+entity PaymentMethod {
+	cardNumber String,
+    accountNum String,
+    expirationDate String,
+    channel PaymentChannel
+}
+
+enum PaymentChannel {
+	CREDIT_CARD, ORANGE, MTN, CASH
+}
+
+entity Document {
+	id Long,
+    file AnyBlob,
+    name String,
+    uploadDate LocalDate,
+    type DocumentType,
+    expirationDate LocalDate
+}
+
+entity Promotion {
+	id Long,
+    code String,
+    description String,
+    type PromotionType,
+    value Double,
+    startDate LocalDate,
+    expirationDate LocalDate
+}
+
+enum PromotionType {
+	FREE_RIDES, DISCOUNTED_RATE
+}
+
+entity Vehicle {
+	id Long,
+    make String,
+    model String,
+    year Integer,
+    type VehicleType,
+    plate String
+}
+
+enum VehicleType {
+	BIKE, VAN, SUV, SEDAN, LUXURY, OTHER
+}
+
+enum DocumentType {
+	DL, REGISTRATION, ID, OTHER
+}
+
+entity Transaction {
+	id Long,
+    transDate LocalDate,
+    originatorAcct String,
+    beneficiaryAcct String,
+    amount Double,
+    type TransactionType
+}
+
+relationship ManyToOne {
+	UserAccount{user} to User
+}
+
+relationship OneToMany {
+	UserAccount{transaction} to Transaction{useraccount},
+    UserAccount{ride} to Ride{useraccount},
+    UserAccount{paymentmethod} to PaymentMethod{useraccount},
+    UserAccount{vehicle} to Vehicle{useraccount},
+    UserAccount{document} to Document{useraccount}
+}
+
+relationship ManyToMany {
+	Ride{promotion} to Promotion{ride}
+}
+
+// Set pagination options
+paginate * with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+//Microservice options
+microservice * with findraapp
